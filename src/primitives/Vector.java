@@ -1,134 +1,123 @@
 package primitives;
 
-import java.util.Objects;
-/* pbm every contractor in class vector need to use the func equal excluding the cortactaor that recive vector*/
-public class Vector  {
-    private Point3D _head_vector;
+/**
+ * Class Vector represents Euclidean 3D vector in Cartesian coordinate system
+ */
+public class Vector {
+    private Point3D _head;
 
-    public Vector (Coordinate x, Coordinate y,Coordinate z) {
-        Point3D temp =new Point3D(x,y,z);;
-
-        if (temp.equals(Point3D.ZERO))
-        {
+    public Vector(Coordinate x, Coordinate y, Coordinate z) {
+        _head = new Point3D(x, y, z);
+        if (_head.equals(Point3D.ZERO))
             throw new IllegalArgumentException("It's not possible to have point head (0,0,0)");
-        }
-
-
-        _head_vector= new Point3D(x,y,z);
     }
 
     public Vector(double x, double y, double z) {
-        Point3D temp =new Point3D(x,y,z);;
-
-        if (temp.equals(Point3D.ZERO))
-        {
+        _head = new Point3D(x, y, z);
+        if (_head.equals(Point3D.ZERO))
             throw new IllegalArgumentException("It's not possible to have point head (0,0,0)");
-        }
-        _head_vector=new Point3D(x,y,z);
-
     }
 
-    public Vector(Point3D a) {
-        Point3D temp =new Point3D(a.get_x(),a.get_y(),a.get_z());
-        if (temp.equals(Point3D.ZERO))
-        {
+    public Vector(Point3D p) {
+        if (p.equals(Point3D.ZERO))
             throw new IllegalArgumentException("It's not possible to have point head (0,0,0)");
-        }
-        _head_vector=new Point3D(a.get_x(),a.get_y(),a.get_z());
+        _head = new Point3D(p);
     }
 
-    public  Vector (Vector a)
-    {
-
-        _head_vector=new Point3D(a._head_vector.get_x(),a._head_vector.get_y(),a._head_vector.get_z());
+    /**
+     * Copy constructor for Point3D
+     *
+     * @param other source Vector to copy from
+     */
+    public Vector(Vector other) {
+        _head = new Point3D(other._head);
     }
 
-    public Vector get_head_Vector() {
-        return new Vector(_head_vector.get_x(),_head_vector.get_y(),_head_vector.get_z());
-    }
-    public  Coordinate get_head_x()
-    {
-        return  _head_vector.get_x();
-    }
-    public  Coordinate get_head_y()
-    {
-        return  _head_vector.get_y();
-    }
-    public  Coordinate get_head_z()
-    {
-        return  _head_vector.get_z();
+    public Point3D getHead() {
+        return _head;
     }
 
     @Override
     public String toString() {
         return "Vector{" +
-                "_head_vector=" + _head_vector +
+                "_head_vector=" + _head +
                 '}';
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Vector vector = (Vector) o;
-        return Objects.equals(_head_vector, vector._head_vector);
+    public boolean equals(Object obj) {
+        if (obj == null) return false;
+        if (this == obj) return true;
+        if (!(obj instanceof Vector)) return false;
+        Vector vector = (Vector) obj;
+        return _head.equals(vector._head);
     }
 
-
-
-    public Vector  crossProduct (Vector b)
-    {
-            /*we send to contractor a new vector kinds of double
-    we are going to do now cross product between two vector and get back an new vector vertical two vector
-    c.x= a.y*b.z − a.z*b.y
-    c.y = a.z*b.x − a.x*b.z
-    c.z = a.x*b.y − a.y*b.x
+    /**
+     * The function performs Cross Product (vector multiplication) operation
+     * on this vector with another one: this X v
+     * and creates new vector which is the result of the operation
+     *
+     * @param v 2nd vector for the operation
+     * @return new vector with cross-product operation result
+     * @throws IllegalArgumentException when the vectors are co-directed (the angle is either 0 or 180)
      */
-        return new Vector(((this._head_vector.get_y()._coord*b._head_vector.get_z()._coord) -(this._head_vector.get_z()._coord*b._head_vector.get_y()._coord))
-                ,((this._head_vector.get_z()._coord*b._head_vector.get_x()._coord) -(this._head_vector.get_x()._coord*b._head_vector.get_z()._coord))
-                ,(this._head_vector.get_x()._coord*b._head_vector.get_y()._coord)-(this._head_vector.get_y()._coord*b._head_vector.get_x()._coord));
+    public Vector crossProduct(Vector v) {
+        double x1 = this._head.getX()._coord;
+        double y1 = this._head.getY()._coord;
+        double z1 = this._head.getZ()._coord;
+        double x2 = v._head.getX()._coord;
+        double y2 = v._head.getY()._coord;
+        double z2 = v._head.getZ()._coord;
+        return new Vector(y1 * z2 - z1 * y2, z1 * x2 - x1 * z2, x1 * y2 - y1 * x2);
     }
-    public double lengthSquared()
-    {
-        return  ((this._head_vector.get_x()._coord*this._head_vector.get_x()._coord)
-                +(this._head_vector.get_y()._coord*this._head_vector.get_y()._coord)
-                +(this._head_vector.get_z()._coord*this._head_vector.get_z()._coord));
+
+    public double lengthSquared() {
+        double x = this._head.getX()._coord;
+        double y = this._head.getY()._coord;
+        double z = this._head.getZ()._coord;
+        return x * x + y * y + z * z;
     }
-    public  double length()
-    {
-        return  Math.sqrt(this.lengthSquared());
+
+    public double length() {
+        return Math.sqrt(this.lengthSquared());
     }
-    public  Vector scale (double multe)
-    {
+
+    public Vector scale(double mult) {
         return new Vector(
-                _head_vector.get_x()._coord*multe,
-                _head_vector.get_y()._coord*multe,
-                _head_vector.get_z()._coord*multe);
+                _head.getX()._coord * mult,
+                _head.getY()._coord * mult,
+                _head.getZ()._coord * mult);
     }
-    public double  dotProduct(Vector b)
-    {
-        return  ((this._head_vector.get_x()._coord*b._head_vector.get_x()._coord)
-                +(this._head_vector.get_y()._coord*b._head_vector.get_y()._coord)
-                +(this._head_vector.get_z()._coord*b._head_vector.get_z()._coord));
+
+    public double dotProduct(Vector v) {
+        return ((this._head.getX()._coord * v._head.getX()._coord)
+                + (this._head.getY()._coord * v._head.getY()._coord)
+                + (this._head.getZ()._coord * v._head.getZ()._coord));
     }
-    public Vector normalize()
-    {
-        double temp =this.length();//the length of this vector
-        this._head_vector = new Point3D(_head_vector.get_x()._coord/temp,_head_vector.get_y()._coord/temp,_head_vector.
-                get_z()._coord/temp);
+
+    /**
+     *
+     * @return
+     */
+    public Vector normalize() {
+        double mult = 1d / this.length();
+        this._head = new Point3D(
+                _head.getX()._coord * mult,
+                _head.getY()._coord * mult,
+                _head.getZ()._coord * mult);
         return this;
     }
-    public Vector  normalized()
-    {
-        return new Vector (this.normalize());
-    }
-    public Vector add(Vector a)
-    {
-        return  new Vector(this._head_vector.add(a));
-    }
-    public Vector subtract (Vector a)
-    {
-        return new Vector(this._head_vector.subtract(a._head_vector));
 
+    public Vector normalized() {
+        return new Vector(this.normalize());
+    }
+
+    public Vector add(Vector a) {
+        return new Vector(this._head.add(a));
+    }
+
+    public Vector subtract(Vector a) {
+        return this._head.subtract(a._head);
     }
 }

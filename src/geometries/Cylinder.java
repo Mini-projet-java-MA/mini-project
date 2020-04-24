@@ -2,7 +2,6 @@ package geometries;
 
 import primitives.*;
 
-import java.util.List;
 import static primitives.Util.alignZero;
 import static primitives.Util.isZero;
 
@@ -39,8 +38,8 @@ public class Cylinder extends Tube {
 
     @Override
     public Vector getNormal(Point3D point) {
-        Point3D a = getRay().get_P1();
-        Vector b = getRay().get_direction();
+        Point3D a = getRay().getP0();
+        Vector b = getRay().getDirection();
 
         // projection of P-O on the ray:
         double t;

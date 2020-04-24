@@ -25,24 +25,24 @@ public class CylinderTest {
         assertEquals( new Vector(0, 1, 0), c1.getNormal(p1));
 
         // Test when height and the vec of Cylinder is same equals (on the top base)
-        assertEquals( ray.get_direction(), c2.getNormal(p2));
+        assertEquals( ray.getDirection(), c2.getNormal(p2));
 
 
 
         // Test when orthogonal, on the down base
         Point3D p3 = new Point3D(0, 0.5, 0);
-        assertEquals( ray.get_direction(), c1.getNormal(p3));
+        assertEquals( ray.getDirection(), c1.getNormal(p3));
 
 
         // Test when point is the center of top base
-        assertEquals( ray.get_direction(), c1.getNormal(ray.get_P1()));
+        assertEquals( ray.getDirection(), c1.getNormal(ray.getP0()));
 
 
 
 
         // Test when point is the center of down base
         Point3D p4 = new Point3D(0, 0, 15);
-        assertEquals( ray.get_direction(), c1.getNormal(p4));
+        assertEquals( ray.getDirection(), c1.getNormal(p4));
 
 
     }

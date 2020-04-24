@@ -14,7 +14,7 @@ public class Plane {
     }
 
     public Plane(Point3D p, Vector normal) {
-        _p = new Point3D(p.get_x(), p.get_y(), p.get_z());
+        _p = new Point3D(p);
         _normal = new Vector(normal);
     }
 
