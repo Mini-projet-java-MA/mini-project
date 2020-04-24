@@ -1,9 +1,7 @@
 package geometries;
 
-import primitives.Coordinate;
 import primitives.Point3D;
 import primitives.Vector;
-
 public class Plane {
     Point3D _p;
     Vector _normal;
@@ -16,8 +14,8 @@ public class Plane {
     }
 
     public Plane(Point3D p, Vector normal) {
-        _p = new Point3D(p.getX(), p.getY(), p.getZ());
-        _p = new Vector(normal);
+        _p = new Point3D(p.get_x(), p.get_y(), p.get_z());
+        _normal = new Vector(normal);
     }
 
     public Vector getNormal(Point3D _p1,Point3D _p2, Point3D _p3)
@@ -28,6 +26,10 @@ public class Plane {
         return  new Vector( V1.crossProduct(V2).normalize());
 
 
+    }
+    public Vector getNormal(Point3D p)
+    {
+        return _normal;
     }
     public Vector getNormal()
     {

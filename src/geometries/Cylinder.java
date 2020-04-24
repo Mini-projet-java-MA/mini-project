@@ -3,7 +3,8 @@ package geometries;
 import primitives.*;
 
 import java.util.List;
-
+import static primitives.Util.alignZero;
+import static primitives.Util.isZero;
 
 
 public class Cylinder extends Tube {
@@ -35,11 +36,26 @@ public class Cylinder extends Tube {
     }
 
 
+
     @Override
-    public Vector getNormal(Point3D point3D) {
-        Point3D O = new Point3D(this.getRay().get_P1().add(this.getRay().get_direction().crossProduct(this.getRay().get_direction().crossProduct(point3D.subtract(this.getRay().get_P1())))));
-        Vector vectorNormal = new Vector(point3D.subtract(O));
-        return vectorNormal.normalize();
+    public Vector getNormal(Point3D point) {
+        Point3D a = getRay().get_P1();
+        Vector b = getRay().get_direction();
+
+        // projection of P-O on the ray:
+        double t;
+        try {
+            t = alignZero(point.subtract(a).dotProduct(b));
+        } catch (IllegalArgumentException e) { // P = O
+            return b;
+        }
+
+        // if the point is at a base
+        if (t == 0 || isZero(_height - t)) // if it's close to 0, we'll get ZERO vector exception
+            return b;
+
+        a = a.add(b.scale(t));
+        return point.subtract(a).normalize();
     }
 
 

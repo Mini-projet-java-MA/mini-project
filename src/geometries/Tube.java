@@ -10,9 +10,14 @@ public class Tube extends RadialGeometry {
 
 
 
-    public Tube(Ray ray, double radius) {
+    public Tube(Ray ray, double radius){
         super(radius);
-        this._ray = ray;
+     if (radius ==0)
+    {
+        throw new IllegalArgumentException("It's not possible to have radius equals to 0");
+    }
+     this._ray = ray;
+
     }
 
 

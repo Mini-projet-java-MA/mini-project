@@ -1,81 +1,98 @@
 package primitives;
 
 import java.util.Objects;
-
-public class Vector extends Point3D {
-   protected Point3D Head_Vector;
+/* pbm every contractor in class vector need to use the func equal excluding the cortactaor that recive vector*/
+public class Vector  {
+    private Point3D _head_vector;
 
     public Vector (Coordinate x, Coordinate y,Coordinate z) {
-        super(x,y,z);
-        if (x.get()==0 && y.get()==0 && z.get()==0)
+        Point3D temp =new Point3D(x,y,z);;
+
+        if (temp.equals(Point3D.ZERO))
         {
             throw new IllegalArgumentException("It's not possible to have point head (0,0,0)");
         }
 
-        Head_Vector = new Point3D(x, y, z);
+
+        _head_vector= new Point3D(x,y,z);
     }
 
     public Vector(double x, double y, double z) {
-        super(x,y,z);
-        if (x==0 && y==0 && z==0) {
+        Point3D temp =new Point3D(x,y,z);;
+
+        if (temp.equals(Point3D.ZERO))
+        {
             throw new IllegalArgumentException("It's not possible to have point head (0,0,0)");
         }
-        Head_Vector = new Point3D(x, y, z);
+        _head_vector=new Point3D(x,y,z);
+
     }
 
     public Vector(Point3D a) {
-        super(a);
-        if (a.equals(Point3D.ZERO)) {
+        Point3D temp =new Point3D(a.get_x(),a.get_y(),a.get_z());
+        if (temp.equals(Point3D.ZERO))
+        {
             throw new IllegalArgumentException("It's not possible to have point head (0,0,0)");
         }
-        Head_Vector=new Point3D(a.getX(),a.getY(),a.getY());
+        _head_vector=new Point3D(a.get_x(),a.get_y(),a.get_z());
     }
+
     public  Vector (Vector a)
     {
-        super(a.Head_Vector.getX(), a.Head_Vector.getY(),a.Head_Vector.getZ());
-        //Head_Vector=new Point3D(a.Head_Vector.getX(),a.Head_Vector.getY(),a.Head_Vector.getZ());
+
+        _head_vector=new Point3D(a._head_vector.get_x(),a._head_vector.get_y(),a._head_vector.get_z());
     }
 
-    public Point3D getHead_Vector() {
-        return Head_Vector;
+    public Vector get_head_Vector() {
+        return new Vector(_head_vector.get_x(),_head_vector.get_y(),_head_vector.get_z());
     }
-
+    public  Coordinate get_head_x()
+    {
+        return  _head_vector.get_x();
+    }
+    public  Coordinate get_head_y()
+    {
+        return  _head_vector.get_y();
+    }
+    public  Coordinate get_head_z()
+    {
+        return  _head_vector.get_z();
+    }
 
     @Override
     public String toString() {
         return "Vector{" +
-                "Head_Vector=" + Head_Vector +
-                "} " + super.toString();
+                "_head_vector=" + _head_vector +
+                '}';
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
         Vector vector = (Vector) o;
-        return Objects.equals(Head_Vector, vector.Head_Vector);
+        return Objects.equals(_head_vector, vector._head_vector);
     }
 
 
-    //we are going to do now cross product between two vector and get back an new vector vertical two vector
+
     public Vector  crossProduct (Vector b)
     {
-        /*we send to ctractor a new vector kinds of double
-        c.x= a.y*b.z − a.z*b.y
-        c.y = a.z*b.x − a.x*b.z
-        c.z = a.x*b.y − a.y*b.x
-         */
-
-        return new Vector(((this.Head_Vector.getY()._coord*b.Head_Vector.getZ()._coord) -(this.Head_Vector.getZ()._coord*b.Head_Vector.getY()._coord))
-                ,((this.Head_Vector.getZ()._coord*b.Head_Vector.getX()._coord) -(this.Head_Vector.getX()._coord*b.Head_Vector.getZ()._coord))
-                ,(this.Head_Vector.getX()._coord*b.Head_Vector.getY()._coord)-(this.Head_Vector.getY()._coord*b.Head_Vector.getX()._coord));
+            /*we send to contractor a new vector kinds of double
+    we are going to do now cross product between two vector and get back an new vector vertical two vector
+    c.x= a.y*b.z − a.z*b.y
+    c.y = a.z*b.x − a.x*b.z
+    c.z = a.x*b.y − a.y*b.x
+     */
+        return new Vector(((this._head_vector.get_y()._coord*b._head_vector.get_z()._coord) -(this._head_vector.get_z()._coord*b._head_vector.get_y()._coord))
+                ,((this._head_vector.get_z()._coord*b._head_vector.get_x()._coord) -(this._head_vector.get_x()._coord*b._head_vector.get_z()._coord))
+                ,(this._head_vector.get_x()._coord*b._head_vector.get_y()._coord)-(this._head_vector.get_y()._coord*b._head_vector.get_x()._coord));
     }
     public double lengthSquared()
     {
-        return  ((this.Head_Vector.getX()._coord*this.Head_Vector.getX()._coord)
-                +(this.Head_Vector.getY()._coord*this.Head_Vector.getY()._coord)
-                +(this.Head_Vector.getZ()._coord*this.Head_Vector.getZ()._coord));
+        return  ((this._head_vector.get_x()._coord*this._head_vector.get_x()._coord)
+                +(this._head_vector.get_y()._coord*this._head_vector.get_y()._coord)
+                +(this._head_vector.get_z()._coord*this._head_vector.get_z()._coord));
     }
     public  double length()
     {
@@ -84,22 +101,21 @@ public class Vector extends Point3D {
     public  Vector scale (double multe)
     {
         return new Vector(
-                Head_Vector.getX()._coord*multe,
-                Head_Vector.getY()._coord*multe,
-                Head_Vector.getZ()._coord*multe);
+                _head_vector.get_x()._coord*multe,
+                _head_vector.get_y()._coord*multe,
+                _head_vector.get_z()._coord*multe);
     }
     public double  dotProduct(Vector b)
     {
-        return  ((this.Head_Vector.getX()._coord*b.Head_Vector.getX()._coord)
-                +(this.Head_Vector.getY()._coord*b.Head_Vector.getY()._coord)
-                +(this.Head_Vector.getZ()._coord*b.Head_Vector.getZ()._coord));
+        return  ((this._head_vector.get_x()._coord*b._head_vector.get_x()._coord)
+                +(this._head_vector.get_y()._coord*b._head_vector.get_y()._coord)
+                +(this._head_vector.get_z()._coord*b._head_vector.get_z()._coord));
     }
     public Vector normalize()
     {
         double temp =this.length();//the length of this vector
-        this.Head_Vector=new Vector(Head_Vector.getX()._coord/length()
-                ,Head_Vector.getY()._coord/length(),
-                Head_Vector.getZ()._coord/length() );
+        this._head_vector = new Point3D(_head_vector.get_x()._coord/temp,_head_vector.get_y()._coord/temp,_head_vector.
+                get_z()._coord/temp);
         return this;
     }
     public Vector  normalized()
@@ -108,11 +124,11 @@ public class Vector extends Point3D {
     }
     public Vector add(Vector a)
     {
-        return  new Vector(this.Head_Vector.add(a));
+        return  new Vector(this._head_vector.add(a));
     }
-    public Vector  subtract(Vector a)
+    public Vector subtract (Vector a)
     {
-        return new Vector(this.Head_Vector.subtract(a));
+        return new Vector(this._head_vector.subtract(a._head_vector));
 
     }
 }

@@ -7,9 +7,10 @@ public class Sphere extends RadialGeometry
 {
     Point3D _center;
 
-    public Sphere(double radius)
+    public Sphere(double radius, Point3D center )
     {
         super(radius);
+        _center=center;
     }
 
     public Point3D get_center() {
