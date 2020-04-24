@@ -11,8 +11,8 @@ public class PolygonTest {
 
 
     @Test
-    public void testConstructor() {// ============ Equivalence Partitions Tests ==============
-
+    public void testConstructor() {
+        // ============ Equivalence Partitions Tests ==============
         // TC01: Correct concave quadrangular with vertices in correct order
         try {
             new Polygon(new Point3D(0, 0, 1), new Point3D(1, 0, 0),
@@ -43,7 +43,6 @@ public class PolygonTest {
         } catch (IllegalArgumentException e) {}
 
         // =============== Boundary Values Tests ==================
-
         // TC10: Vertix on a side of a quadrangular
         try {
             new Polygon(new Point3D(0, 0, 1), new Point3D(1, 0, 0),

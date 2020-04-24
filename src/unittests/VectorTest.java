@@ -22,8 +22,6 @@ public class VectorTest {
 
     @org.junit.Test
     public void crossProduct() {
-
-
         /*
         we need to do test for this next this case//GOOD
         1. when the vectors have the same diretion//GOOD
@@ -94,7 +92,7 @@ public class VectorTest {
             v2 = new Vector(-2, -4, -6);
             v3= new Vector(0, 3, -2);
             v1.crossProduct(v2);
-            out.println("ERROR: crossProduct() for parallel vectors does not throw an exception");
+            fail("crossProduct() for parallel vectors does not throw an exception");
         } catch (Exception e) {}
         v1=new Vector(1, 2, 3);
         v2 = new Vector(-2, -4, -6);

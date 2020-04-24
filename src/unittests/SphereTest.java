@@ -5,7 +5,6 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import geometries.Sphere;
 import primitives.*;
-import java.util.List;
 
 public class SphereTest {
 
@@ -17,7 +16,7 @@ public class SphereTest {
         Point3D centerPoint=new Point3D(x,y,z);
         double radius=2;
         Sphere mySphere= new Sphere(radius,centerPoint);
-        Point3D result= mySphere.get_center();
+        Point3D result= mySphere.getCenter();
         Point3D expResult= new Point3D(centerPoint);
         assertEquals(result,expResult);
     }//if the test worked it means the result and expected results are equal and then get center works

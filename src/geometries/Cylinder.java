@@ -2,24 +2,17 @@ package geometries;
 
 import primitives.*;
 
-import static primitives.Util.alignZero;
-import static primitives.Util.isZero;
-
+import static primitives.Util.*;
 
 public class Cylinder extends Tube {
     private double _height;
 
-    /* ********* Constructors ***********/
-
-
     public Cylinder(Ray ray, double radius, double height) {
         super(ray, radius);
-        if (height >= 0)
-            this._height = height;
-        else
+        if (height <= 0)
             throw new IllegalArgumentException("height can't be zero (or almost zero).");
+        this._height = height;
     }
-
 
     public double getHeight() {
         return _height;
@@ -30,32 +23,29 @@ public class Cylinder extends Tube {
         return "Cylinder{" +
                 "_height=" + _height +
                 ", _ray=" + getRay() +
-                ", _radius=" + get_radius()+
+                ", _radius=" + getRadius() +
                 '}';
     }
 
-
-
     @Override
     public Vector getNormal(Point3D point) {
-        Point3D a = getRay().getP0();
-        Vector b = getRay().getDirection();
+        Point3D p0 = getRay().getP0();
+        Vector v = getRay().getDirection();
 
         // projection of P-O on the ray:
         double t;
         try {
-            t = alignZero(point.subtract(a).dotProduct(b));
-        } catch (IllegalArgumentException e) { // P = O
-            return b;
+            t = point.subtract(p0).dotProduct(v);
+        } catch (IllegalArgumentException e) { // P = O - center of the 1st base
+            return v;
         }
 
         // if the point is at a base
-        if (t == 0 || isZero(_height - t)) // if it's close to 0, we'll get ZERO vector exception
-            return b;
+        if (isZero(t) || isZero(_height - t)) // if it's close to 0, we'll get ZERO vector exception
+            return v;
 
-        a = a.add(b.scale(t));
-        return point.subtract(a).normalize();
+        p0 = p0.add(v.scale(t));
+        return point.subtract(p0).normalize();
     }
-
 
 }
