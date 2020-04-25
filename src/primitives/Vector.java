@@ -6,18 +6,35 @@ package primitives;
 public class Vector {
     private Point3D _head;
 
+    /**
+     * this is the basic constructor for a vector:
+     * it receive three coordinates and set them as the head of the vector
+     * @param x 1st coordinate
+     * @param y 2nd coordinate
+     * @param z 3rd coordinate
+     */
     public Vector(Coordinate x, Coordinate y, Coordinate z) {
         _head = new Point3D(x, y, z);
         if (_head.equals(Point3D.ZERO))
             throw new IllegalArgumentException("It's not possible to have point head (0,0,0)");
     }
 
+    /**
+     * this is a basic constructor it receives three numbers and set them as the point head of the vector
+     * @param x 1st coordinate
+     * @param y 2nd coordinate
+     * @param z 3rd coordinates
+     */
     public Vector(double x, double y, double z) {
         _head = new Point3D(x, y, z);
         if (_head.equals(Point3D.ZERO))
             throw new IllegalArgumentException("It's not possible to have point head (0,0,0)");
     }
 
+    /**
+     * this is a basic constructor it receives a point already constructed and set it as the head of the vector
+     * @param p the point set as vector head
+     */
     public Vector(Point3D p) {
         if (p.equals(Point3D.ZERO))
             throw new IllegalArgumentException("It's not possible to have point head (0,0,0)");
@@ -72,6 +89,10 @@ public class Vector {
         return new Vector(y1 * z2 - z1 * y2, z1 * x2 - x1 * z2, x1 * y2 - y1 * x2);
     }
 
+    /**
+     * this function allows us to compute the square of the length of this vector
+     * @return a number equal to the square of the length of our vector
+     */
     public double lengthSquared() {
         double x = this._head.getX()._coord;
         double y = this._head.getY()._coord;
@@ -79,10 +100,20 @@ public class Vector {
         return x * x + y * y + z * z;
     }
 
+    /**
+     * this function allows us to receive the length of the vector
+     * @return a number equal to the length of our vector
+     */
     public double length() {
         return Math.sqrt(this.lengthSquared());
     }
 
+    /**
+     * this function multiplies the specified vector by the specified Double
+     * and returns the result as a Vector
+     * @param mult the specified double
+     * @return a new vector equal to the old one multiplied by the double
+     */
     public Vector scale(double mult) {
         return new Vector(
                 _head.getX()._coord * mult,

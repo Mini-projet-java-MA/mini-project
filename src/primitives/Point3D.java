@@ -1,7 +1,7 @@
 package primitives;
 
 /**
- *
+ * class Point3d represents a point in cartesian coordinate system
  */
 public class Point3D {
     private Coordinate _x;
