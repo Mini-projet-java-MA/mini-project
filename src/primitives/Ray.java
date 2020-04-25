@@ -1,28 +1,41 @@
 package primitives;
 
-// In Java:
-// protected == C# internal protected --- which means it's available for any class in the same package as
-// well as in any child class in other packages
-// w/o access (default) == C# internal --- it's called package friendly in Java
-
 public class Ray {
     private Point3D _p0;
     private Vector _direction;
 
+    /**
+     * this is the basic constructor of ray it receive a point and a vector and
+     * create a new ray from this point and the vector normalized for his direction
+     * @param p the base point of the ray
+     * @param v the vector that will give the direction of the ray
+     */
     public Ray(Point3D p, Vector v) {
         this._direction = v.normalized();
         this._p0 = new Point3D(p);
     }
 
+    /**
+     * this is the copy constructor that allow us to build a new ray from an existing one
+     * @param other the ray we copy in the new one
+     */
     public Ray(Ray other) {
         this._direction = new Vector(other._direction);
         this._p0 = new Point3D(other._p0);
     }
 
+    /**
+     * the getter for the direction vector
+     * @return the direction vector
+     */
     public Vector getDirection() {
         return _direction;
     }
 
+    /**
+     * the getter for the point of the ray
+     * @return the point of the ray
+     */
     public Point3D getP0() {
         return _p0;
     }
