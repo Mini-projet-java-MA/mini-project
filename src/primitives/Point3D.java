@@ -14,9 +14,10 @@ public class Point3D {
     public static Point3D ZERO = new Point3D(0, 0, 0);
 
     /**
-     * @param x
-     * @param y
-     * @param z
+     * this is the constructor of a point in cartesian coordinate system with three coordinate x,y,z
+     * @param x 1st coordinate
+     * @param y 2nd coordinate
+     * @param z 3rd coordinate
      */
     public Point3D(Coordinate x, Coordinate y, Coordinate z) {
         this._x = new Coordinate(x);
@@ -24,12 +25,22 @@ public class Point3D {
         this._z = new Coordinate(z);
     }
 
+    /**
+     * this is the constructor of a point in cartesian coordinate system with three numbers x,y,z that will become coordinate
+     * @param x 1st coordinate
+     * @param y 2nd coordinate
+     * @param z 3rd coordinate
+     */
     public Point3D(double x, double y, double z) {
         this._x = new Coordinate(x);
         this._y = new Coordinate(y);
         this._z = new Coordinate(z);
     }
 
+    /**
+     * this is the copy constructor that allows us to build a point from another one with the same parameters
+     * @param other this is the point we copy to the new point
+     */
     public Point3D(Point3D other) {
         this._x = new Coordinate(other._x);
         this._y = new Coordinate(other._y);
@@ -41,11 +52,11 @@ public class Point3D {
     }
 
     public Coordinate getY() {
-        return new Coordinate(_y);
+        return _y;
     }
 
     public Coordinate getZ() {
-        return new Coordinate(_z);
+        return _z;
     }
 
     public double distanceSquared(Point3D a) {
