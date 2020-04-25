@@ -59,14 +59,24 @@ public class Point3D {
         return _z;
     }
 
-    public double distanceSquared(Point3D a) {
-        return ((this._x._coord - a._x._coord) * (this._x._coord - a._x._coord))
-                + ((this._y._coord - a._y._coord) * (this._y._coord - a._y._coord)
-                + (this._z._coord - a._y._coord) * (this._z._coord - a._y._coord));
+    /**
+     * this is the function that will allow us to calculate the square of the distance between two points
+     * @param p this is the second point we will receive in parameter
+     * @return the square of the distance between our point and the point p
+     */
+    public double distanceSquared(Point3D p) {
+        return ((this._x._coord - p._x._coord) * (this._x._coord - p._x._coord))
+                + ((this._y._coord - p._y._coord) * (this._y._coord - p._y._coord)
+                + (this._z._coord - p._y._coord) * (this._z._coord - p._y._coord));
     }
 
-    public double distance(Point3D a) {
-        return Math.sqrt(this.distanceSquared(a));
+    /**
+     * this function calculate the distance between two points
+     * @param p the second point
+     * @return the distance between our points and the point p
+     */
+    public double distance(Point3D p) {
+        return Math.sqrt(this.distanceSquared(p));
     }
 
     @Override
@@ -78,12 +88,22 @@ public class Point3D {
         return _x.equals(oth._x) && _y.equals(oth._y) && _z.equals(oth._z);
     }
 
+    /**
+     * thie function allows us to compute an addition between a point and a vector and it will return a point for result
+     * @param v the vector we add to our point
+     * @return a point3d as a result of the addition
+     */
     public Point3D add(Vector v) {
         return new Point3D(this.getX()._coord + v.getHead().getX()._coord,
                 this.getY()._coord + v.getHead().getY()._coord,
                 this.getZ()._coord + v.getHead().getZ()._coord);
     }
 
+    /**
+     * the function allows us to compute a subtraction of a point from another one the result will be a vector
+     * @param other the point we subtract to our current point
+     * @return a new vector as the result of the subtraction
+     */
     public Vector subtract(Point3D other) {
         return new Vector(this._x._coord - other.getX()._coord,
                 this._y._coord - other.getY()._coord,
