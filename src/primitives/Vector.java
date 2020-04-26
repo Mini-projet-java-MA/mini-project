@@ -150,6 +150,10 @@ public class Vector {
         return this;
     }
 
+    /**
+     * this function create a new vector and set it as the given vector normalized
+     * @return the given vector normalized in a new vector
+     */
     public Vector normalized() {
         return new Vector(this.normalize());
     }
