@@ -121,6 +121,14 @@ public class Vector {
                 _head.getZ()._coord * mult);
     }
 
+    /**
+     * The function performs Dot Product (Scalar Product) operation
+     * on this vector with another one: this X v
+     * and creates new vector which is the result of the operation
+     *
+     * @param v 2nd vector for this operation
+     * @return new vector with dot product operation result
+     */
     public double dotProduct(Vector v) {
         return ((this._head.getX()._coord * v._head.getX()._coord)
                 + (this._head.getY()._coord * v._head.getY()._coord)
@@ -128,8 +136,10 @@ public class Vector {
     }
 
     /**
-     *
-     * @return
+     * This function normalize a given vector.
+     * A normalized vector maintains its direction but its Length becomes 1.
+     * A vector is normalized by dividing the vector by its own Length.
+     * @return the vector normalized
      */
     public Vector normalize() {
         double mult = 1d / this.length();
@@ -144,10 +154,20 @@ public class Vector {
         return new Vector(this.normalize());
     }
 
+    /**
+     * this function performs the addition of two vectors
+     * @param a the vector we add to our vector
+     * @return new vector containing the result of the addition
+     */
     public Vector add(Vector a) {
         return new Vector(this._head.add(a));
     }
 
+    /**
+     * this function performs the subtraction of two vectors and return a point as result
+     * @param a the vector we subtract to our vector
+     * @return a point who is the result of the substraction
+     */
     public Vector subtract(Vector a) {
         return this._head.subtract(a._head);
     }
