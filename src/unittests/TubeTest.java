@@ -15,7 +15,18 @@ public class TubeTest {
 
 
 
+    @Test
+    public void testConstructor() {
+        try {
+            // ============ Equivalence Partitions Tests ==============
 
+            //TC01:test build a tube with a radius equals to zero
+            double radius = 0;
+            new Tube(new Ray(new Point3D(1, 2, 3), new Vector(1, 1, 1)), radius);
+            fail("Constructed a tube with a null radius ");
+        } catch (IllegalArgumentException e) {
+        }
+    }
     @Test//test the get ray by comparing the result of the func and the expected result
     public void getRay() {
         // ============ Equivalence Partitions Tests ==============
