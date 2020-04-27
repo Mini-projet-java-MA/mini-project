@@ -49,27 +49,23 @@ public class Cylinder extends Tube {
      */
     @Override
     public Vector getNormal(Point3D point) {
-        Point3D o = this.getRay().getP0();
-        Vector direction = this.getRay().getDirection();
-        Vector maybe_normal_cylinder= point.subtract(o);
-        double scale_projection;
-        //if normal he inside of the cylinder
-        try {
-            //if the projection he equal to zero because the vector are orthogonal it onle because p=0
-            scale_projection=  maybe_normal_cylinder.dotProduct(direction);
-        }
-        catch (IllegalArgumentException e) {
-            return direction.normalize();
-        }
-        // if one of the vector equal to zero or dot product he very close to height it on border of the height
-        if (scale_projection == 0 || isZero(_height - scale_projection))
-            //so normal he his diretion
-            return direction.normalize();
+        Point3D p0 = getRay().getP0();
+        Vector v = getRay().getDirection();
 
-        //if the point is outside
-        o = o.add(direction.scale(scale_projection));
-        Vector normal_cylinder= point.subtract(o);
-        return normal_cylinder.normalize();
+        // projection of P-O on the ray:
+        double t;
+        try {
+            t = point.subtract(p0).dotProduct(v);
+        } catch (IllegalArgumentException e) { // P = O - center of the 1st base
+            return v;
+        }
+
+        // if the point is at a base
+        if (isZero(t) || isZero(_height - t)) // if it's close to 0, we'll get ZERO vector exception
+            return v;
+
+        p0 = p0.add(v.scale(t));
+        return point.subtract(p0).normalize();
     }
 
 
