@@ -4,6 +4,7 @@ import static java.lang.System.out;
 import static org.junit.Assert.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static primitives.Util.isZero;
+//test
 
 /**
  * Unit tests for primitives.Vector class
