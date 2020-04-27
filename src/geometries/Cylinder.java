@@ -5,17 +5,17 @@ import primitives.*;
 import static primitives.Util.*;
 
 /**
- * the cylinder the tube with height so he exsqlty like tube and he have one more param height
+ * the cylinder is a the tube with height so he exactly like tube and he have one more param who is height
  */
 public class Cylinder extends Tube {
     private double _height;
 
     /**  this is the basic constructor for a tube :
-     * it receive ray and raduis,
+     * it receive ray and radius
      * @param ray -the ray
-     * @param radius- the raduis
+     * @param radius- the radius
      * @param height- the height of the (cylinder he limited with height)
-     * @throws if the radius equal on small to zero so we don't can't have a cylinder so his return IllegalArgumentException
+     * @throws IllegalArgumentException the radius is equal or smaller to zero so we don't have a cylinder
      */
 
     public Cylinder(Ray ray, double radius, double height) {
@@ -27,7 +27,7 @@ public class Cylinder extends Tube {
 
     /**
      * simple function get
-     * @return the ray
+     * @return the height of the ray
      */
     public double getHeight() {
         return _height;

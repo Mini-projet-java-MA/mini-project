@@ -6,7 +6,7 @@ import primitives.Vector;
 
 /**
  *
- * tube class for represents tube tube in 3D Cartesian coordinate and he define witch a radius and ray
+ * tube class represents a tube in 3D Cartesian coordinate and he define it with a radius and ray
  *
  * @author aaron
  */
@@ -17,7 +17,7 @@ public class Tube extends RadialGeometry {
      * he receive ray and radius
      * @param radius
      * @param ray
-     * @throws  if the radius equal on small to zero so we don't have a tube so his return IllegalArgumentException
+     * @throws  IllegalArgumentException when the radius is equal or smaller to zero so we don't have a tube
      */
     public Tube(Ray ray, double radius) {
         super(radius);

@@ -31,6 +31,9 @@ public class PlaneTest {
 
     @Test
     //we test the plane normalization with expected result and computed result with a delta of 0.00001 for more accuracy
+    /**
+     * this test allows us to verify if  the function getNormal from the class plane is working like it is supposed to
+     */
     public void getNormal() {
 
         Point3D receivedPoint = new Point3D(2, 2, 2);

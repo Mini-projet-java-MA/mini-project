@@ -11,7 +11,7 @@ public class Plane {
     private Vector _normal;
 
     /**
-     * this is a basic constructor who buil a plane from 3 points int cartesian coordinates system
+     * this is a basic constructor who build a plane from 3 points int cartesian coordinates system
      *
      * @param _p1 1st point
      * @param _p2 2nd point
