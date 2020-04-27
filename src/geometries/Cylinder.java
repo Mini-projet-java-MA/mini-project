@@ -6,7 +6,6 @@ import static primitives.Util.*;
 
 /**
  * the cylinder the tube with height so he exsqlty like tube and he have one more param height
- *
  */
 public class Cylinder extends Tube {
     private double _height;
@@ -16,12 +15,13 @@ public class Cylinder extends Tube {
      * @param ray -the ray
      * @param radius- the raduis
      * @param height- the height of the (cylinder he limited with height)
-     * @throws if the radius equal on small to zero so we don't have a tube so his return IllegalArgumentException
+     * @throws if the radius equal on small to zero so we don't can't have a cylinder so his return IllegalArgumentException
      */
+
     public Cylinder(Ray ray, double radius, double height) {
         super(ray, radius);
-        if (height <= 0)
-            throw new IllegalArgumentException("height must be equal or superior to zero.");
+        if (height <= 0)    //if the radius equal on small to zero so we don't can't have a cylinder so his return IllegalArgumentException
+        throw new IllegalArgumentException("height must be equal or superior to zero.");
         this._height = height;
     }
 
@@ -42,25 +42,17 @@ public class Cylinder extends Tube {
                 '}';
     }
 
+    /**
+     *
+     * @param point- he recive a point on cylinder
+     * @return a normal of the cylinder normalize (new vector in size one)
+     */
     @Override
-    public Vector getNormal(Point3D point) {
-        Point3D p0 = getRay().getP0();
-        Vector v = getRay().getDirection();
+    public Vector getNormal(Point3D point3D) {
+        return  super.getNormal(point3D);
 
-        // projection of P-O on the ray:
-        double t;
-        try {
-            t = point.subtract(p0).dotProduct(v);
-        } catch (IllegalArgumentException e) { // P = O - center of the 1st base
-            return v;
-        }
-
-        // if the point is at a base
-        if (isZero(t) || isZero(_height - t)) // if it's close to 0, we'll get ZERO vector exception
-            return v;
-
-        p0 = p0.add(v.scale(t));
-        return point.subtract(p0).normalize();
     }
+
+
 
 }
