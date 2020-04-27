@@ -4,10 +4,11 @@ import static java.lang.System.out;
 import static org.junit.Assert.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static primitives.Util.isZero;
+//test
 
 /**
  * Unit tests for primitives.Vector class
- * @author Dan
+ * @author aaron
  */
 
 import primitives.Point3D;
@@ -36,18 +37,15 @@ public class VectorTest
             8. when the vectors with a blunt angle between//GOOD
              */
         // ============ Equivalence Partitions Tests ==============
-        //this test will be try tu calculator a regular cross product this link caculator online if he his the good answer
-        // https://onlinemschool.com/math/assistance/vector/multiply1/
 
-
-        System.out.println("\t" + "cross product test ");
+        // TC01: Correct concave quadrangular with vertices in correct order
         Vector v1;
         Vector v2;
         Vector v3;
+        // TC01: cross product witch the same diretion
 
-        //the first test-the same diretion
+
         try {
-            System.out.println("\t" + "witch for vectors with same directions:");
             v1 = new Vector(4, 8, 12);
             v2 = new Vector(2, 4, 6);
             Vector temp = new Vector(v1.crossProduct(v2));

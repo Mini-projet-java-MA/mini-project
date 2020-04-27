@@ -14,9 +14,6 @@ public abstract class RadialGeometry implements Geometry {
         _radius = radius;
     }
 
-    public void RadialGeometry(RadialGeometry other) {
-        this._radius = other._radius;
-    }
 
     public double getRadius() {
         return _radius;
