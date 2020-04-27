@@ -23,7 +23,7 @@ public class VectorTest {
 
     @org.junit.Test
     public void crossProduct() {
-        // ============ Equivalence Partitions Tests ==============
+            // ============ Equivalence Partitions Tests ==============
 
         Vector v1;
         Vector v2;
