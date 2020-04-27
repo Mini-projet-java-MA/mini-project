@@ -25,12 +25,6 @@ public final class Main {
         Vector v2 = new Vector(-2, -4, -6);
         Vector v3 = new Vector(0, 3, -2);
 
-        // test length..
-        if (!isZero(v1.lengthSquared() - 14))
-            out.println("ERROR: lengthSquared() wrong value");
-        if (!isZero(new Vector(0, 3, 4).length() - 5))
-            out.println("ERROR: length() wrong value");
-
         // test Dot-Product
         if (!isZero(v1.dotProduct(v3)))
             out.println("ERROR: dotProduct() for orthogonal vectors is not zero");

@@ -1,472 +1,390 @@
 package unittests;
 
-import static java.lang.System.out;
-import static org.junit.Assert.*;
+import primitives.Point3D;
+import primitives.Vector;
+
+import static org.junit.Assert.fail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static primitives.Util.isZero;
+
 //test
 
 /**
  * Unit tests for primitives.Vector class
+ *
  * @author aaron
  */
 
-import primitives.Point3D;
-import primitives.Vector;
-
-import java.awt.event.ItemEvent;
-
-public class VectorTest
-{
+public class VectorTest {
     /**
      * Test method for {@link primitives.Vector#crossProduct(primitives.Vector)}.
      */
 
     @org.junit.Test
     public void crossProduct() {
-
-
-            /*
-            we need to do test for this next this case//GOOD
-            1. when the vectors have the same diretion//GOOD
-            2. when the vectors have the oposite diretion//GOOD
-            4. when the vector have the orthogonal diretion//good
-            5. the test from the main//GOOD
-            6. just regular test//GOOD
-            7. when the vectors with a sharp angle between//GOOD
-            8. when the vectors with a blunt angle between//GOOD
-             */
         // ============ Equivalence Partitions Tests ==============
 
-        // TC01: Correct concave quadrangular with vertices in correct order
         Vector v1;
         Vector v2;
         Vector v3;
+        Vector result;
+        Vector excepted;
+
         // TC01: cross product witch the same diretion
-
-
         try {
             v1 = new Vector(4, 8, 12);
             v2 = new Vector(2, 4, 6);
             Vector temp = new Vector(v1.crossProduct(v2));
-            fail();
+            fail("cross product witch the same diretion");
         } catch (IllegalArgumentException e) {
-            System.out.println("\t" + "the test was fail like supose  !");
         }
-        //the second test -opposite diretion
+        // TC02: cross product when the vectors have the opposite direction
         try {
-            System.out.println("\t" + "witch the vectors with opposite directions:");
             v1 = new Vector(4, 8, 12);
             v2 = new Vector(-4, -8, -12);
-            Vector temp = new Vector(v1.crossProduct(v2));
-            fail();
+            result = new Vector(v1.crossProduct(v2));
+            fail("cross product when the vectors have the opposite direction");
         } catch (IllegalArgumentException e) {
-            System.out.println("\t" + "the test was fail like suppose  !");
         }
-
-        //the third test- the ortogonal test
-
+        // TC03:cross product when the vector orthogonal
         try {
-            System.out.println("\t" + "witch the vectors with otogonal  directions:");
             v1 = new Vector(1, 5, 6);
-            v2 = new Vector(-10, 2, -0);
-            Vector temp = new Vector(-12, -60, 52);
-            Vector succe = new Vector(v1.crossProduct(v2));
-
-            assertEquals(succe, temp, "\t+he third  succes");
-
+            v2 = new Vector(-10, 2, 0);
+            excepted = new Vector(-12, -60, 52);
+            result = new Vector(v1.crossProduct(v2));
+            assertEquals(excepted, result);
         } catch (IllegalArgumentException e) {
-            System.out.println("\t" + "the test was fail !");
         }
+//TC04:test from the main
+        //  TC04.1:test zero vector
 
-
-        //  the fourth test -the main test
         try {
-            // test zero vector
+            v1 = new Vector(1, 2, 3);
+            v2 = new Vector(-2, -4, -6);
+            result = v1.crossProduct(v2);
+            fail("test zero vector");
+        } catch (IllegalArgumentException e) {
+        }
+        //  TC04.2 test cross product witch zero
+        try {
+
             v1 = new Vector(1, 2, 3);
             v2 = new Vector(-2, -4, -6);
             v3 = new Vector(0, 3, -2);
-            v1.crossProduct(v2);
-            out.println("ERROR: crossProduct() for parallel vectors does not throw an exception");
-        } catch (Exception e) {
-        }
-        v1 = new Vector(1, 2, 3);
-        v2 = new Vector(-2, -4, -6);
-        v3 = new Vector(0, 3, -2);
-        Vector vr = new Vector(v1.crossProduct(v3));
-        if (!isZero(vr.length() - v1.length() * v3.length()))
-            out.println("ERROR: crossProduct() wrong result length");
-        if (!isZero(vr.dotProduct(v1)) || !isZero(vr.dotProduct(v3)))
-            out.println("ERROR: crossProduct() result is not orthogonal to its operands");
-        // the fifth- a normal test
-        try {
-            System.out.println("\t" + "witch the vectors with normal tset :");
-            v1 = new Vector(0, 3, 4);
-            v2 = new Vector(1, 5, 2);
-            Vector temp = new Vector(-14, 4, -3);
-            Vector sucs = v1.crossProduct(v2);
-            assertEquals(sucs, temp, "the normal test success");
+            assertEquals(0, v1.crossProduct(v3).length() - v1.length() * v3.length());
         } catch (IllegalArgumentException e) {
-            System.out.println("\t" + "the test was fail !");
         }
+        //TC04.3: test from the main
         try {
-            v1 = new Vector(1, 2, -5);
-            v2 = new Vector(0, 2, 1);
-            v3 = new Vector(12, -1, 2);
-            assertEquals(v3, v1.crossProduct(v2), "the normal test was accuses");
+
+            v1 = new Vector(1, 2, 3);
+            v2 = new Vector(-2, -4, -6);
+            v3 = new Vector(0, 3, -2);
+
+            Vector vr = v1.crossProduct(v3);
+            if (!isZero(vr.dotProduct(v1)) || !isZero(vr.dotProduct(v3)))
+                assertEquals(0, 0);
 
         } catch (IllegalArgumentException e) {
-            System.out.println("\t" + "the test was fail!");
-
         }
-        // when the vectors with a sharp angle between
+        //TC05: test of cross product witch sharp angle between
         try {
             v1 = new Vector(5, -2, 3);
             v2 = new Vector(-4, 5, 7);
-            v3 = new Vector(-29, -47, 17);
+            excepted = v1.crossProduct(v2);
+            result = new Vector(-29, -47, 17);
+            assertEquals(excepted, result);
+        } catch (IllegalArgumentException e) {
         }
-        catch (IllegalArgumentException e)
-        {
-            System.out.print("the test was fail!");
-
-        }
-
-        // when the vectors with a blunt angle between
+        //TC06: test of cross product witch blunt angle between
         try {
             v1 = new Vector(-2, 2, 2);
             v2 = new Vector(0, 2, 2);
-            v3 = new Vector(0, 4, -4);
-            assertEquals(v1.crossProduct(v2), v3, "the of blunt angle was success");
-        } catch (IllegalArgumentException e)
-        {
-            System.out.print("the test was for blunt angle fail!");
+            excepted = v1.crossProduct(v2);
+            result = new Vector(0, 4, -4);
+            assertEquals(excepted, result);
+        } catch (IllegalArgumentException e) {
         }
     }
 
+
     @org.junit.Test
     public void lengthSquared() {
-            /*
-            test for lengthSquared
-            1.when the vector normal vector
-            2. when the vector equal to zero
-             */
-        //=============the first test
-        Vector v1 = new Vector(0, 3, 4);
-        double expected = 25;
-        double result = v1.lengthSquared();
-        assertEquals(result, expected);
-        ///======================the second test
+
+        // ============ Equivalence Partitions Tests ==============
+//TC01:when the vector normal vector
+        Vector v1;
+        double expected;
+        double result;
+        try {
+            v1 = new Vector(0, 3, 4);
+            expected = 25;
+            result = v1.lengthSquared();
+            assertEquals(result, expected);
+        } catch (IllegalArgumentException e) {
+        }
+
+//TC02:when the vector equal to zero
         try {
             v1 = new Vector(0, 0, 0);
             expected = 0;
             result = v1.lengthSquared();
-            assertEquals(result, expected);
-            fail();
+            fail("id not possible vector zero");
         } catch (IllegalArgumentException e) {
-            System.out.println("\t" + "the test was fail like suppose");
 
         }
-        // the test from the main
-
+        //TC03:test from the main
+        try {
+            v1 = new Vector(1, 2, 3);
+            assertEquals(v1.lengthSquared() - 14, 0);
+        } catch (IllegalArgumentException e) {
+        }
     }
+
     @org.junit.Test
-    public void length()
-    {
-                    /*
-            test for length
-            1.when the vector normal vector
-            2. when the vector equal to zero
-            3. test from the main
-             */
-        //=============the first test
-        Vector v1 = new Vector(0, 3, 4);
-        double expected = 5;
-        double result = v1.length();
-        assertEquals(result, expected);
-        ///======================the second test
+    public void length() {
+        // ============ Equivalence Partitions Tests ==============
+
+        Vector v1;
+        Vector v2;
+        Vector v3;
+        double expected;
+        double result;
+        //TC01:when the vector equal to zero
         try {
             v1 = new Vector(0, 0, 0);
-            expected = 0;
-            result = v1.length();
-            assertEquals(result, expected);
-            fail();
+            v1.length();
         } catch (IllegalArgumentException e) {
-            System.out.println("\t" + "the test was fail like suppose");
-
         }
-        //test from the main
-        v1 = new Vector(1, 2, 3);
-        Vector v2 = new Vector(-2, -4, -6);
-        Vector v3 = new Vector(0, 3, -2);
-        if (!isZero(v1.lengthSquared() - 14))
-            out.println("ERROR: lengthSquared() wrong value");
-        if (!isZero(new Vector(0, 3, 4).length() - 5))
-            out.println("ERROR: length() wrong value");
-
-        // test Dot-Product
-        if (!isZero(v1.dotProduct(v3)))
-            out.println("ERROR: dotProduct() for orthogonal vectors is not zero");
-        if (!isZero(v1.dotProduct(v2) + 28))
-            out.println("ERROR: dotProduct() wrong value");
-
-    }
-
-    @org.junit.Test
-    public void scale() {
-            /* we do a tests for opertion scale witch the next case
-            1. when we mule by wero
-            2. a simple test
-             */
-        //
-        // ============ Equivalence Partitions Tests ==============
-        //this test should try the boundary of vector scale be double
-        //a simple test
-
-        Vector v1 = new Vector(4,5,6);
-        double num = 5.68852;
-        Vector parm1 ;
-        Vector parm2 ;
+        //TC02:te test fronm the main
         try {
+            assertEquals(new Vector(0, 3, 4).length(), 5);
 
-
-            parm1 = new Vector((4 * num), (5 * num), (6 * num));
-            parm2 = v1.scale(num);
-            //return true if he is the good answer
-            assertEquals(parm1, parm2);
+        } catch (IllegalArgumentException e) {
         }
-        catch (IllegalArgumentException e)
-        {
-            System.out.println("\t" + "the test was fail!");
-
-        }
-        //when we mult by zero
+        //TC03: normal test
         try {
-
-
-            num = 0;
-            parm1 = new Vector((4 * num), (5 * num), (6 * num));
-            parm2 = v1.scale(num);
-            assertEquals(parm1, parm2);
-            fail();
+            assertEquals(new Vector(3, 4, 0).length(), 5);
+        } catch (IllegalArgumentException e) {
         }
-        catch (IllegalArgumentException error)
-        {
-            System.out.println("\t" +"teh test was sucsse so he fail!" );
-        }
+
     }
 
     @org.junit.Test
     public void dotProduct() {
-        //we need to do tests for this next test
+        // ============ Equivalence Partitions Tests ==============
 
-        //1. a normal test
-
-        //2.test for orthogonal vectors
-
-        //3.test for vectors with opposite directions
-
-        //4. test for vectors with the same direction
-
-        // 5. the vectors with a blunt angle between
-
-        //6. the test for
-        //for more explain see wiki https://en.wikipedia.org/wiki/Dot_product or see this video  https://www.youtube.com/watch?v=lVhCbjmpkN8
-
-        //a normal test
+        //TC01: normal test
         Vector v1 = new Vector(1, 2, 3);
         Vector v2 = new Vector(1, 1, 1);
         try {
             double temp = 6;
             v1.dotProduct(v2);
-            assertEquals(v1.dotProduct(v2), temp, "this normal test was succsec");
+            assertEquals(v1.dotProduct(v2), temp);
 
-        } catch (IllegalArgumentException e )
-        {
-            System.out.println("this normal test wa fail!");
+        } catch (IllegalArgumentException e) {
         }
-
-        //assertTrue(Util.usubtract(expected, result) == 0);
-
-
-
+        //TC02:test for orthogonal vectors
         try {
-
-
-            //test for orthogonal vectors
             v1 = new Vector(3, 2, -7);
             v2 = new Vector(1, 2, 1);
             double temp = 0;
             ;
-            assertEquals(v1.dotProduct(v2), temp, "the test was succsec ");
+            assertEquals(v1.dotProduct(v2), temp);
+        } catch (IllegalArgumentException e) {
         }
-        catch (IllegalArgumentException e )
-        {
-            System.out.println("\t" +"the orthogonal test was  fail! ");
-        }
-        //test for vectors with opposite directions
+        //TC03:test for vectors with opposite directions
         try {
 
             v1 = new Vector(1, 2, 3);
             v2 = new Vector(-1, -2, -3);
             double temp = -14;
-            assertEquals(v1.dotProduct(v2), temp, "the test was sוcces");
-        }
-        catch (IllegalArgumentException e )
-        {
-            System.out.println("\t" +"the test opposite directions was fail ");
+            assertEquals(v1.dotProduct(v2), temp);
+        } catch (IllegalArgumentException e) {
         }
 
-        //test for vectors with the same direction
+        //TC04:test for vectors with the same direction
         try {
             v1 = new Vector(1, 2, 4);
             v2 = new Vector(2, 4, 8);
             double temp = 42;
-            assertEquals(v1.dotProduct(v2),temp , "the test of the same diretion was succsec " );
+            assertEquals(v1.dotProduct(v2), temp);
 
+        } catch (IllegalArgumentException e) {
         }
-        catch ( IllegalArgumentException e ) {
-            System.out.println("the test of the same direction was fail!");
-        }
-        // the test from the maim
+        // TC05: test from the maim
 
         v1 = new Vector(1, 2, 3);
         v2 = new Vector(-2, -4, -6);
         Vector v3 = new Vector(0, 3, -2);
+        // TC05.1: test from the maim
+        try {
+            assertEquals(v1.dotProduct(v3), 0);
+        } catch (IllegalArgumentException e) {
+        }
 
-        if (!isZero(v1.dotProduct(v3)))
-            out.println("ERROR: dotProduct() for orthogonal vectors is not zero");
-        if (!isZero(v1.dotProduct(v2) + 28))
-            out.println("ERROR: dotProduct() wrong value");
+// TC05.2: test from the maim
 
-        // test the vectors with a sharp angle(so dot product his negative )
+        try {
+            assertEquals(v1.dotProduct(v2) + 28, 0);
+
+        } catch (IllegalArgumentException e) {
+        }
+
+        //TC06:test vectors with a sharp angle(so dot product his negative )
         try {
             v1 = new Vector(5, -2, 3);
             v2 = new Vector(-4, 5, 7);
-            double temp=-9;
-        }
-        catch (IllegalArgumentException e)
-        {
-            System.out.print("the test was fail!");
+            double temp = -9;
+            assertEquals(v1.dotProduct(v2), temp);
+        } catch (IllegalArgumentException e) {
 
         }
 
-        // test the vectors with a blunt angle (so dot product his positive )
+        // TC07:test the vectors with a blunt angle (so dot product his positive )
         try {
             v1 = new Vector(-2, 2, 2);
             v2 = new Vector(0, 2, 2);
             double temp = 8;
-            assertEquals(v1.dotProduct(v2), temp, "the of dot product witch blunt angle was success");
-        } catch (IllegalArgumentException e)
-        {
-            System.out.print("the test was for blunt angle fail!");
+            assertEquals(v1.dotProduct(v2), temp);
+        } catch (IllegalArgumentException e) {
         }
     }
 
     @org.junit.Test
     public void normalize() {
-            /*
-            we test the opeation normalize should chang the vector
-            // test from the main
-             */
+
+        // ============ Equivalence Partitions Tests ==============
+        //TC01:normal test
         try {
-            Vector v1 =new Vector(4,3,0);
-            Vector temp =new Vector(0.8, 0.6,0);
-            assertEquals( v1.normalize(), temp,"the test was success ");
+            Vector v1 = new Vector(4, 3, 0);
+            Vector temp = new Vector(0.8, 0.6, 0);
+            assertEquals(v1.normalize(), temp);
+        } catch (IllegalArgumentException e) {
         }
+        Vector v = new Vector(1, 2, 3);
+        Vector vCopy = new Vector(v);
+        //TC02:test from the main
+        //TC02.1:test from the main
 
-
-        catch (IllegalArgumentException e) {
-            System.out.println("\t" + "the was fail");
-            Vector v = new Vector(1, 2, 3);
-            Vector vCopy = new Vector(v);
-            Vector vCopyNormalize = vCopy.normalize();
-            if (vCopy != vCopyNormalize)
-                out.println("ERROR: normalize() function creates a new vector");
-            if (!isZero(vCopyNormalize.length() - 1))
-                out.println("ERROR: normalize() result is not a unit vector");
+        Vector vCopyNormalize = vCopy.normalize();
+        try {
+            assertEquals(vCopy, vCopyNormalize);
+        } catch (IllegalArgumentException e) {
         }
+        //TC02.2:test from the main
 
-
+        try {
+            assertEquals(vCopyNormalize.length() - 1, 0);
+        } catch (IllegalArgumentException e) {
+        }
 
     }
 
     @org.junit.Test
     public void normalized() {
-                    /*
-            we test the opeation normalized should to get a new vector
-            //the test fron the main
-             */
+
+        // ============ Equivalence Partitions Tests ==============
+//TC01: normal test
         try {
-            Vector v1 =new Vector(4,3,0);
-            Vector v2=new Vector(v1.normalized());
-            Vector temp =new Vector(0.8, 0.6,0);
-            assertEquals( v2, v1,"the test was success ");
+            Vector v1 = new Vector(4, 3, 0);
+            Vector v2 = new Vector(v1.normalized());
+            Vector temp = new Vector(0.8, 0.6, 0);
+            assertEquals(v2, v1);
 
-        }
-        catch (IllegalArgumentException e) {
-            System.out.println("\t" + "the was fail");
+        } catch (IllegalArgumentException e) {
         }
 
-        // test from the main
+        // TC02:test from the main
         Vector v = new Vector(1, 2, 3);
-        Vector vCopy = new Vector(v);
-        Vector vCopyNormalize = vCopy.normalize();
-        if (vCopy != vCopyNormalize)
-            out.println("ERROR: normalize() function creates a new vector");
-        if (!isZero(vCopyNormalize.length() - 1))
-            out.println("ERROR: normalize() result is not a unit vector");
         Vector u = v.normalized();
-        if (u == v)
-            out.println("ERROR: normalizated() function does not create a new vector");
+        try {
 
+            assertEquals(u, v);
+        } catch (IllegalArgumentException e) {
+        }
+    }
+
+    @org.junit.Test
+    public void scale() {
+
+        // ============ Equivalence Partitions Tests ==============
+
+        Vector v1 = new Vector(4, 5, 6);
+        double num = 5.68852;
+        Vector result;
+        Vector excepted;
+        // TC01:simple test
+        try {
+
+
+            result = new Vector((4 * num), (5 * num), (6 * num));
+            excepted = v1.scale(num);
+            assertEquals(excepted, result);
+        } catch (IllegalArgumentException e) {
+
+        }
+        //TC02: mult be zero
+        try {
+            num = 0;
+            result = new Vector((4 * num), (5 * num), (6 * num));
+            excepted = v1.scale(num);
+            assertEquals(excepted, result);
+            fail();
+        } catch (IllegalArgumentException error) {
+        }
     }
 
     @org.junit.Test
     public void add() {
-        // 1.a normal test
+        // ============ Equivalence Partitions Tests ==============
+        Vector v1;
+        Vector v2;
+        Vector expected;
+        Vector result;
         //2. a test from the main
+        //TC01: normal test
         try {
-            Vector v1 = new Vector(0, 3, 4);
-            Vector v2 = new Vector(0, 5, 4);
-            Vector expected = new Vector(0, 8, 8);
-            Vector result = v1.add(v2);
+            v1 = new Vector(0, 3, 4);
+            v2 = new Vector(0, 5, 4);
+            expected = new Vector(0, 8, 8);
+            result = v1.add(v2);
             assertEquals(expected, result);
+        } catch (IllegalArgumentException e) {
         }
-        catch (IllegalArgumentException error)
-        {
-            System.out.println("\t" +"teh test was fail!" );
+        //TC02:test from the main
+        try {
+            Point3D p1 = new Point3D(1, 2, 3);
+            if (!Point3D.ZERO.equals(p1.add(new Vector(-1, -2, -3))))
+                fail();
+        } catch (IllegalArgumentException e) {
         }
-        Point3D p1 = new Point3D(1, 2, 3);
-        if (!Point3D.ZERO.equals(p1.add(new Vector(-1, -2, -3))))
-            out.println("ERROR: Point + Vector does not work correctly");
 
-
-        out.println("If there were no any other outputs - all tests succeeded!");
     }
 
     @org.junit.Test
     public void subtract() {
-        // we do a normal test to check if the operaion subdo what he suppose to do
-        //a
+        // ============ Equivalence Partitions Tests ==============
+
+        //TC01: normal test
         try {
             Vector v1 = new Vector(1, 2, 4);
             Vector v2 = new Vector(1, 5, 2);
             Vector expected = new Vector(0, -3, 2);
             Vector result = v1.subtract(v2);
             assertEquals(expected, result);
+        } catch (IllegalArgumentException e) {
+            System.out.println("the test was fail!");
         }
-        catch (IllegalArgumentException e)
-        {System.out.println("the test was fail!");
-        }
+        //TC02:test from the main
         Point3D p1 = new Point3D(1, 2, 3);
-        if (!Point3D.ZERO.equals(p1.add(new Vector(-1, -2, -3))))
-            out.println("ERROR: Point + Vector does not work correctly");
-        if (!new Vector(1, 1, 1).equals(new Point3D(2, 3, 4).subtract(p1)))
-            out.println("ERROR: Point - Point does not work correctly");
+        try {
 
-        out.println("If there were no any other outputs - all tests succeeded!");
+            if (!new Vector(1, 1, 1).equals(new Point3D(2, 3, 4).subtract(p1)))
+                fail();
 
-
+        } catch (IllegalArgumentException e) {
+        }
 
     }
 }
