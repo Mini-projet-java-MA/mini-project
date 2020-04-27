@@ -5,6 +5,7 @@ import primitives.Vector;
 
 import static org.junit.Assert.fail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static primitives.Util.alignZero;
 import static primitives.Util.isZero;
 
 //test
@@ -71,7 +72,8 @@ public class VectorTest {
             v1 = new Vector(1, 2, 3);
             v2 = new Vector(-2, -4, -6);
             v3 = new Vector(0, 3, -2);
-            assertEquals(0, v1.crossProduct(v3).length() - v1.length() * v3.length());
+            Vector vr = v1.crossProduct(v3);
+            assertEquals( 0,alignZero(vr.length()-v1.length()*v3.length()));
         } catch (IllegalArgumentException e) {
         }
         //TC04.3: test from the main
