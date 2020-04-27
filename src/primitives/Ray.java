@@ -3,13 +3,14 @@ package primitives;
 /**
  * the class ray represents 3D ray in cartesian coordinate system
  */
-public class   Ray {
+public class Ray {
     private Point3D _p0;
     private Vector _direction;
 
     /**
      * this is the basic constructor of ray it receive a point and a vector and
      * create a new ray from this point and the vector normalized for his direction
+     *
      * @param p the base point of the ray
      * @param v the vector that will give the direction of the ray
      */
@@ -20,6 +21,7 @@ public class   Ray {
 
     /**
      * this is the copy constructor that allow us to build a new ray from an existing one
+     *
      * @param other the ray we copy in the new one
      */
     public Ray(Ray other) {
@@ -29,6 +31,7 @@ public class   Ray {
 
     /**
      * the getter for the direction vector
+     *
      * @return the direction vector
      */
     public Vector getDirection() {
@@ -37,6 +40,7 @@ public class   Ray {
 
     /**
      * the getter for the point of the ray
+     *
      * @return the point of the ray
      */
     public Point3D getP0() {

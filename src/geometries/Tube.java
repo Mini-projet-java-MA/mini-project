@@ -5,36 +5,39 @@ import primitives.Ray;
 import primitives.Vector;
 
 /**
- *
  * tube class represents a tube in 3D Cartesian coordinate and he define it with a radius and ray
  *
  * @author aaron
  */
 public class Tube extends RadialGeometry {
     private Ray _ray;
+
     /**
      * this is the basic constructor for a ray:
      * he receive ray and radius
+     *
      * @param radius
      * @param ray
-     * @throws  IllegalArgumentException when the radius is equal or smaller to zero so we don't have a tube
+     * @throws IllegalArgumentException when the radius is equal or smaller to zero so we don't have a tube
      */
     public Tube(Ray ray, double radius) {
         super(radius);
-        if (radius <=0)
+        if (radius <= 0)
             throw new IllegalArgumentException("It's not possible to have radius equals to 0");
         this._ray = new Ray(ray);
     }
 
     /**
      * simple function get
+     *
      * @return the ray
      */
     public Ray getRay() {
         return _ray;
     }
 
-    /** the fucnction should return the normal of tube in size one
+    /**
+     * the fucnction should return the normal of tube in size one
      *
      * @param point- he recive a point on cycle tube
      * @return a normal of the tube normalize
@@ -45,7 +48,7 @@ public class Tube extends RadialGeometry {
         // he found the point on the border of the tube
         Point3D o = _ray.getP0().add(_ray.getDirection().scale(scaleNumber));
         // the normal of tube his the point on the border of the tub minus the central
-        Vector normal_tube=  point.subtract(o);
+        Vector normal_tube = point.subtract(o);
         //rerun normal tube vector in size one
         return normal_tube.normalize();
     }

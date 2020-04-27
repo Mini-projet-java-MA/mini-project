@@ -9,8 +9,10 @@ import geometries.*;
 import primitives.*;
 
 public class PlaneTest {
+
     @Test
     public void testConstructor() {
+        // ============ Equivalence Partitions Tests ==============
         //wrong plane with two identical points
         try {
             new Plane(new Point3D(0, 0, 1), new Point3D(0, 0, 1),
@@ -25,15 +27,11 @@ public class PlaneTest {
             fail("Constructed a plane with three same vertices");
         } catch (IllegalArgumentException e) {
         }
-
     }
-
 
     @Test
     //we test the plane normalization with expected result and computed result with a delta of 0.00001 for more accuracy
-    /**
-     * this test allows us to verify if  the function getNormal from the class plane is working like it is supposed to
-     */
+    //this test allows us to verify if  the function getNormal from the class plane is working like it is supposed to
     public void getNormal() {
 
         Point3D receivedPoint = new Point3D(2, 2, 2);

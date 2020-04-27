@@ -16,8 +16,7 @@ import primitives.Vector;
 
 import java.awt.event.ItemEvent;
 
-public class VectorTest
-{
+public class VectorTest {
     /**
      * Test method for {@link primitives.Vector#crossProduct(primitives.Vector)}.
      */
@@ -42,7 +41,7 @@ public class VectorTest
         Vector v1;
         Vector v2;
         Vector v3;
-        // TC01: cross product witch the same diretion
+        // TC01: cross product witch the same direction
 
 
         try {
@@ -124,9 +123,7 @@ public class VectorTest
             v1 = new Vector(5, -2, 3);
             v2 = new Vector(-4, 5, 7);
             v3 = new Vector(-29, -47, 17);
-        }
-        catch (IllegalArgumentException e)
-        {
+        } catch (IllegalArgumentException e) {
             System.out.print("the test was fail!");
 
         }
@@ -137,8 +134,7 @@ public class VectorTest
             v2 = new Vector(0, 2, 2);
             v3 = new Vector(0, 4, -4);
             assertEquals(v1.crossProduct(v2), v3, "the of blunt angle was success");
-        } catch (IllegalArgumentException e)
-        {
+        } catch (IllegalArgumentException e) {
             System.out.print("the test was for blunt angle fail!");
         }
     }
@@ -169,9 +165,9 @@ public class VectorTest
         // the test from the main
 
     }
+
     @org.junit.Test
-    public void length()
-    {
+    public void length() {
                     /*
             test for length
             1.when the vector normal vector
@@ -222,10 +218,10 @@ public class VectorTest
         //this test should try the boundary of vector scale be double
         //a simple test
 
-        Vector v1 = new Vector(4,5,6);
+        Vector v1 = new Vector(4, 5, 6);
         double num = 5.68852;
-        Vector parm1 ;
-        Vector parm2 ;
+        Vector parm1;
+        Vector parm2;
         try {
 
 
@@ -233,9 +229,7 @@ public class VectorTest
             parm2 = v1.scale(num);
             //return true if he is the good answer
             assertEquals(parm1, parm2);
-        }
-        catch (IllegalArgumentException e)
-        {
+        } catch (IllegalArgumentException e) {
             System.out.println("\t" + "the test was fail!");
 
         }
@@ -248,10 +242,8 @@ public class VectorTest
             parm2 = v1.scale(num);
             assertEquals(parm1, parm2);
             fail();
-        }
-        catch (IllegalArgumentException error)
-        {
-            System.out.println("\t" +"teh test was sucsse so he fail!" );
+        } catch (IllegalArgumentException error) {
+            System.out.println("\t" + "teh test was sucsse so he fail!");
         }
     }
 
@@ -280,13 +272,11 @@ public class VectorTest
             v1.dotProduct(v2);
             assertEquals(v1.dotProduct(v2), temp, "this normal test was succsec");
 
-        } catch (IllegalArgumentException e )
-        {
+        } catch (IllegalArgumentException e) {
             System.out.println("this normal test wa fail!");
         }
 
         //assertTrue(Util.usubtract(expected, result) == 0);
-
 
 
         try {
@@ -298,10 +288,8 @@ public class VectorTest
             double temp = 0;
             ;
             assertEquals(v1.dotProduct(v2), temp, "the test was succsec ");
-        }
-        catch (IllegalArgumentException e )
-        {
-            System.out.println("\t" +"the orthogonal test was  fail! ");
+        } catch (IllegalArgumentException e) {
+            System.out.println("\t" + "the orthogonal test was  fail! ");
         }
         //test for vectors with opposite directions
         try {
@@ -310,10 +298,8 @@ public class VectorTest
             v2 = new Vector(-1, -2, -3);
             double temp = -14;
             assertEquals(v1.dotProduct(v2), temp, "the test was sוcces");
-        }
-        catch (IllegalArgumentException e )
-        {
-            System.out.println("\t" +"the test opposite directions was fail ");
+        } catch (IllegalArgumentException e) {
+            System.out.println("\t" + "the test opposite directions was fail ");
         }
 
         //test for vectors with the same direction
@@ -321,10 +307,9 @@ public class VectorTest
             v1 = new Vector(1, 2, 4);
             v2 = new Vector(2, 4, 8);
             double temp = 42;
-            assertEquals(v1.dotProduct(v2),temp , "the test of the same diretion was succsec " );
+            assertEquals(v1.dotProduct(v2), temp, "the test of the same diretion was succsec ");
 
-        }
-        catch ( IllegalArgumentException e ) {
+        } catch (IllegalArgumentException e) {
             System.out.println("the test of the same direction was fail!");
         }
         // the test from the maim
@@ -342,10 +327,8 @@ public class VectorTest
         try {
             v1 = new Vector(5, -2, 3);
             v2 = new Vector(-4, 5, 7);
-            double temp=-9;
-        }
-        catch (IllegalArgumentException e)
-        {
+            double temp = -9;
+        } catch (IllegalArgumentException e) {
             System.out.print("the test was fail!");
 
         }
@@ -356,8 +339,7 @@ public class VectorTest
             v2 = new Vector(0, 2, 2);
             double temp = 8;
             assertEquals(v1.dotProduct(v2), temp, "the of dot product witch blunt angle was success");
-        } catch (IllegalArgumentException e)
-        {
+        } catch (IllegalArgumentException e) {
             System.out.print("the test was for blunt angle fail!");
         }
     }
@@ -369,13 +351,10 @@ public class VectorTest
             // test from the main
              */
         try {
-            Vector v1 =new Vector(4,3,0);
-            Vector temp =new Vector(0.8, 0.6,0);
-            assertEquals( v1.normalize(), temp,"the test was success ");
-        }
-
-
-        catch (IllegalArgumentException e) {
+            Vector v1 = new Vector(4, 3, 0);
+            Vector temp = new Vector(0.8, 0.6, 0);
+            assertEquals(v1.normalize(), temp, "the test was success ");
+        } catch (IllegalArgumentException e) {
             System.out.println("\t" + "the was fail");
             Vector v = new Vector(1, 2, 3);
             Vector vCopy = new Vector(v);
@@ -387,7 +366,6 @@ public class VectorTest
         }
 
 
-
     }
 
     @org.junit.Test
@@ -397,13 +375,12 @@ public class VectorTest
             //the test fron the main
              */
         try {
-            Vector v1 =new Vector(4,3,0);
-            Vector v2=new Vector(v1.normalized());
-            Vector temp =new Vector(0.8, 0.6,0);
-            assertEquals( v2, v1,"the test was success ");
+            Vector v1 = new Vector(4, 3, 0);
+            Vector v2 = new Vector(v1.normalized());
+            Vector temp = new Vector(0.8, 0.6, 0);
+            assertEquals(v2, v1, "the test was success ");
 
-        }
-        catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             System.out.println("\t" + "the was fail");
         }
 
@@ -431,10 +408,8 @@ public class VectorTest
             Vector expected = new Vector(0, 8, 8);
             Vector result = v1.add(v2);
             assertEquals(expected, result);
-        }
-        catch (IllegalArgumentException error)
-        {
-            System.out.println("\t" +"teh test was fail!" );
+        } catch (IllegalArgumentException error) {
+            System.out.println("\t" + "teh test was fail!");
         }
         Point3D p1 = new Point3D(1, 2, 3);
         if (!Point3D.ZERO.equals(p1.add(new Vector(-1, -2, -3))))
@@ -454,9 +429,8 @@ public class VectorTest
             Vector expected = new Vector(0, -3, 2);
             Vector result = v1.subtract(v2);
             assertEquals(expected, result);
-        }
-        catch (IllegalArgumentException e)
-        {System.out.println("the test was fail!");
+        } catch (IllegalArgumentException e) {
+            System.out.println("the test was fail!");
         }
         Point3D p1 = new Point3D(1, 2, 3);
         if (!Point3D.ZERO.equals(p1.add(new Vector(-1, -2, -3))))
@@ -465,7 +439,6 @@ public class VectorTest
             out.println("ERROR: Point - Point does not work correctly");
 
         out.println("If there were no any other outputs - all tests succeeded!");
-
 
 
     }

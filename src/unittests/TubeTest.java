@@ -15,7 +15,9 @@ public class TubeTest {
 
     @Test
     public void testConstructor() {
-        try {//build a tube with a radius equals to zero which is irrelevant because it will build a point3d not a tube
+        // ============ Equivalence Partitions Tests ==============
+        //build a tube with a radius equals to zero which is irrelevant because it will build a point3d not a tube
+        try {
             double radius = 0;
             new Tube(new Ray(new Point3D(1, 2, 3), new Vector(1, 1, 1)), radius);
             fail("Constructed a tube with a null radius ");
@@ -23,8 +25,9 @@ public class TubeTest {
         }
     }
 
-    @Test//test the get ray by comparing the result of the func and the expected result
+    @Test
     public void getRay() {
+        //test the get ray by comparing the result of the func and the expected result
         Point3D p = new Point3D(2, 3, 4);
         Vector d = new Vector(1, 1, 1);
         double radius = 3;

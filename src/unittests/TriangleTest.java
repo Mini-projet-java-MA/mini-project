@@ -7,7 +7,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * most of the test for triangle can be used from his parent class polygon
+ * most of the test for triangle can be taken from his parent class polygon
  */
 public class TriangleTest {
     @Test

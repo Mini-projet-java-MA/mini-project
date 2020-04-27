@@ -5,7 +5,7 @@ import primitives.*;
 import static primitives.Util.*;
 
 /**
- * the cylinder is a the tube with height so he exactly like tube and he have one more param who is height
+ * the cylinder is a  tube with height so he is exactly like tube and he have one more param which is height
  */
 public class Cylinder extends Tube {
     private double _height;
@@ -27,7 +27,7 @@ public class Cylinder extends Tube {
 
     /**
      * simple function get
-     * @return the height of the ray
+     * @return the height of the cylinder
      */
     public double getHeight() {
         return _height;
