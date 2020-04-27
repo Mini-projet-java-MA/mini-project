@@ -15,6 +15,7 @@ public class Point3D {
 
     /**
      * this is the constructor of a point in cartesian coordinate system with three coordinate x,y,z
+     *
      * @param x 1st coordinate
      * @param y 2nd coordinate
      * @param z 3rd coordinate
@@ -27,6 +28,7 @@ public class Point3D {
 
     /**
      * this is the constructor of a point in cartesian coordinate system with three numbers x,y,z that will become coordinate
+     *
      * @param x 1st coordinate
      * @param y 2nd coordinate
      * @param z 3rd coordinate
@@ -39,6 +41,7 @@ public class Point3D {
 
     /**
      * this is the copy constructor that allows us to build a point from another one with the same parameters
+     *
      * @param other this is the point we copy to the new point
      */
     public Point3D(Point3D other) {
@@ -61,6 +64,7 @@ public class Point3D {
 
     /**
      * this is the function that will allow us to calculate the square of the distance between two points
+     *
      * @param p this is the second point we will receive in parameter
      * @return the square of the distance between our point and the point p
      */
@@ -72,6 +76,7 @@ public class Point3D {
 
     /**
      * this function calculate the distance between two points
+     *
      * @param p the second point
      * @return the distance between our points and the point p
      */
@@ -90,6 +95,7 @@ public class Point3D {
 
     /**
      * thie function allows us to compute an addition between a point and a vector and it will return a point for result
+     *
      * @param v the vector we add to our point
      * @return a point3d as a result of the addition
      */
@@ -101,6 +107,7 @@ public class Point3D {
 
     /**
      * the function allows us to compute a subtraction of a point from another one the result will be a vector
+     *
      * @param other the point we subtract to our current point
      * @return a new vector as the result of the subtraction
      */

@@ -31,13 +31,12 @@ public class Sphere extends RadialGeometry {
     }
 
     /**
-     * the function find the normal vector og the sphere when he recive point 3d
+     * the function find the normal vector of the sphere at a specific point 3d
      *
-     * @param point3d
+     * @param p the specified point
      * @return new vector normal of the sphere in size one
      */
     public Vector getNormal(Point3D p) {
-
 //the normal of the vector the diff between the point p minus the center
         Vector normal_sphere = p.subtract(_center);
         //rerun normal sphere vector in size one

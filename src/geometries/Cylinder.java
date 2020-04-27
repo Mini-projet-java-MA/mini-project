@@ -5,17 +5,17 @@ import primitives.*;
 import static primitives.Util.*;
 
 /**
- * the cylinder the tube with height so he exsqlty like tube and he have one more param height
+ * the cylinder is a the tube with height so he exactly like tube and he have one more param who is height
  */
 public class Cylinder extends Tube {
     private double _height;
 
     /**  this is the basic constructor for a tube :
-     * it receive ray and raduis,
+     * it receive ray and radius
      * @param ray -the ray
-     * @param radius- the raduis
+     * @param radius- the radius
      * @param height- the height of the (cylinder he limited with height)
-     * @throws if the radius equal on small to zero so we don't can't have a cylinder so his return IllegalArgumentException
+     * @throws IllegalArgumentException the radius is equal or smaller to zero so we don't have a cylinder
      */
 
     public Cylinder(Ray ray, double radius, double height) {
@@ -27,7 +27,7 @@ public class Cylinder extends Tube {
 
     /**
      * simple function get
-     * @return the ray
+     * @return the height of the ray
      */
     public double getHeight() {
         return _height;
@@ -49,27 +49,23 @@ public class Cylinder extends Tube {
      */
     @Override
     public Vector getNormal(Point3D point) {
-        Point3D o = this.getRay().getP0();
-        Vector direction = this.getRay().getDirection();
-        Vector maybe_normal_cylinder= point.subtract(o);
-        double scale_projection;
-        //if normal he inside of the cylinder
-        try {
-            //if the projection he equal to zero because the vector are orthogonal it onle because p=0
-            scale_projection=  maybe_normal_cylinder.dotProduct(direction);
-        }
-        catch (IllegalArgumentException e) {
-            return direction.normalize();
-        }
-        // if one of the vector equal to zero or dot product he very close to height it on border of the height
-        if (scale_projection == 0 || isZero(_height - scale_projection))
-            //so normal he his diretion
-            return direction.normalize();
+        Point3D p0 = getRay().getP0();
+        Vector v = getRay().getDirection();
 
-        //if the point is outside
-        o = o.add(direction.scale(scale_projection));
-        Vector normal_cylinder= point.subtract(o);
-        return normal_cylinder.normalize();
+        // projection of P-O on the ray:
+        double t;
+        try {
+            t = point.subtract(p0).dotProduct(v);
+        } catch (IllegalArgumentException e) { // P = O - center of the 1st base
+            return v;
+        }
+
+        // if the point is at a base
+        if (isZero(t) || isZero(_height - t)) // if it's close to 0, we'll get ZERO vector exception
+            return v;
+
+        p0 = p0.add(v.scale(t));
+        return point.subtract(p0).normalize();
     }
 
 
