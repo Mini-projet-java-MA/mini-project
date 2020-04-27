@@ -43,14 +43,33 @@ public class Cylinder extends Tube {
     }
 
     /**
-     *
-     * @param point- he recive a point on cylinder
+     *function to find the normal of the cylinder
+     * @param point to find the normal
      * @return a normal of the cylinder normalize (new vector in size one)
      */
     @Override
-    public Vector getNormal(Point3D point3D) {
-        return  super.getNormal(point3D);
+    public Vector getNormal(Point3D point) {
+        Point3D o = this.getRay().getP0();
+        Vector direction = this.getRay().getDirection();
+        Vector maybe_normal_cylinder= point.subtract(o);
+        double scale_projection;
+        //if normal he inside of the cylinder
+        try {
+            //if the projection he equal to zero because the vector are orthogonal it onle because p=0
+            scale_projection=  maybe_normal_cylinder.dotProduct(direction);
+        }
+        catch (IllegalArgumentException e) {
+            return direction.normalize();
+        }
+        // if one of the vector equal to zero or dot product he very close to height it on border of the height
+        if (scale_projection == 0 || isZero(_height - scale_projection))
+            //so normal he his diretion
+            return direction.normalize();
 
+        //if the point is outside
+        o = o.add(direction.scale(scale_projection));
+        Vector normal_cylinder= point.subtract(o);
+        return normal_cylinder.normalize();
     }
 
 
