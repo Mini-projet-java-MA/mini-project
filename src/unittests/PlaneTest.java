@@ -1,26 +1,26 @@
 package unittests;
 
 
+import geometries.Plane;
 import org.junit.Test;
+import primitives.Point3D;
 
-import static org.junit.Assert.*;
-
-import geometries.*;
-import primitives.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 public class PlaneTest {
 
     @Test
     public void testConstructor() {
         // ============ Equivalence Partitions Tests ==============
-        //wrong plane with two identical points
+        //TC01:test when the  plane with two identical points
         try {
             new Plane(new Point3D(0, 0, 1), new Point3D(0, 0, 1),
                     new Point3D(1, 0, 0));
             fail("Constructed a plane with two same vertices");
         } catch (IllegalArgumentException e) {
         }
-        //wrong plane with three identical points
+        //TC02: test wrong plane with three identical points
         try {
             new Plane(new Point3D(0, 0, 1), new Point3D(0, 0, 1),
                     new Point3D(0, 0, 1));
@@ -30,10 +30,9 @@ public class PlaneTest {
     }
 
     @Test
-    //we test the plane normalization with expected result and computed result with a delta of 0.00001 for more accuracy
-    //this test allows us to verify if  the function getNormal from the class plane is working like it is supposed to
     public void getNormal() {
-
+        // ============ Equivalence Partitions Tests ==============
+        //TC01:we test the plane normalization with expected result and computed result with a delta of 0.00001 for more accuracy this test allows us to verify if the function getNormal from the class plane is working like it is supposed to
         Point3D receivedPoint = new Point3D(2, 2, 2);
         Point3D p1 = new Point3D(5, 4, 0);
         Point3D p2 = new Point3D(5, 6, 0);

@@ -18,7 +18,7 @@ public class SphereTest {
     @Test
     public void get_center() {
         // ============ Equivalence Partitions Tests ==============
-//TC01:we test the get center of sphere by comparing the result of the func and the expected result:
+        //TC01:we test the get center of sphere by comparing the result of the func and the expected result:
         try {
             Coordinate x = new Coordinate(2);
             Coordinate y = new Coordinate(3);
@@ -40,10 +40,9 @@ public class SphereTest {
 
         //TC01:we test the get normal of sphere the same way than the other func(result and expected result)
         try {
-        Sphere sp = new Sphere(1.0, new Point3D(0, 0, 1));
-        assertEquals(new Vector(0, 0, 1), sp.getNormal(new Point3D(0, 0, 2)));
-    }
-
-        catch (IllegalArgumentException e){}
+            Sphere sp = new Sphere(1.0, new Point3D(0, 0, 1));
+            assertEquals(new Vector(0, 0, 1), sp.getNormal(new Point3D(0, 0, 2)));
+        } catch (IllegalArgumentException e) {
+        }
     }
 }

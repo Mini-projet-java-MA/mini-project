@@ -1,18 +1,17 @@
 package unittests;
 
-import geometries.*;
-import primitives.*;
+import geometries.Triangle;
 import org.junit.Test;
+import primitives.Point3D;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.fail;
 
-/**
- * most of the test for triangle can be taken from his parent class polygon
- */
+
 public class TriangleTest {
     @Test
     public void testConstructor() {
-        //with two same points and so it's not a triangle it's a vector
+        // ============ Equivalence Partitions Tests ==============
+        //TC01:with two same points and so it's not a triangle it's a vector
         try {
             new Triangle(new Point3D(0, 0, 0), new Point3D(0, 0, 0), new Point3D(1, 2, 3));
             fail("Constructed a vector not a triangle ");

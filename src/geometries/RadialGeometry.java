@@ -7,6 +7,9 @@ import primitives.Vector;
 import java.util.List;
 import java.awt.Color;
 
+/**
+ *
+ */
 public abstract class RadialGeometry implements Geometry {
     protected double _radius;
 
