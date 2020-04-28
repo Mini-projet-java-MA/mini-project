@@ -1,13 +1,16 @@
  package unittests;
 
+ import static org.junit.Assert.*;
+ import java.util.List;
+
 import geometries.*;
 import org.junit.Test;
 import primitives.*;
 
-import java.util.List;
 
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.fail;
+
+
+
 
 
 public class TriangleTest {
@@ -29,7 +32,10 @@ public class TriangleTest {
         Ray ray = new Ray(new Point3D(2, 5, 0), new Vector(0, 0, -1));
         Triangle triangle = new Triangle(new Point3D(0, 0, 0), new Point3D(7, 0, 0), new Point3D(0, 8, 0));
         List<Point3D> intersectionsList = triangle.findIntersections(ray);
-        assertArrayEquals(intersectionsList, );
+        assertNotNull("must be not empty", intersectionsList);
+        assertEquals("must be empty",1,intersectionsList.size());
+        assertEquals("must be the same",new Point3D(2.139,5.556,0),intersectionsList.get(0));
+
 
         //TC02 outside against edge
         ray = new Ray(new Point3D(5, 6, 0), new Vector(0, 0, -1));
