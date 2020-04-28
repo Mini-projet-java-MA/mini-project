@@ -1,13 +1,14 @@
- package unittests;
+package unittests;
 
-import geometries.*;
 import org.junit.Test;
-import primitives.*;
+import geometries.Triangle;
+import primitives.Point3D;
+import primitives.Ray;
+import primitives.Vector;
 
 import java.util.List;
 
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 
 public class TriangleTest {
@@ -29,7 +30,9 @@ public class TriangleTest {
         Ray ray = new Ray(new Point3D(2, 5, 0), new Vector(0, 0, -1));
         Triangle triangle = new Triangle(new Point3D(0, 0, 0), new Point3D(7, 0, 0), new Point3D(0, 8, 0));
         List<Point3D> intersectionsList = triangle.findIntersections(ray);
-        assertArrayEquals(intersectionsList, );
+        assertNotNull("Must be not empty", intersectionsList);
+        assertEquals("Must be one point", 1, intersectionsList.size());
+        assertEquals("Bad point", new Point3D(0,0,0), intersectionsList.get(0));
 
         //TC02 outside against edge
         ray = new Ray(new Point3D(5, 6, 0), new Vector(0, 0, -1));
@@ -39,14 +42,13 @@ public class TriangleTest {
         //TC02 outside against vertex
         ray = new Ray(new Point3D(-1, -1, 0), new Vector(0, 0, -1));
         intersectionsList = triangle.findIntersections(ray);
-
+        assertNull("Must be empty", intersectionsList);
 
 
 // =============== Boundary Values Tests ==================
         //TC10 on edge- start at the plane
         ray = new Ray(new Point3D(1, 0, 0), new Vector(0, 0, -1));
         intersectionsList = triangle.findIntersections(ray);
-
 
 
     }
