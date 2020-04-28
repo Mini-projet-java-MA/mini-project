@@ -4,6 +4,8 @@ import primitives.Point3D;
 import primitives.Ray;
 import primitives.Vector;
 
+import java.util.List;
+
 /**
  * tube class represents a tube in 3D Cartesian coordinate and he define it with a radius and ray
  *
@@ -59,5 +61,14 @@ public class Tube extends RadialGeometry {
                 "_ray=" + _ray +
                 ", _radius=" + _radius +
                 "} " + super.toString();
+    }
+
+    /**
+     * @param ray - he his the ray that insert the object
+     * @return a list of all intersection
+     */
+    @Override
+    public List<Point3D> findIntersections(Ray ray) {
+        return null;
     }
 }

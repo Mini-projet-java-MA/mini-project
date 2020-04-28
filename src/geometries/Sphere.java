@@ -1,7 +1,10 @@
 package geometries;
 
 import primitives.Point3D;
+import primitives.Ray;
 import primitives.Vector;
+
+import java.util.List;
 
 /**
  * sphere class represents sphere in 3D Cartesian coordinate
@@ -42,5 +45,29 @@ public class Sphere extends RadialGeometry {
         Vector normal_sphere = p.subtract(_center);
         //rerun normal sphere vector in size one
         return normal_sphere.normalize();
+    }
+
+    /**
+     * @param ray - he his the ray that insert the object
+     * @return a list of all intersection
+     */
+    @Override
+    public List<Point3D> findIntersections(Ray ray)
+    {
+        List<Point3D>insertion ;
+       // 𝑢 = 𝑂 − 𝑃0
+        double u= _center.subtract(ray.getP0()).length();
+        //tm=v*u
+        double tm=ray.getDirection().length()*u;
+        //d=root of (u^2+tm^2)
+        double d=Math.sqrt((u*u)-(tm*tm));
+        //th=radius*radius-d*d
+        double th=Math.sqrt((_radius*_radius)-(d*d));
+        //t1=tm+th
+        double t1=tm+th;
+        //t1=tm-th
+        double t2=tm+th;
+insertion.add(ray.getP0()+(t1*)
+    return  insertion;
     }
 }
