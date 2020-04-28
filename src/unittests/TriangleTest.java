@@ -1,16 +1,12 @@
- package unittests;
+package unittests;
 
- import static org.junit.Assert.*;
- import java.util.List;
+import static org.junit.Assert.*;
+
+import java.util.List;
 
 import geometries.*;
 import org.junit.Test;
 import primitives.*;
-
-
-
-
-
 
 
 public class TriangleTest {
@@ -32,29 +28,45 @@ public class TriangleTest {
         Ray ray = new Ray(new Point3D(2, 5, 0), new Vector(0, 0, -1));
         Triangle triangle = new Triangle(new Point3D(0, 0, 0), new Point3D(7, 0, 0), new Point3D(0, 8, 0));
         List<Point3D> intersectionsList = triangle.findIntersections(ray);
-        assertNull("must be not empty", intersectionsList);
-        assertEquals("must be equal to 1",1,intersectionsList.size());
-        assertEquals("must be the same",new Point3D(2.139,5.556,0),intersectionsList.get(0));
+        assertNotNull("must be not empty", intersectionsList);
+        assertEquals("must be equal to 1", 1, intersectionsList.size());
+        assertEquals("must be the same", new Point3D(2.139, 5.556, 0), intersectionsList.get(0));
 
 
         //TC02 outside against edge
         ray = new Ray(new Point3D(5, 6, 0), new Vector(0, 0, -1));
         intersectionsList = triangle.findIntersections(ray);
-        assertNull("must be empty",intersectionsList);
+        assertNull("must be empty", intersectionsList);
 
 
         //TC02 outside against vertex
         ray = new Ray(new Point3D(-1, -1, 0), new Vector(0, 0, -1));
         intersectionsList = triangle.findIntersections(ray);
-        assertNull("must be empty",intersectionsList);
+        assertNull("must be empty", intersectionsList);
 
 
+        // =============== Boundary Values Tests ==================
 
-// =============== Boundary Values Tests ==================
-        //TC10 on edge- start at the plane
-        ray = new Ray(new Point3D(1, 0, 0), new Vector(0, 0, -1));
+        //ray starts "before" the plane
+        //TC10 on edge
+        ray = new Ray(new Point3D(0, 0, 1), new Vector(1, 0, -1));
         intersectionsList = triangle.findIntersections(ray);
+        assertNotNull("must be not empty", intersectionsList);
+        assertEquals("must be equal to 1", 1, intersectionsList.size());
+        assertEquals("must be the same", new Point3D(1, 0, 0), intersectionsList.get(0));
 
+
+        // TC12 in vertex
+        ray = new Ray(new Point3D(6, 0, 1), new Vector(1, 0, -1));
+        intersectionsList = triangle.findIntersections(ray);
+        assertNotNull("must be not empty", intersectionsList);
+        assertEquals("must be equal to 1", 1, intersectionsList.size());
+        assertEquals("must be the same", new Point3D(7, 0, 0), intersectionsList.get(0));
+
+        // TC13 on edge continuation
+        ray = new Ray(new Point3D(10, 0, 0), new Vector(0, 0, -1));
+        intersectionsList = triangle.findIntersections(ray);
+        assertNull("must be empty", intersectionsList);
 
 
     }
