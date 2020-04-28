@@ -54,6 +54,7 @@ public class Sphere extends RadialGeometry {
     @Override
     public List<Point3D> findIntersections(Ray ray)
     {
+      /*
         List<Point3D>insertion ;
        // 𝑢 = 𝑂 − 𝑃0
         double u= _center.subtract(ray.getP0()).length();
@@ -69,5 +70,7 @@ public class Sphere extends RadialGeometry {
         double t2=tm+th;
 insertion.add(ray.getP0()+(t1*)
     return  insertion;
+    */
+      return null;
     }
 }

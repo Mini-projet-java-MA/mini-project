@@ -3,6 +3,9 @@ package unittests;
 import geometries.Triangle;
 import org.junit.Test;
 import primitives.Point3D;
+import primitives.Vector;
+
+import java.io.PipedOutputStream;
 
 import static org.junit.Assert.fail;
 
@@ -18,4 +21,5 @@ public class TriangleTest {
         } catch (IllegalArgumentException e) {
         }
     }
+
 }

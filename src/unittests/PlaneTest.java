@@ -4,6 +4,8 @@ package unittests;
 import geometries.Plane;
 import org.junit.Test;
 import primitives.Point3D;
+import primitives.Ray;
+import primitives.Vector;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
@@ -41,5 +43,19 @@ public class PlaneTest {
         assertEquals(1, plane.getNormal(receivedPoint).length(), 0.00001);
         assertEquals(0, p1.subtract(p2).dotProduct(plane.getNormal(receivedPoint)), 0.00001);
         assertEquals(0, p1.subtract(p3).dotProduct(plane.getNormal(receivedPoint)), 0.00001);
+    }
+    @Test
+    public void findIntersections() {
+        // ============ Equivalence Partitions Tests ==============
+        Plane plane;
+        Ray ray;
+//TC01:test ray neither orthogonal nor parallel to the plan
+        //TC02: ray neither orthogonal nor parallel to the planwithout intersections
+        //TC03:ray parallel to plane included in plane
+        //TC04: parallel, not included not included in plane
+        //TC05: the ray are ray orthogonal to plane and p0 before plane
+        //TC06:the ray are ray orthogonal to plane and p0 after plane
+
+
     }
 }

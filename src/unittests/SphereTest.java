@@ -4,6 +4,7 @@ import geometries.Sphere;
 import org.junit.Test;
 import primitives.Coordinate;
 import primitives.Point3D;
+import primitives.Ray;
 import primitives.Vector;
 
 import static org.junit.Assert.assertEquals;
@@ -12,7 +13,7 @@ public class SphereTest {
     /**
      * Test method for {@link geometries.Sphere}.
      *
-     * @auther aaron
+     * @author aaron
      */
 
     @Test
@@ -44,5 +45,10 @@ public class SphereTest {
             assertEquals(new Vector(0, 0, 1), sp.getNormal(new Point3D(0, 0, 2)));
         } catch (IllegalArgumentException e) {
         }
+    }
+    @Test
+    public void findIntersections() {
+
+        
     }
 }
