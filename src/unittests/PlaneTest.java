@@ -7,8 +7,9 @@ import primitives.Point3D;
 import primitives.Ray;
 import primitives.Vector;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import java.util.List;
+
+import static org.junit.Assert.*;
 
 public class PlaneTest {
 
@@ -49,13 +50,67 @@ public class PlaneTest {
         // ============ Equivalence Partitions Tests ==============
         Plane plane;
         Ray ray;
-//TC01:test ray neither orthogonal nor parallel to the plan
-        //TC02: ray neither orthogonal nor parallel to the planwithout intersections
-        //TC03:ray parallel to plane included in plane
-        //TC04: parallel, not included not included in plane
-        //TC05: the ray are ray orthogonal to plane and p0 before plane
-        //TC06:the ray are ray orthogonal to plane and p0 after plane
+        List<Point3D> intersectionsList = null;
+        //TC01: the ray not included parallel to the plane
+        try {
+            ray = new Ray(new Point3D(2, 6, 1), new Vector(3, 3, 0));
+            plane = new Plane(new Point3D(5, 4, 0), new Point3D(7, 8, 0), new Point3D(5, 6, 0));
+            assertEquals("must be equal to 1", 1, intersectionsList.size());
+            assertEquals("must be the same", new Point3D(3, 3, 0), intersectionsList.get(0));
+        } catch (IllegalArgumentException e) {
+        }
+        //TC02: the ray included parallel to the plane
+        try {
+            ray = new Ray(new Point3D(2, 6, 0), new Vector(3, 3, 0));
+            plane = new Plane(new Point3D(5, 4, 0), new Point3D(7, 8, 0), new Point3D(5, 6, 0));
+            intersectionsList = plane.findIntersections(ray);
+            assertNotNull("must be not empty", intersectionsList);
+        } catch (IllegalArgumentException e) {
+        }
 
+        //TC03:the ray orthogonal to plane, p0 before plane
+        try {
+            ray = new Ray(new Point3D(2, 6, 1), new Vector(0, 0, -1));
+            plane = new Plane(new Point3D(5, 4, 0), new Point3D(7, 8, 0), new Point3D(5, 6, 0));
+            assertEquals("must be equal to 1", 1, intersectionsList.size());
+            assertEquals("must be the same", new Point3D(1, 3, 0), intersectionsList.get(0));
+        } catch (IllegalArgumentException e) {
+        }
+        //TC04:the ray orthogonal to plane, p0 in plane
+        try {
 
+            ray = new Ray(new Point3D(2, 6, 0), new Vector(0, 0, 1));
+            plane = new Plane(new Point3D(5, 4, 0), new Point3D(7, 8, 0), new Point3D(5, 6, 0));
+            assertEquals("must be equal to 1", 1, intersectionsList.size());
+            assertEquals("must be the same", new Point3D(2, 6, 0), intersectionsList.get(0));
+
+        } catch (IllegalArgumentException e) {
+        }
+        // TC05:the ray orthogonal to plane, p0 after plane
+        try {
+            ray = new Ray(new Point3D(2, 6, 1), new Vector(0, 0, 1));
+            plane = new Plane(new Point3D(5, 4, 0), new Point3D(7, 8, 0), new Point3D(5, 6, 0));
+            assertNotNull("must be not empty", intersectionsList);
+
+        } catch (IllegalArgumentException e) {
+        }
+
+        //TC06:Ray is neither orthogonal nor parallel to and begins at the plane (𝑃0 is in the plane, but not the ray)
+        try {
+            ray = new Ray(new Point3D(3, 3, 3), new Vector(-1, 0, -1));
+            plane = new Plane(new Point3D(5, 4, 0), new Point3D(7, 8, 0), new Point3D(5, 6, 0));
+            assertEquals("must be equal to 1", 1, intersectionsList.size());
+            assertEquals("must be the same", new Point3D(0, 0.75, 0), intersectionsList.get(0));
+
+        } catch (IllegalArgumentException e) {
+        }
+        //TC07:the Ray neither orthogonal nor parallel to the plane without intersection
+        try {
+            ray = new Ray(new Point3D(3, 3, 3), new Vector(-1, 0, -1));
+            plane = new Plane(new Point3D(5, 4, 0), new Point3D(7, 8, 0), new Point3D(5, 6, 0));
+            assertEquals("must be equal to 1", 1, intersectionsList.size());
+            assertEquals("must be the same", new Point3D(0, -1.5, 0), intersectionsList.get(0));
+        } catch (IllegalArgumentException e) {
+        }
     }
 }
