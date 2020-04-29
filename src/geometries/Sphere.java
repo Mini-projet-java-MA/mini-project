@@ -52,25 +52,26 @@ public class Sphere extends RadialGeometry {
      * @return a list of all intersection
      */
     @Override
-    public List<Point3D> findIntersections(Ray ray)
-    {
-      /*
-        List<Point3D>insertion ;
-       // 𝑢 = 𝑂 − 𝑃0
-        double u= _center.subtract(ray.getP0()).length();
+    public List<Point3D> findIntersections(Ray ray) {
+        List<Point3D> insertion = null;
+        // 𝑢 = 𝑂 − 𝑃0
+        double u = _center.subtract(ray.getP0()).length();
         //tm=v*u
-        double tm=ray.getDirection().length()*u;
+        double tm = ray.getDirection().length() * u;
         //d=root of (u^2+tm^2)
-        double d=Math.sqrt((u*u)-(tm*tm));
+        double d = Math.sqrt((u * u) - (tm * tm));
+        // if (d>r) there are no intersections
+        if (d>_radius)return  null;
         //th=radius*radius-d*d
-        double th=Math.sqrt((_radius*_radius)-(d*d));
+        double th = Math.sqrt((_radius * _radius) - (d * d));
         //t1=tm+th
-        double t1=tm+th;
+        double t1 = tm + th;
         //t1=tm-th
-        double t2=tm+th;
-insertion.add(ray.getP0()+(t1*)
-    return  insertion;
-    */
-      return null;
+        double t2 = tm + th;
+        if (t1>0)
+        insertion.add(ray.getP0().add((ray.getDirection().scale(t1))));
+        if (t2>0)
+        insertion.add(ray.getP0().add((ray.getDirection().scale(t2))));
+        return insertion;
     }
 }
