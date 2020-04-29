@@ -51,13 +51,13 @@ public class SphereTest {
     @Test
     public void findIntersections() {
         // ============ Equivalence Partitions Tests ==============
-        //TC01 no intersections
+        //TC01 no intersections ray is outside of the sphere
         Ray ray= new Ray(new Point3D(0,0,0), new Vector(0,0,-1));
         Sphere sphere = new Sphere(1, new Point3D(0,2,-4));
         List<Point3D> intersectionsList= sphere.findIntersections(ray);
         assertNull("must be empty",intersectionsList);
 
-        //TC02 ray cross the sphere twice: 2 intersections
+        //TC02 ray start before and cross the sphere twice: 2 intersections
         //(si ca ne marche pas penser a changer l'ordre des points)
         ray= new Ray(new Point3D(0,0,0), new Vector(0,0,-1));
         sphere = new Sphere(1, new Point3D(0,0.5,-4));
@@ -75,7 +75,7 @@ public class SphereTest {
         assertEquals("must be equal to one",1,intersectionsList.size());
         assertEquals("must be equal",new Point3D(0,0,-5.9),intersectionsList.get(0));
 
-        //TC04 ray starts outside sphere, due to direction- no intersection
+        //TC04 ray starts outside sphere after it, due to direction- no intersection
         ray= new Ray(new Point3D(0,0,0), new Vector(0,0,-1));
         sphere = new Sphere(2, new Point3D(0,1,4));
         intersectionsList=sphere.findIntersections(ray);
