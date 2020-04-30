@@ -76,6 +76,8 @@ public class Plane {
     }
 
     public List<Point3D> findIntersections(Ray ray) {
+        if (_p.equals(ray.getP0()))
+            return null;
 
         List<Point3D> insertion = null;
         double nv =alignZero(_normal.dotProduct(ray.getDirection()));

@@ -50,13 +50,13 @@ public class PlaneTest {
         // ============ Equivalence Partitions Tests ==============
         Plane plane;
         Ray ray;
-        List<Point3D> intersectionsList = null;
+
         //TC01: the ray not included parallel to the plane
 
             ray = new Ray(new Point3D(2, 6, 1), new Vector(3, 3, 0));
             plane = new Plane(new Point3D(5, 4, 0), new Point3D(7, 8, 0), new Point3D(5, 6, 0));
-           assertEquals("must be equal to 1", 1, intersectionsList.size());
-            assertEquals("must be the same", new Point3D(3, 3, 0), intersectionsList.get(0));
+            List<Point3D> intersectionsList = plane.findIntersections(ray);
+            assertNull("must be empty", intersectionsList);
         //TC02: the ray included parallel to the plane
 
             ray = new Ray(new Point3D(2, 6, 0), new Vector(3, 3, 0));
@@ -89,7 +89,7 @@ public class PlaneTest {
         //TC06:Ray is neither orthogonal nor parallel to and begins at the plane (𝑃0 is in the plane, but not the ray)
 
             ray = new Ray(new Point3D(3, 3, 3), new Vector(-1, 0, -1));
-            plane = new Plane(new Point3D(5, 4, 0), new Point3D(7, 8, 0), new Point3D(5, 6, 0));
+            plane = new Plane(new Point3D(2, 4, 0), new Point3D(7, 8, 0), new Point3D(5, 6, 0));
             assertEquals("must be equal to 1", 1, intersectionsList.size());
             assertEquals("must be the same", new Point3D(0, 0.75, 0), intersectionsList.get(0));
 

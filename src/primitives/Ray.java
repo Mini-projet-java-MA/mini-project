@@ -1,4 +1,5 @@
 package primitives;
+import static primitives.Util.*;
 
 /**
  * the class ray represents 3D ray in cartesian coordinate system
@@ -59,5 +60,12 @@ public class Ray {
         if (!(o instanceof Ray)) return false;
         Ray ray = (Ray) o;
         return _p0.equals(ray._p0) && _direction.equals(ray._direction);
+    }
+    public Point3D getTargetPoint(double length) {
+        if (isZero(length )) {
+            return _p0;
+        }
+    return _p0.add(_direction.scale(length));
+
     }
 }
