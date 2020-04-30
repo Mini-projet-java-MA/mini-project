@@ -24,13 +24,18 @@ public class Triangle extends Polygon {
         super(p1, p2, p3);
     }
 
+    /**
+     *
+     * @param ray - he his the ray that insert the object
+     * @return list of Intersections
+     */
     public List<Point3D> findIntersections(Ray ray) {
         List<Point3D> intersections = _plane.findIntersections(ray);
         if (intersections == null) return null;
 
         Point3D p0 = ray.getP0();
         Vector v = ray.getDirection();
-
+//we creat the tree vector
         Vector v1 = _vertices.get(0).subtract(p0);
         Vector v2 = _vertices.get(1).subtract(p0);
         Vector v3 = _vertices.get(2).subtract(p0);
