@@ -1,8 +1,12 @@
 package geometries;
 
+import primitives.Point3D;
+import primitives.Ray;
+import primitives.Vector;
+
 import java.util.List;
-import primitives.*;
-import static primitives.Util.*;
+
+import static primitives.Util.isZero;
 
 /**
  * Polygon class represents two-dimensional polygon in 3D Cartesian coordinate
@@ -80,7 +84,6 @@ public class Polygon implements Geometry {
         }
     }
 
-    @Override
     public Vector getNormal(Point3D point) {
         return _plane.getNormal();
     }
