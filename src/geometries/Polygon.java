@@ -84,6 +84,7 @@ public class Polygon implements Geometry {
         }
     }
 
+   // @Override
     public Vector getNormal(Point3D point) {
         return _plane.getNormal();
     }
@@ -93,7 +94,7 @@ public class Polygon implements Geometry {
      * @return a list of all intersection
      */
     @Override
-        public List<Point3D> findIntersections(Ray ray) {
+    public List<Point3D> findIntersections(Ray ray) {
         return null;
     }
 }
