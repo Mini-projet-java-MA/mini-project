@@ -176,7 +176,7 @@ public class SphereTest {
 
 
         // **** Group: Special cases
-        //TC18 ray is on a line that vertical to radius- ray starts on the radius line
+        //TC19 ray is on a line that vertical to radius- ray starts on the radius line
         ray = new Ray(new Point3D(0, 0, 0), new Vector(0, 0, -1));
         sphere = new Sphere(1, new Point3D(0, 2, 0));
         intersectionsList = sphere.findIntersections(ray);

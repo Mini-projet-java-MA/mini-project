@@ -3,11 +3,9 @@ package geometries;
 import primitives.Point3D;
 import primitives.Ray;
 import primitives.Vector;
-import java.util.List;
-import static primitives.Util.alignZero;
 import static primitives.Util.*;
 
-import java.awt.*;
+import java.util.List;
 
 /**
  * class Triangle represents a triangle in 3D cartesian coordinate system
@@ -25,7 +23,8 @@ public class Triangle extends Polygon {
     public Triangle(Point3D p1, Point3D p2, Point3D p3) {
         super(p1, p2, p3);
     }
-    @Override
+
+
     public List<Point3D> findIntersections(Ray ray) {
         List<Point3D> intersections = _plane.findIntersections(ray);
         if (intersections == null) return null;
