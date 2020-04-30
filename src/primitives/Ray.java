@@ -1,4 +1,5 @@
 package primitives;
+import static primitives.Util.*;
 
 /**
  * the class ray represents 3D ray in cartesian coordinate system
@@ -17,6 +18,13 @@ public class Ray {
     public Ray(Point3D p, Vector v) {
         this._direction = v.normalized();
         this._p0 = new Point3D(p);
+    }
+    public Point3D getTargetPoint(double length) {
+        if (isZero(length )) {
+            return _p0;
+        }
+        return _p0.add(_direction.scale(length));
+
     }
 
     /**

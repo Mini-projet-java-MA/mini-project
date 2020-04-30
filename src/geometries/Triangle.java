@@ -3,9 +3,10 @@ package geometries;
 import primitives.Point3D;
 import primitives.Ray;
 import primitives.Vector;
-import static primitives.Util.*;
 
 import java.util.List;
+
+import static primitives.Util.isZero;
 
 /**
  * class Triangle represents a triangle in 3D cartesian coordinate system
@@ -42,8 +43,8 @@ public class Triangle extends Polygon {
         if (isZero(s2)) return null;
         double s3 = v.dotProduct(v3.crossProduct(v1));
         if (isZero(s3)) return null;
+        if ((s1 > 0 && s2 > 0 && s3 > 0)||(s1 < 0 && s2 < 0 && s3 < 0)) return intersections;
 
-        return ((s1 > 0 && s2 > 0 && s3 > 0) || (s1 < 0 && s2 < 0 && s3 < 0)) ? intersections : null;
-
+return  null;
     }
 }

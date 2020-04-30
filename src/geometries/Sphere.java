@@ -54,35 +54,40 @@ public class Sphere extends RadialGeometry {
      * @return a list of all intersection
      */
     @Override
-    public List<Point3D> findIntersections(Ray ray) {
-        List<Point3D> insertion = null;
+  public List<Point3D> findIntersections(Ray ray) {
+        Point3D p0 = ray.getP0();
+        Vector v = ray.getDirection();
         Vector u;
         // 𝑢 = 𝑂 − 𝑃0
         try {
-            u = new Vector(_center.subtract(ray.getP0()));
-        }
-        //throw if vector u=(0,0,0)
-        catch (IllegalArgumentException e) {
+            u = _center.subtract(p0);
+        } catch (IllegalArgumentException e) {
             return List.of(ray.getTargetPoint(_radius));
-
         }
         //tm=v*u
-        u = new Vector(_center.subtract(ray.getP0()));
-        double tm = alignZero(ray.getDirection().dotProduct(u));
-        //d=root of (u^2+tm^2)
-        double d = Math.sqrt((u.lengthSquared() * u.lengthSquared()) - (tm * tm));
-        // if (d>r) there are no intersections
-        if (d > _radius) return null;
+        double tm = alignZero(v.dotProduct(u));
+//d=u^2+tm^2
+        double dsquared ;
+        if (tm == 0)
+            dsquared=u.lengthSquared();
+        else {dsquared=u.lengthSquared() - tm * tm;}
+        double thsquared = alignZero(_radius * _radius - dsquared);
+
+        if (thsquared <= 0) return null;
         //th=radius*radius-d*d
-        double th = alignZero(Math.sqrt((_radius * _radius) - (d * d)));
-        //t1=tm+th
-        double t1 =alignZero( tm + th);
-        //t1=tm-th
-        double t2 = alignZero(tm -th);
+        double th = alignZero(Math.sqrt(thsquared));
+        if (th == 0) return null;
+
+        double t1 = alignZero(tm - th);
+        double t2 = alignZero(tm + th);
+        if (t1 <= 0 && t2 <= 0) return null;
+
+        if (t1 > 0 && t2 > 0)
+            return List.of(ray.getTargetPoint(t1), ray.getTargetPoint(t2)); //P1 , P2
         if (t1 > 0)
-            insertion.add(ray.getP0().add((ray.getDirection().scale(t1))));
-        if (t2 > 0)
-            insertion.add(ray.getP0().add((ray.getDirection().scale(t2))));
-        return insertion;
+            return List.of(ray.getTargetPoint(t1));
+        if(t2>0)
+            return List.of(ray.getTargetPoint(t2));
+        return null;
     }
 }
