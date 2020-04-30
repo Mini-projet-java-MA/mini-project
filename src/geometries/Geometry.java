@@ -1,19 +1,15 @@
 package geometries;
 
 import primitives.Point3D;
+import primitives.Ray;
 import primitives.Vector;
-
-import java.awt.*;
+import java.util.List;
 
 /**
  *
  */
 public interface Geometry extends Intersectable {
-    /**
-     *
-     * @param p
-     * @return
-     */
-    List<Intersectable> rrg;
+
+    List<Point3D> findIntersections(Ray ray);
     Vector getNormal(Point3D p) ;
 }

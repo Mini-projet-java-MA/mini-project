@@ -173,7 +173,7 @@ public class SphereTest {
         sphere = new Sphere(1, new Point3D(0, 1, 1));
         intersectionsList = sphere.findIntersections(ray);
         assertNull("must be empty", intersectionsList);
-        
+
 
         // **** Group: Special cases
         //TC18 ray is on a line that vertical to radius- ray starts on the radius line
