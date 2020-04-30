@@ -6,6 +6,8 @@ import primitives.Vector;
 
 import java.util.List;
 
+import static primitives.Util.alignZero;
+
 /**
  * sphere class represents sphere in 3D Cartesian coordinate
  * for represents a sphere 3D Cartesian we need radius and point 3D
@@ -54,24 +56,32 @@ public class Sphere extends RadialGeometry {
     @Override
     public List<Point3D> findIntersections(Ray ray) {
         List<Point3D> insertion = null;
+        Vector u;
         // 𝑢 = 𝑂 − 𝑃0
-        double u = _center.subtract(ray.getP0()).length();
+        try {
+            u = new Vector(_center.subtract(ray.getP0()));
+        }
+        //throw if vector u=(0,0,0)
+        catch (IllegalArgumentException e) {
+            return null;
+        }
         //tm=v*u
-        double tm = ray.getDirection().length() * u;
+        u = new Vector(_center.subtract(ray.getP0()));
+        double tm = alignZero(ray.getDirection().dotProduct(u));
         //d=root of (u^2+tm^2)
-        double d = Math.sqrt((u * u) - (tm * tm));
+        double d = Math.sqrt((u.lengthSquared() * u.lengthSquared()) - (tm * tm));
         // if (d>r) there are no intersections
-        if (d>_radius)return  null;
+        if (d > _radius) return null;
         //th=radius*radius-d*d
-        double th = Math.sqrt((_radius * _radius) - (d * d));
+        double th = alignZero(Math.sqrt((_radius * _radius) - (d * d)));
         //t1=tm+th
         double t1 = tm + th;
         //t1=tm-th
         double t2 = tm + th;
-        if (t1>0)
-        insertion.add(ray.getP0().add((ray.getDirection().scale(t1))));
-        if (t2>0)
-        insertion.add(ray.getP0().add((ray.getDirection().scale(t2))));
+        if (t1 > 0)
+            insertion.add(ray.getP0().add((ray.getDirection().scale(t1))));
+        if (t2 > 0)
+            insertion.add(ray.getP0().add((ray.getDirection().scale(t2))));
         return insertion;
     }
 }

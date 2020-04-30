@@ -8,12 +8,12 @@ import java.awt.*;
 /**
  *
  */
+
 public interface Geometry extends Intersectable {
     /**
      *
      * @param p
      * @return
      */
-    List<Intersectable> rrg;
-    Vector getNormal(Point3D p) ;
+
 }
