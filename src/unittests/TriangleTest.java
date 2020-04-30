@@ -29,8 +29,8 @@ public class TriangleTest {
         Triangle triangle = new Triangle(new Point3D(0, 0, 0), new Point3D(7, 0, 0), new Point3D(0, 8, 0));
         List<Point3D> intersectionsList = triangle.findIntersections(ray);
         assertNotNull("must be not empty", intersectionsList);
-        assertEquals("must be equal to 1", 1, intersectionsList.size());
-        assertEquals("must be the same", new Point3D(2.139, 5.556, 0), intersectionsList.get(0));
+        assertEquals("must be equal to 1", , intersectionsList.size());
+        assertEquals("must be the same", new Point3D(2,6 , 0), intersectionsList.get(0));
 
 
         //TC02 outside against edge

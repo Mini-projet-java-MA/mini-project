@@ -82,7 +82,8 @@ public class Plane {
         //if the ray are paralle to the plan so is not intersections
         if (nv==0)
             return null;
-
+        if (_p.equals(ray.getP0()))
+            return null;
         //if (_p.equals(ray.getP0())) return null;
         // intersections point equal 𝑃 = 𝑃0 + 𝑡 ∙ 𝑣, 𝑡 ≥ 0
         Vector pq0=ray.getP0().subtract(_p);

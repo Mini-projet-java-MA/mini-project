@@ -63,7 +63,8 @@ public class Sphere extends RadialGeometry {
         }
         //throw if vector u=(0,0,0)
         catch (IllegalArgumentException e) {
-            return null;
+            return List.of(ray.getTargetPoint(_radius));
+
         }
         //tm=v*u
         u = new Vector(_center.subtract(ray.getP0()));
@@ -75,9 +76,9 @@ public class Sphere extends RadialGeometry {
         //th=radius*radius-d*d
         double th = alignZero(Math.sqrt((_radius * _radius) - (d * d)));
         //t1=tm+th
-        double t1 = tm + th;
+        double t1 =alignZero( tm + th);
         //t1=tm-th
-        double t2 = tm + th;
+        double t2 = alignZero(tm -th);
         if (t1 > 0)
             insertion.add(ray.getP0().add((ray.getDirection().scale(t1))));
         if (t2 > 0)
