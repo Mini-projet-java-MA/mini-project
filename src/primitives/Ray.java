@@ -68,4 +68,11 @@ public class Ray {
         Ray ray = (Ray) o;
         return _p0.equals(ray._p0) && _direction.equals(ray._direction);
     }
+    public Point3D getTargetPoint(double length) {
+        if (isZero(length )) {
+            return _p0;
+        }
+    return _p0.add(_direction.scale(length));
+
+    }
 }
