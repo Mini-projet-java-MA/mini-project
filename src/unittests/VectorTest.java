@@ -23,7 +23,7 @@ public class VectorTest {
 
     @org.junit.Test
     public void crossProduct() {
-            // ============ Equivalence Partitions Tests ==============
+        // ============ Equivalence Partitions Tests ==============
 
         Vector v1;
         Vector v2;
@@ -73,7 +73,7 @@ public class VectorTest {
             v2 = new Vector(-2, -4, -6);
             v3 = new Vector(0, 3, -2);
             Vector vr = v1.crossProduct(v3);
-            assertEquals( 0,alignZero(vr.length()-v1.length()*v3.length()));
+            assertEquals(0, alignZero(vr.length() - v1.length() * v3.length()));
         } catch (IllegalArgumentException e) {
         }
         //TC04.3: test from the main

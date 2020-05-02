@@ -8,6 +8,7 @@ import javax.management.ValueExp;
 import java.util.List;
 
 import static primitives.Util.alignZero;
+
 /**
  * class plane represents a plane in 3D cartesian coordinate system
  */
@@ -80,26 +81,27 @@ public class Plane {
             return null;
 
         List<Point3D> insertion = null;
-        double nv =alignZero(_normal.dotProduct(ray.getDirection()));
+        double nv = alignZero(_normal.dotProduct(ray.getDirection()));
         //if the ray are paralle to the plan so is not intersections
-        if (nv==0)
+        if (nv == 0)
             return null;
         if (_p.equals(ray.getP0()))
             return null;
         //if (_p.equals(ray.getP0())) return null;
         // intersections point equal 𝑃 = 𝑃0 + 𝑡 ∙ 𝑣, 𝑡 ≥ 0
-        Vector pq0=ray.getP0().subtract(_p);
+        Vector pq0 = ray.getP0().subtract(_p);
 
-        double scal_t=alignZero(_normal.dotProduct(_p.subtract(ray.getP0())) / nv);
+        double scal_t = alignZero(_normal.dotProduct(_p.subtract(ray.getP0())) / nv);
         //t>=0, and hence:
         if (scal_t <= 0)
             return null;
         try {
             Point3D p = _p.add(ray.getDirection().scale(scal_t));
-            return List.of(p);
-        } catch (IllegalArgumentException e) {
+            insertion.add(p);
+        } catch (Exception e) {
             return null;
         }
+        return insertion;
 
     }
 }

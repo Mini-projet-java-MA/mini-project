@@ -54,41 +54,43 @@ public class Sphere extends RadialGeometry {
      * @return a list of all intersection
      */
     @Override
-        public List <Point3D> findIntersections(Ray ray) {
-            Point3D p0 = ray.getP0();
-            Vector v = ray.getDirection();
-            Vector u;
-            // 𝑢 = 𝑂 − 𝑃0
-            try {
-                u = _center.subtract(p0);
-            } catch (IllegalArgumentException e) {
-                return List.of(ray.getTargetPoint(_radius));
-            }
-            //tm=v*u
-            double tm = alignZero(v.dotProduct(u));
-//d=u^2+tm^2
-            double dsquared ;
-            if (tm == 0)
-                dsquared=u.lengthSquared();
-            else {dsquared=u.lengthSquared() - tm * tm;}
-            double thsquared = alignZero(_radius * _radius - dsquared);
-
-            if (thsquared <= 0) return null;
-            //th=radius*radius-d*d
-            double th = alignZero(Math.sqrt(thsquared));
-            if (th == 0) return null;
-
-            double t1 = alignZero(tm - th);
-            double t2 = alignZero(tm + th);
-            if (t1 <= 0 && t2 <= 0) return null;
-
-            if (t1 > 0 && t2 > 0)
-                return List.of(ray.getTargetPoint(t1), ray.getTargetPoint(t2)); //P1 , P2
-            if (t1 > 0)
-                return List.of(ray.getTargetPoint(t1));
-            if(t2>0)
-                return List.of(ray.getTargetPoint(t2));
-            return null;
+    public List<Point3D> findIntersections(Ray ray) {
+        Point3D p0 = ray.getP0();
+        Vector v = ray.getDirection();
+        Vector u;
+        // 𝑢 = 𝑂 − 𝑃0
+        try {
+            u = _center.subtract(p0);
+        } catch (IllegalArgumentException e) {
+            return List.of(ray.getTargetPoint(_radius));
         }
+        //tm=v*u
+        double tm = alignZero(v.dotProduct(u));
+        //d=u^2+tm^2
+        double dsquared;
+        if (tm == 0)
+            dsquared = u.lengthSquared();
+        else {
+            dsquared = u.lengthSquared() - tm * tm;
+        }
+        double thsquared = alignZero(_radius * _radius - dsquared);
 
+        if (thsquared <= 0) return null;
+        //th=radius*radius-d*d
+        double th = alignZero(Math.sqrt(thsquared));
+        if (th == 0) return null;
+
+        double t1 = alignZero(tm - th);
+        double t2 = alignZero(tm + th);
+        if (t1 <= 0 && t2 <= 0) return null;
+
+        if (t1 > 0 && t2 > 0)
+            return List.of(ray.getTargetPoint(t1), ray.getTargetPoint(t2)); //P1 , P2
+        if (t1 > 0)
+            return List.of(ray.getTargetPoint(t1));
+        if (t2 > 0)
+            return List.of(ray.getTargetPoint(t2));
+        return null;
     }
+
+}
