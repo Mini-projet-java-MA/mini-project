@@ -1,12 +1,14 @@
 package unittests;
 
-import static org.junit.Assert.*;
+import geometries.Triangle;
+import org.junit.Test;
+import primitives.Point3D;
+import primitives.Ray;
+import primitives.Vector;
 
 import java.util.List;
 
-import geometries.*;
-import org.junit.Test;
-import primitives.*;
+import static org.junit.Assert.*;
 
 
 public class TriangleTest {
