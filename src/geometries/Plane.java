@@ -96,11 +96,10 @@ public class Plane {
             return null;
         try {
             Point3D p = _p.add(ray.getDirection().scale(scal_t));
-            insertion.add(p);
-        } catch (Exception e) {
+            return List.of(p);
+        } catch (IllegalArgumentException e) {
             return null;
         }
-return insertion;
 
     }
 }
