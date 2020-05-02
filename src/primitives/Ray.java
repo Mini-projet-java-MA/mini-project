@@ -19,12 +19,14 @@ public class Ray {
         this._direction = v.normalized();
         this._p0 = new Point3D(p);
     }
-    public Point3D getTargetPoint(double length) {
-        if (isZero(length )) {
-            return _p0;
-        }
-        return _p0.add(_direction.scale(length));
 
+    /**
+     * Get a point on the ray at a given distance from the ray head
+     * @param distance from the ray head
+     * @return the point
+     */
+    public Point3D getTargetPoint(double distance) {
+        return _p0.add(_direction.scale(distance));
     }
 
     /**

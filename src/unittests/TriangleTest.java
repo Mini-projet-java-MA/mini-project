@@ -25,13 +25,12 @@ public class TriangleTest {
     public void findIntersections() {
         // ============ Equivalence Partitions Tests ==============
         //TC01 inside triangle
-        Ray ray = new Ray(new Point3D(0, 2, 2), new Vector(8, -4, -2));
+        Ray ray = new Ray(new Point3D(-4, 4, 3), new Vector(4, -2, -1));
         Triangle triangle = new Triangle(new Point3D(0, 0, 0), new Point3D(0, 6, 0), new Point3D(0, 0, 8));
         List<Point3D> intersectionsList = triangle.findIntersections(ray);
         assertNotNull("must be not empty", intersectionsList);
         assertEquals("must be equal to 1", 1, intersectionsList.size());
         assertEquals("must be the same", new Point3D(0, 2, 2), intersectionsList.get(0));
-
 
         //TC02 outside against edge
         ray = new Ray(new Point3D(5, 6, 0), new Vector(0, 0, -1));
@@ -49,11 +48,11 @@ public class TriangleTest {
 
         //ray starts "before" the plane
         //TC10 on edge
-        ray = new Ray(new Point3D(0, 0, 1), new Vector(1, 0, -1));
+        ray = new Ray(new Point3D(-2, 0, 5), new Vector(1, 0, -1));
         intersectionsList = triangle.findIntersections(ray);
         assertNotNull("must be not empty", intersectionsList);
         assertEquals("must be equal to 1", 1, intersectionsList.size());
-        assertEquals("must be the same", new Point3D(1, 0, 0), intersectionsList.get(0));
+        assertEquals("must be the same", new Point3D(0, 0, 2.99999999999999), intersectionsList.get(0));
 
 
         // TC12 in vertex
@@ -67,7 +66,5 @@ public class TriangleTest {
         ray = new Ray(new Point3D(10, 0, 0), new Vector(0, 0, -1));
         intersectionsList = triangle.findIntersections(ray);
         assertNull("must be empty", intersectionsList);
-
-
     }
 }

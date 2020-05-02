@@ -118,15 +118,18 @@ public class SphereTest {
         assertEquals("must be equal to one", 1, intersectionsList.size());
         assertEquals("must be equal", new Point3D(0, 0, -5), intersectionsList.get(0));
 
-        /*//TC14 ray starts on sphere surface, to the outside: 1 intersection
+        //TC14 ray starts on sphere surface, to the outside:
+        //no intersection because we don't take in account the ray head
         ray = new Ray(new Point3D(0, 0, 3), new Vector(0, 0, 5));
         sphere = new Sphere(2, new Point3D(0, 0, 1));
         intersectionsList = sphere.findIntersections(ray);
-        assertNotNull("must be not empty", intersectionsList);
+        assertNull("must be empty",intersectionsList);
+        /*assertNotNull("must be not empty", intersectionsList);
         assertEquals("must be equal to one", 1, intersectionsList.size());
         assertEquals("must be equal", new Point3D(0, 0, 3), intersectionsList.get(0));*/
 
-        //TC15 ray starts on sphere surface, to the inside: 1 intersection
+        //TC15 ray starts on sphere surface, to the inside:
+        //1 intersection because we don't take in account the ray head
         ray = new Ray(new Point3D(0, 0, 4), new Vector(0, 0, 1));
         sphere = new Sphere(2, new Point3D(0, 0, 6));
         intersectionsList = sphere.findIntersections(ray);
@@ -160,13 +163,13 @@ public class SphereTest {
 
 
         // **** Group: Ray's line is tangent to the sphere
-        /*//TC16 ray is on the tangent line- ray starts before intersection: 1 intersection
+        //TC16 ray is on the tangent line- ray starts before intersection: 1 intersection
         ray = new Ray(new Point3D(0, 0, 0), new Vector(0, 0, -1));
         sphere = new Sphere(1, new Point3D(0, 1, -1));
         intersectionsList = sphere.findIntersections(ray);
         assertNotNull("must be not empty", intersectionsList);
         assertEquals("must be equal to one", 1, intersectionsList.size());
-        assertEquals("must be equal", new Point3D(0, 0, -1), intersectionsList.get(0));*/
+        assertEquals("must be equal", new Point3D(0, 0, -1), intersectionsList.get(0));
 
         /*//TC17 ray is on the tangent line- ray starts on intersection: 1 intersection
         ray = new Ray(new Point3D(0, 0, 0), new Vector(0, 0, -1));
