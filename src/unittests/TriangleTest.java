@@ -52,7 +52,7 @@ public class TriangleTest {
         intersectionsList = triangle.findIntersections(ray);
         assertNotNull("must be not empty", intersectionsList);
         assertEquals("must be equal to 1", 1, intersectionsList.size());
-        assertEquals("must be the same", new Point3D(0, 0, 2.99999999999999), intersectionsList.get(0));
+        assertEquals("must be the same", new Point3D(0, 0, 1), intersectionsList.get(0));
 
 
         // TC12 in vertex
