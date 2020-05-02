@@ -35,7 +35,7 @@ public class Triangle extends Polygon {
 
         Point3D p0 = ray.getP0();
         Vector v = ray.getDirection();
-//we creat the tree vector
+        //we creat the tree vector
         Vector v1 = _vertices.get(0).subtract(p0);
         Vector v2 = _vertices.get(1).subtract(p0);
         Vector v3 = _vertices.get(2).subtract(p0);
