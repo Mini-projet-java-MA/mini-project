@@ -39,19 +39,19 @@ public class Camera {
 
     }
 
-    public Point3D get_p0() {
+    public Point3D getP0() {
         return _p0;
     }
 
-    public Vector get_vto() {
+    public Vector getVto() {
         return _vto;
     }
 
-    public Vector get_vup() {
+    public Vector getVup() {
         return _vup;
     }
 
-    public Vector get_vright() {
+    public Vector getVright() {
         return _vright;
     }
 
