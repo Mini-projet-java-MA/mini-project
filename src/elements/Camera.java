@@ -23,17 +23,17 @@ public class Camera {
      *
      * @param p0-the place of the camera
      * @param vto- where the vector point outgoing from the camera
-     * @param vtup-the vector vertical to vto
+     * @param vup-the vector vertical to vto
      */
-    public Camera(Point3D p0, Vector vto, Vector vtup) {
+    public Camera(Point3D p0, Vector vto, Vector vup) {
 
-        double check_vertical = vto.dotProduct(vtup);
+        double check_vertical = vto.dotProduct(vup);
         //if the two vectors are not orthogonal throw exception
         if (check_vertical != 0)
-            throw new IllegalArgumentException("the vectors must be orthogonal ");
+            throw new IllegalArgumentException("the vto should be orthogonal to vup ");
         _p0=new Point3D(p0);
         _vto = new Vector(vto.normalize());
-        _vup = new Vector(vtup.normalize());
+        _vup = new Vector(vup.normalize());
         _vright = new Vector(_vup.crossProduct(_vto).normalize());
 
 
@@ -75,8 +75,8 @@ public class Camera {
         double Ry = screenHeight / nY;
         double Rx = screenWidth / nX;
         //Pixel[i,j] center Pi,j = Pc + (xj∙vright – yi∙vup) ,yi = (i – Ny/2)∙Ry + Ry/2 , xj = (j – Nx/2)∙Rx + Rx/2
-        double yi = ((i - nY / 2.0) * Ry + Ry / 2.0);
-        double xj = ((j - nX / 2.0) * Rx + Rx / 2.0);
+        double yi = ((i - nY / 2d) * Ry + Ry / 2d);
+        double xj = ((j - nX / 2d) * Rx + Rx / 2d);
         Point3D pij = new Point3D(pc);
         if (!isZero(xj)) pij = pij.add(_vright.scale(xj));
         if (!isZero(yi)) pij.add(_vup.scale(-yi));
