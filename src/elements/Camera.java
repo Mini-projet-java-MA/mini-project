@@ -72,7 +72,6 @@ public class Camera {
     }
 
     /**
-     *
      * @return in string data of camera
      */
     @Override
