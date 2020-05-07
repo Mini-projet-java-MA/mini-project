@@ -54,7 +54,7 @@ public class Plane {
         // the points are in the same line
         Vector v1 = p2.subtract(p1);
         Vector v2 = p3.subtract(p1);
-        return v1.crossProduct(v2).normalize();
+      return v1.crossProduct(v2).normalize();
     }
 
     /**

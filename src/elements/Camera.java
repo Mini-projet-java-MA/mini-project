@@ -8,9 +8,10 @@ import static primitives.Util.isZero;
 
 
 /**
- * camera class represents camera in 3D Cartesian coordinate
+ *  camera class represents camera in 3D Cartesian coordinate
  *
- * @author aaron
+ *
+ *   @author aaron
  */
 public class Camera {
     private Point3D _p0;
@@ -19,8 +20,9 @@ public class Camera {
     private Vector _vright;
 
     /**
-     * @param p0-the   place of the camera
-     * @param vto-     where the vector point outgoing from the camera
+     *
+     * @param p0-the place of the camera
+     * @param vto- where the vector point outgoing from the camera
      * @param vtup-the vector vertical to vto
      */
     public Camera(Point3D p0, Vector vto, Vector vtup) {
@@ -29,7 +31,7 @@ public class Camera {
         //if the two vectors are not orthogonal throw exception
         if (check_vertical != 0)
             throw new IllegalArgumentException("the vectors must be orthogonal ");
-        _p0 = new Point3D(p0);
+        _p0=new Point3D(p0);
         _vto = new Vector(vto.normalize());
         _vup = new Vector(vtup.normalize());
         _vright = new Vector(_vup.crossProduct(_vto).normalize());
@@ -38,16 +40,17 @@ public class Camera {
     }
 
     /**
+     *
      * @param nX
      * @param nY
      * @param j
      * @param i
-     * @param screenDistance-   the distance between the _p0 and pc where the image are located
-     * @param screenWidth-width of the screen
-     * @param screenHeight-     height of the screen
+     * @param screenDistance- the distance between the _p0 and pc where the image are located
+     * @param screenWidth-width  of the screen
+     * @param screenHeight- height of the screen
      * @return ray where outgoing construct Ray Through Pixel
      */
-    public Ray constructRayThroughPixel(int nX, int nY, int j, int i, double screenDistance, double screenWidth, double screenHeight) {
+    public Ray constructRayThroughPixel (int nX, int nY, int j, int i, double screenDistance, double screenWidth, double screenHeight) {
         if (isZero(screenHeight) || isZero(screenWidth) || isZero(screenDistance))
             throw new IllegalArgumentException("the screen Height or  screen Height or screen Distance can't be zero or negative ");
         //  Image center equal to Pc = P0 + d∙Vto
@@ -60,12 +63,9 @@ public class Camera {
         double xj = ((j - nX / 2.0) * Rx + Rx / 2.0);
         Point3D pij = new Point3D(pc);
         if (!isZero(xj)) pij = pij.add(_vright.scale(xj));
-
         if (!isZero(yi)) pij.add(_vup.scale(-yi));
         Vector vij = pij.subtract(_p0);
-
         return new Ray(_p0, vij);
-
     }
 
     /**

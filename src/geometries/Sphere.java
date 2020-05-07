@@ -43,7 +43,7 @@ public class Sphere extends RadialGeometry {
      */
 
     public Vector getNormal(Point3D p) {
-//the normal of the vector the diff between the point p minus the center
+        //the normal of the vector the diff between the point p minus the center
         Vector normal_sphere = p.subtract(_center);
         //rerun normal sphere vector in size one
         return normal_sphere.normalize();
