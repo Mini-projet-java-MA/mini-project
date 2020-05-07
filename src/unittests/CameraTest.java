@@ -8,6 +8,16 @@ import geometries.*;
 import static org.junit.Assert.*;
 
 public class CameraTest {
+    @Test
+    public void constructorTest() {
+        Point3D location = new Point3D(3, 3, 3);
+        Vector up = new Vector(0, 0, 3);
+        Vector to = new Vector(4, 0, 0);
+        Camera result = new Camera(location, up, to);
+        assertEquals(new Vector(1, 0, 0), result.getVTo());
+        assertEquals(new Vector(0, 0, 1), result.getVUp());
+        assertEquals(new Vector(0, -1, 0), result.getVRight());
+    }
     /**
      * this is the test for the function construct ray trough pixel
      * we are testing on different dispositions to see if the ray is good

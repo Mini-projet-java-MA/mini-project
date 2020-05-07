@@ -39,6 +39,22 @@ public class Camera {
 
     }
 
+    public Point3D get_p0() {
+        return _p0;
+    }
+
+    public Vector get_vto() {
+        return _vto;
+    }
+
+    public Vector get_vup() {
+        return _vup;
+    }
+
+    public Vector get_vright() {
+        return _vright;
+    }
+
     /**
      *
      * @param nX
