@@ -40,7 +40,7 @@ public class Camera {
     }
 
     /**
-     *
+     *the func should creat ray witch point
      * @param nX
      * @param nY
      * @param j
