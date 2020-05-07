@@ -30,24 +30,9 @@ public class CameraTest {
         // ============ Equivalence Partitions Tests ==============
 
         // TC01: 3X3 on the Corner (0,0)
-       /* assertEquals("Bad ray",
+       assertEquals("Bad ray",
                 new Ray(Point3D.ZERO, new Vector(-2, -2, 10)), camera.constructRayThroughPixel(3, 3, 0, 0,
                         10, 6, 6));
-*/
-        // TC02: 4X4 on the Corner (0,0)
-        assertEquals("Bad ray",
-                new Ray(Point3D.ZERO, new Vector(-3, -3, 10)), camera.constructRayThroughPixel(4, 4, 0, 0,
-                        10, 8, 8));
-
-        // TC03: 4X4 on the Side (0,1) top row collumn n°2
-        assertEquals("Bad ray",
-                new Ray(Point3D.ZERO, new Vector(-1, -3, 10)), camera.constructRayThroughPixel(4, 4, 1, 0,
-                        10, 8, 8));
-
-        // TC04: 4X4 Inside of the object (1,1)
-        assertEquals("Bad ray",
-                new Ray(Point3D.ZERO, new Vector(-1, -1, 10)), camera.constructRayThroughPixel(4, 4, 1, 1,
-                        10, 8, 8));
 
         // =============== Boundary Values Tests ==================
 
