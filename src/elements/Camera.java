@@ -32,9 +32,9 @@ public class Camera {
         if (check_vertical != 0)
             throw new IllegalArgumentException("the vto should be orthogonal to vup ");
         _p0=new Point3D(p0);
-        _vto = new Vector(vto.normalize());
-        _vup = new Vector(vup.normalize());
-        _vright = new Vector(_vup.crossProduct(_vto).normalize());
+        _vto = vto.normalized();
+        _vup = vup.normalized();
+        _vright = _vup.crossProduct(_vto).normalized();
 
 
     }
