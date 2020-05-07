@@ -21,9 +21,9 @@ public class Camera {
 
     /**
      *
-     * @param _p0-the place of the camera
-     * @param _vto- where the vector point outgoing from the camera
-     * @param _vup-the vector vertical to vto
+     * @param p0-the place of the camera
+     * @param vto- where the vector point outgoing from the camera
+     * @param vtup-the vector vertical to vto
      */
     public Camera(Point3D p0, Vector vto, Vector vtup) {
 

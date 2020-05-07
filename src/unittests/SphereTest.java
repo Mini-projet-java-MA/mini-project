@@ -171,13 +171,13 @@ public class SphereTest {
         assertEquals("must be equal to one", 1, intersectionsList.size());
         assertEquals("must be equal", new Point3D(0, 0, -1), intersectionsList.get(0));
 
-        /*//TC17 ray is on the tangent line- ray starts on intersection: 1 intersection
+        //TC17 ray is on the tangent line- ray starts on intersection: 1 intersection
         ray = new Ray(new Point3D(0, 0, 0), new Vector(0, 0, -1));
         sphere = new Sphere(1, new Point3D(0, 1, 0));
         intersectionsList = sphere.findIntersections(ray);
         assertNotNull("must be not empty", intersectionsList);
         assertEquals("must be equal to one", 1, intersectionsList.size());
-        assertEquals("must be equal", new Point3D(0, 0, 0), intersectionsList.get(0));*/
+        assertEquals("must be equal", new Point3D(0, 0, 0), intersectionsList.get(0));
 
         //TC18 ray is on the tangent line- ray starts after intersection: no intersections
         ray = new Ray(new Point3D(0, 0, 0), new Vector(0, 0, -1));
