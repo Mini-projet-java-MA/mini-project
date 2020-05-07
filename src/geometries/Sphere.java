@@ -41,7 +41,11 @@ public class Sphere extends RadialGeometry {
      * @param p the specified point
      * @return new vector normal of the sphere in size one
      */
-
+    @Override
+    public String toString() {
+        return String.format
+                ("point: " + _center + ", radius: " + _radius);
+    }
     public Vector getNormal(Point3D p) {
         //the normal of the vector the diff between the point p minus the center
         Vector normal_sphere = p.subtract(_center);

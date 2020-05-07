@@ -11,7 +11,6 @@ import java.util.List;
  */
 public interface Intersectable {
     /**
-     *
      * @param ray- he his the ray that insert the object
      * @return a list of all intersection
      */

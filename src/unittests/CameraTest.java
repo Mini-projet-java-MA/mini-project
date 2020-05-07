@@ -8,6 +8,7 @@ import geometries.*;
 import static org.junit.Assert.*;
 
 public class CameraTest {
+
     @Test
     public void constructorTest() {
         Point3D location = new Point3D(3, 3, 3);
@@ -24,7 +25,7 @@ public class CameraTest {
      */
     @Test
     public void constructRayThroughPixel() {
-        Camera camera = new Camera(Point3D.ZERO, new Vector(0, 0, 1), new Vector(0, -1, 0));
+        Camera camera = new Camera(Point3D.ZERO, new Vector(0, 0, 1), new Vector(0, -1, 0) );
 
         // ============ Equivalence Partitions Tests ==============
 

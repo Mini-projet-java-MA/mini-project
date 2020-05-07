@@ -27,12 +27,12 @@ public class Triangle extends Polygon {
 
     @Override
     public String toString() {
-        return "Triangle{" +
-                "_vertices=" + _vertices +
-                ", _plane=" + _plane +
-                "} " + super.toString();
+        String result = "";
+        for (Point3D p : _vertices) {
+            result += p.toString();
+        }
+        return result;
     }
-
     /**
      * @param ray - he his the ray that insert the object
      * @return list of Intersections
