@@ -67,7 +67,7 @@ public class Camera {
      * @return ray where outgoing construct Ray Through Pixel
      */
     public Ray constructRayThroughPixel (int nX, int nY, int j, int i, double screenDistance, double screenWidth, double screenHeight) {
-        if (isZero(screenHeight) || isZero(screenWidth) || isZero(screenDistance))
+        if (isZero(screenDistance))
             throw new IllegalArgumentException("the screen Height or  screen Height or screen Distance can't be zero or negative ");
         //  Image center equal to Pc = P0 + d∙Vto
         Point3D pc = _p0.add(_vto.scale(screenDistance));
