@@ -55,13 +55,6 @@ public class Tube extends RadialGeometry {
         return normal_tube.normalize();
     }
 
-    @Override
-    public String toString() {
-        return "Tube{" +
-                "_ray=" + _ray +
-                ", _radius=" + _radius +
-                "} " + super.toString();
-    }
 
     /**
      * @param ray - he his the ray that insert the object
@@ -70,5 +63,11 @@ public class Tube extends RadialGeometry {
     @Override
     public List<Point3D> findIntersections(Ray ray) {
         return null;
+    }
+
+    @Override
+    public String toString() {
+        return "ray: " + _ray +
+                ", radius: " + _radius;
     }
 }

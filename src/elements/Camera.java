@@ -57,10 +57,10 @@ public class Camera {
 
     /**
      *the func should creat ray witch point
-     * @param nX
-     * @param nY
-     * @param j
-     * @param i
+     * @param nX-number of pixels in the x axis
+     * @param nY-number of pixels in the y axis
+     * @param j- horizontal index of pixel (from left to right)
+     * @param i-vertical index of pixel (from up to down)
      * @param screenDistance- the distance between the _p0 and pc where the image are located
      * @param screenWidth-width  of the screen
      * @param screenHeight- height of the screen
@@ -71,13 +71,14 @@ public class Camera {
             throw new IllegalArgumentException("the screen Height or  screen Height or screen Distance can't be zero or negative ");
         //  Image center equal to Pc = P0 + d∙Vto
         Point3D pc = _p0.add(_vto.scale(screenDistance));
+        //pixel[i,j] center
         //Ratio (pixel width & height),Ry = h/Ny,Rx = w/Nx
         double Ry = screenHeight / nY;
         double Rx = screenWidth / nX;
         //Pixel[i,j] center Pi,j = Pc + (xj∙vright – yi∙vup) ,yi = (i – Ny/2)∙Ry + Ry/2 , xj = (j – Nx/2)∙Rx + Rx/2
         double yi = ((i - nY / 2d) * Ry + Ry / 2d);
         double xj = ((j - nX / 2d) * Rx + Rx / 2d);
-        Point3D pij = new Point3D(pc);
+        Point3D pij = pc;
         if (!isZero(xj)) pij = pij.add(_vright.scale(xj));
         if (!isZero(yi)) pij.add(_vup.scale(-yi));
         Vector vij = pij.subtract(_p0);

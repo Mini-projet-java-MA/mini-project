@@ -116,4 +116,12 @@ public class Point3D {
                 this._y._coord - other.getY()._coord,
                 this._z._coord - other.getZ()._coord);
     }
+    @Override
+    public String toString() {
+        return "(" +
+                _x +
+                ", " + _y +
+                ", " + _z +
+                ')';
+    }
 }
