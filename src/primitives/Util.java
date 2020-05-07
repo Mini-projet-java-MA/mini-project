@@ -1,5 +1,10 @@
 package primitives;
 
+/**
+ * Util class is used for some internal utilities, e.g. controlling accuracy
+ *
+ * @author Dan Zilberstein
+ */
 public abstract class Util {
     // It is binary, equivalent to ~1/1,000,000,000,000 in decimal (12 digits)
     private static final int ACCURACY = -40;
@@ -33,6 +38,6 @@ public abstract class Util {
      * @return 0.0 if the number is very close to zero, the number itself otherwise
      */
     public static double alignZero(double number) {
-        return getExp(number) < ACCURACY ? 0 : number;
+        return getExp(number) < ACCURACY ? 0.0 : number;
     }
 }
