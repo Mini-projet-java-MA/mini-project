@@ -8,7 +8,10 @@ import geometries.*;
 import static org.junit.Assert.*;
 
 public class CameraTest {
-
+    /**
+     * this is the test for the function construct ray trough pixel
+     * we are testing on different dispositions to see if the ray is good
+     */
     @Test
     public void constructRayThroughPixel() {
         Camera camera = new Camera(Point3D.ZERO, new Vector(0, 0, 1), new Vector(0, -1, 0));
