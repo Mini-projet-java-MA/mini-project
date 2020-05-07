@@ -34,7 +34,7 @@ public class Camera {
         _p0=new Point3D(p0);
         _vto = vto.normalized();
         _vup = vup.normalized();
-        _vright = _vup.crossProduct(_vto).normalized();
+        _vright = _vto.crossProduct(_vup).normalized();
 
 
     }
