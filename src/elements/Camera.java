@@ -61,14 +61,11 @@ public class Camera {
         //Pixel[i,j] center Pi,j = Pc + (xj∙vright – yi∙vup) ,yi = (i – Ny/2)∙Ry + Ry/2 , xj = (j – Nx/2)∙Rx + Rx/2
         double yi = ((i - nY / 2.0) * Ry + Ry / 2.0);
         double xj = ((j - nX / 2.0) * Rx + Rx / 2.0);
-        Point3D pij=new Point3D(pc);
+        Point3D pij = new Point3D(pc);
         if (!isZero(xj)) pij = pij.add(_vright.scale(xj));
-
         if (!isZero(yi)) pij.add(_vup.scale(-yi));
-            Vector vij = pij.subtract(_p0);
-
+        Vector vij = pij.subtract(_p0);
         return new Ray(_p0, vij);
-
     }
 
     /**
