@@ -59,18 +59,29 @@ public class Camera {
         double Ry = screenHeight / nY;
         double Rx = screenWidth / nX;
         //Pixel[i,j] center Pi,j = Pc + (xj∙vright – yi∙vup) ,yi = (i – Ny/2)∙Ry + Ry/2 , xj = (j – Nx/2)∙Rx + Rx/2
-        double yi = ((i - nY / 2) * Ry + Ry / 2);
-        double xj = ((j - nX / 2) * Rx + Rx / 2);
-        Point3D pij=pc;
-        if (!isZero(xj)) {
-            pij = pij.add(_vright.scale(xj));
-        }
-        if (!isZero(yi)) {
-        }
+        double yi = ((i - nY / 2.0) * Ry + Ry / 2.0);
+        double xj = ((j - nX / 2.0) * Rx + Rx / 2.0);
+        Point3D pij=new Point3D(pc);
+        if (!isZero(xj)) pij = pij.add(_vright.scale(xj));
 
-        Vector vij = pij.subtract(_p0);
+        if (!isZero(yi)) pij.add(_vup.scale(-yi));
+            Vector vij = pij.subtract(_p0);
 
-        return new Ray(_p0, vijij);
+        return new Ray(_p0, vij);
 
+    }
+
+    /**
+     *
+     * @return in string data of camera
+     */
+    @Override
+    public String toString() {
+        return "Camera{" +
+                "_p0=" + _p0 +
+                ", _vUp=" + _vup +
+                ", _vTo=" + _vto +
+                ", _vRight=" + _vright +
+                '}';
     }
 }
