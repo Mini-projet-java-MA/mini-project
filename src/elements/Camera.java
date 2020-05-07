@@ -21,16 +21,16 @@ public class Camera {
 
     /**
      *
-     * @param _p0-the place of the camera
-     * @param _vto- where the vector point outgoing from the camera
-     * @param _vup-the vector vertical to vto
+     * @param p0-the place of the camera
+     * @param vto- where the vector point outgoing from the camera
+     * @param vtup-the vector vertical to vto
      */
     public Camera(Point3D p0, Vector vto, Vector vtup) {
 
         double check_vertical = vto.dotProduct(vtup);
-        //if two vector vto are not vertical to vtup
+        //if the two vectors are not orthogonal throw exception
         if (check_vertical != 0)
-            throw new IllegalArgumentException("the vector vto are not parallel to vector vtup ");
+            throw new IllegalArgumentException("the vectors must be orthogonal ");
         _p0=new Point3D(p0);
         _vto = new Vector(vto.normalize());
         _vup = new Vector(vtup.normalize());
