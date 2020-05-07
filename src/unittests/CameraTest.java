@@ -14,7 +14,7 @@ public class CameraTest {
         Point3D location = new Point3D(3, 3, 3);
         Vector up = new Vector(0, 0, 3);
         Vector to = new Vector(4, 0, 0);
-        Camera result = new Camera(location, up, to);
+        Camera result = new Camera(location, to, up);
         assertEquals(new Vector(1, 0, 0), result.getVto());
         assertEquals(new Vector(0, 0, 1), result.getVup());
         assertEquals(new Vector(0, -1, 0), result.getVright());
