@@ -4,8 +4,6 @@ import primitives.Point3D;
 import primitives.Ray;
 import primitives.Vector;
 
-import static primitives.Util.*;
-
 
 /**
  *  camera class represents camera in 3D Cartesian coordinate
@@ -70,17 +68,17 @@ public class Camera {
         //image center
         Point3D screenCenter = _p0.add(_vto.scale(screenDistance));
         //ratio (pixel height&width)
-        double yRatio = screenHeight / nY;
-        double xRatio = screenWidth / nX;
+        double Ry = screenHeight / nY;
+        double Rx = screenWidth / nX;
         //pixel[i,j] center
         //multiplying of x value of pixel with the pixel width. and adding half of the width to get the distance till the center.
-        double XOfPixel = (i - nX / 2.0) * xRatio + xRatio / 2.0;
-        double YOfPixel = (j - nY / 2.0) * yRatio + yRatio / 2.0;
-        Point3D PixelIJ = screenCenter;
-        if (XOfPixel != 0) PixelIJ = PixelIJ.add(_vright.scale(XOfPixel));
-        if (YOfPixel != 0) PixelIJ = PixelIJ.add(_vup.scale(-YOfPixel));
+        double Xpixsel = (i - nX / 2.0) * Rx + Rx / 2.0;
+        double Ypixsel = (j - nY / 2.0) * Ry + Ry / 2.0;
+        Point3D Pij = screenCenter;
+        if (Xpixsel != 0) Pij = Pij.add(_vright.scale(Xpixsel));
+        if (Ypixsel != 0) Pij = Pij.add(_vup.scale(-Ypixsel));
         //direction vector to pixel center
-        Vector direction = PixelIJ.subtract(_p0);
+        Vector direction = Pij.subtract(_p0);
         return new Ray(_p0, direction);
     }
 
