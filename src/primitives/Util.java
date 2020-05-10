@@ -3,7 +3,7 @@ package primitives;
 /**
  * Util class is used for some internal utilities, e.g. controlling accuracy
  *
- * @author Dan Zilberstein
+ * @author Dan
  */
 public abstract class Util {
     // It is binary, equivalent to ~1/1,000,000,000,000 in decimal (12 digits)
@@ -18,7 +18,7 @@ public abstract class Util {
         // 2. Shift all 52 bits to the right (removing mantissa)
         // 3. Zero the sign of number bit by mask 0x7FF
         // 4. "De-normalize" the exponent by subtracting 1023
-        return (int) ((Double.doubleToRawLongBits(num) >> 52) & 0x7FFL) - 1023;
+        return (int)((Double.doubleToRawLongBits(num) >> 52) & 0x7FFL) - 1023;
     }
 
     /**

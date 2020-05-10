@@ -4,7 +4,7 @@ import primitives.Point3D;
 import primitives.Ray;
 import primitives.Vector;
 
-import static primitives.Util.isZero;
+import static primitives.Util.*;
 
 
 /**
@@ -27,14 +27,14 @@ public class Camera {
      */
     public Camera(Point3D p0, Vector vto, Vector vup) {
 
-        double check_vertical = vto.dotProduct(vup);
+
         //if the two vectors are not orthogonal throw exception
-        if (check_vertical != 0)
-            throw new IllegalArgumentException("the vto should be orthogonal to vup ");
+        if (vto.dotProduct(vup)!= 0)
+            throw new IllegalArgumentException("the vto not orthogonal to vup ");
         _p0=new Point3D(p0);
         _vto = vto.normalized();
         _vup = vup.normalized();
-        _vright = _vto.crossProduct(_vup).normalized();
+        _vright = _vto.crossProduct(_vup).normalize();
 
 
     }
@@ -66,24 +66,24 @@ public class Camera {
      * @param screenHeight- height of the screen
      * @return ray where outgoing construct Ray Through Pixel
      */
-    public Ray constructRayThroughPixel (int nX, int nY, int j, int i, double screenDistance, double screenWidth, double screenHeight) {
-        if (isZero(screenDistance))
-            throw new IllegalArgumentException("the screen Height or  screen Height or screen Distance can't be zero or negative ");
-        //  Image center equal to Pc = P0 + d∙Vto
-        Point3D pc = _p0.add(_vto.scale(screenDistance));
+    public Ray constructRayThroughPixel(int nX, int nY, int i, int j, double screenDistance, double screenWidth, double screenHeight) {
+        //image center
+        Point3D screenCenter = _p0.add(_vto.scale(screenDistance));
+        //ratio (pixel height&width)
+        double yRatio = screenHeight / nY;
+        double xRatio = screenWidth / nX;
         //pixel[i,j] center
-        //Ratio (pixel width & height),Ry = h/Ny,Rx = w/Nx
-        double Ry = screenHeight / nY;
-        double Rx = screenWidth / nX;
-        //Pixel[i,j] center Pi,j = Pc + (xj∙vright – yi∙vup) ,yi = (i – Ny/2)∙Ry + Ry/2 , xj = (j – Nx/2)∙Rx + Rx/2
-        double yi = ((i - nY / 2d) * Ry + Ry / 2d);
-        double xj = ((j - nX / 2d) * Rx + Rx / 2d);
-        Point3D pij = pc;
-        if (!isZero(xj)) pij = pij.add(_vright.scale(xj));
-        if (!isZero(yi)) pij.add(_vup.scale(-yi));
-        Vector vij = pij.subtract(_p0);
-        return new Ray(_p0, vij);
+        //multiplying of x value of pixel with the pixel width. and adding half of the width to get the distance till the center.
+        double XOfPixel = (i - nX / 2.0) * xRatio + xRatio / 2.0;
+        double YOfPixel = (j - nY / 2.0) * yRatio + yRatio / 2.0;
+        Point3D PixelIJ = screenCenter;
+        if (XOfPixel != 0) PixelIJ = PixelIJ.add(_vright.scale(XOfPixel));
+        if (YOfPixel != 0) PixelIJ = PixelIJ.add(_vup.scale(-YOfPixel));
+        //direction vector to pixel center
+        Vector direction = PixelIJ.subtract(_p0);
+        return new Ray(_p0, direction);
     }
+
 
     /**
      * @return in string data of camera
