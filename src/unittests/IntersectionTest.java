@@ -14,7 +14,7 @@ public class IntersectionTest {
         Camera cam2 = new Camera(new Point3D(0, 0, -0.5), new Vector(0, 0, 1), new Vector(0, -1, 0));
 
         @Test
-        public void constructRayThroughPixelWithSphere1() {
+        public void constructRayThroughPixelWithFirstSphere() {
             //TO DO
             Sphere sph = new Sphere(1, new Point3D(0, 0, 3));
 //        Ray ray = cam1.constructRayThroughPixel(3,3,0,0,1,3,3);
@@ -37,7 +37,7 @@ public class IntersectionTest {
         }
 
         @Test
-        public void constructRayThroughPixelWithSphere2() {
+        public void constructRayThroughPixelWithSecondSphere() {
             Sphere sph = new Sphere(2.5, new Point3D(0, 0, 2.5));
 
             List<Point3D> results;
