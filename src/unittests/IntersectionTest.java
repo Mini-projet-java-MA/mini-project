@@ -8,6 +8,9 @@ import elements.*;
 import org.junit.Test;
 import java.util.List;
 
+/**
+ * we test thw Intersection between package geometry and ray to the camera
+ */
 public class IntersectionTest {
 
         Camera cam1 = new Camera(Point3D.ZERO, new Vector(0, 0, 1), new Vector(0, -1, 0));
@@ -32,7 +35,6 @@ public class IntersectionTest {
             }
 
             assertEquals("not good",2, count );
-            System.out.println("count: " + count);
 
         }
 
@@ -56,6 +58,5 @@ public class IntersectionTest {
             }
 
             assertEquals("not good",18, count );
-            System.out.println("count: " + count);
         }
     }

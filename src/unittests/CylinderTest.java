@@ -12,7 +12,9 @@ import static org.junit.Assert.assertEquals;
 public class CylinderTest {
     // ============ Equivalence Partitions Tests ==============
 
-
+    /**
+     * this func should test BVA of get normal
+     */
     @Test
     public void testGetNormal() {
         // ============ Equivalence Partitions Tests ==============
