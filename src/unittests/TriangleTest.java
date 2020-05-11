@@ -52,17 +52,12 @@ public class TriangleTest {
         //TC10 on edge
         ray = new Ray(new Point3D(-2, 0, 5), new Vector(1, 0, -1));
         intersectionsList = triangle.findIntersections(ray);
-        assertNotNull("must be not empty", intersectionsList);
-        assertEquals("must be equal to 1", 1, intersectionsList.size());
-        assertEquals("must be the same", new Point3D(0, 0, 1), intersectionsList.get(0));
+        assertNull("must be empty", intersectionsList);
 
-
-        // TC12 in vertex
+       // TC12 in vertex
         ray = new Ray(new Point3D(6, 0, 1), new Vector(1, 0, -1));
         intersectionsList = triangle.findIntersections(ray);
-        assertNotNull("must be not empty", intersectionsList);
-        assertEquals("must be equal to 1", 1, intersectionsList.size());
-        assertEquals("must be the same", new Point3D(7, 0, 0), intersectionsList.get(0));
+        assertNull("must be not empty", intersectionsList);
 
         // TC13 on edge continuation
         ray = new Ray(new Point3D(10, 0, 0), new Vector(0, 0, -1));

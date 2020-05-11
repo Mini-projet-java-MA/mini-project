@@ -161,23 +161,25 @@ public class SphereTest {
         assertEquals("must be equal to one", 1, intersectionsList.size());
         assertEquals("must be equal", new Point3D(0, 0, 5), intersectionsList.get(0));
 
+        // **** Group: Special cases
+        //TC19 ray is on a line that vertical to radius- ray starts on the radius line
+        ray = new Ray(new Point3D(0, 0, 0), new Vector(0, 0, -1));
+        sphere = new Sphere(1, new Point3D(0, 2, 0));
+        intersectionsList = sphere.findIntersections(ray);
+        assertNull("must be empty", intersectionsList);
 
         // **** Group: Ray's line is tangent to the sphere
         //TC16 ray is on the tangent line- ray starts before intersection: 1 intersection
         ray = new Ray(new Point3D(0, 0, 0), new Vector(0, 0, -1));
         sphere = new Sphere(1, new Point3D(0, 1, -1));
         intersectionsList = sphere.findIntersections(ray);
-        assertNotNull("must be not empty", intersectionsList);
-        assertEquals("must be equal to one", 1, intersectionsList.size());
-        assertEquals("must be equal", new Point3D(0, 0, -1), intersectionsList.get(0));
+        assertNull("must be empty", intersectionsList);
 
         //TC17 ray is on the tangent line- ray starts on intersection: 1 intersection
         ray = new Ray(new Point3D(0, 0, 0), new Vector(0, 0, -1));
         sphere = new Sphere(1, new Point3D(0, 1, 0));
         intersectionsList = sphere.findIntersections(ray);
-        assertNotNull("must be not empty", intersectionsList);
-        assertEquals("must be equal to one", 1, intersectionsList.size());
-        assertEquals("must be equal", new Point3D(0, 0, 0), intersectionsList.get(0));
+        assertNull("must be empty", intersectionsList);
 
         //TC18 ray is on the tangent line- ray starts after intersection: no intersections
         ray = new Ray(new Point3D(0, 0, 0), new Vector(0, 0, -1));
@@ -186,12 +188,7 @@ public class SphereTest {
         assertNull("must be empty", intersectionsList);
 
 
-        // **** Group: Special cases
-        //TC19 ray is on a line that vertical to radius- ray starts on the radius line
-        ray = new Ray(new Point3D(0, 0, 0), new Vector(0, 0, -1));
-        sphere = new Sphere(1, new Point3D(0, 2, 0));
-        intersectionsList = sphere.findIntersections(ray);
-        assertNull("must be empty", intersectionsList);
+
 
     }
 }
