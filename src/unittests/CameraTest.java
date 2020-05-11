@@ -7,8 +7,15 @@ import primitives.Ray;
 import primitives.Vector;
 
 import static org.junit.Assert.assertEquals;
+
+/**
+ * this is a class test for the java class camera
+ */
 public class CameraTest {
 
+    /**
+     * this is a test for the constructor of camera
+     */
     @Test
     public void constructorTest() {
         Point3D location = new Point3D(3, 3, 3);
