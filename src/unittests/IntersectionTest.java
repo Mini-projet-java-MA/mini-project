@@ -21,8 +21,8 @@ public class IntersectionTest {
     @Test
     public void constructRayThroughPixelWithFirstSphere() {
         Sphere sph = new Sphere(1, new Point3D(0, 0, 3));
-//        Ray ray = cam1.constructRayThroughPixel(3,3,0,0,1,3,3);
-//        List<Point3D> results =  sph.findIntersections(ray);
+//Ray ray = cam1.constructRayThroughPixel(3,3,0,0,1,3,3);
+// List<Point3D> results =  sph.findIntersections(ray);
         List<Point3D> results;
         int count = 0;
         int Nx = 3;
@@ -56,5 +56,7 @@ public class IntersectionTest {
         }
 
         assertEquals("not good", 18, count);
+
+
     }
 }
