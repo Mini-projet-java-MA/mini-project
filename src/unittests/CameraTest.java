@@ -1,12 +1,12 @@
 package unittests;
 
+import elements.Camera;
 import org.junit.Test;
-import elements.*;
-import primitives.*;
-import geometries.*;
+import primitives.Point3D;
+import primitives.Ray;
+import primitives.Vector;
 
-import static org.junit.Assert.*;
-
+import static org.junit.Assert.assertEquals;
 public class CameraTest {
 
     @Test
@@ -19,13 +19,14 @@ public class CameraTest {
         assertEquals(new Vector(0, 0, 1), result.getVup());
         assertEquals(new Vector(0, -1, 0), result.getVright());
     }
+
     /**
      * this is the test for the function construct ray trough pixel
      * we are testing on different dispositions to see if the ray is good
      */
     @Test
     public void constructRayThroughPixel() {
-        Camera camera = new Camera(Point3D.ZERO, new Vector(0, 0, 1), new Vector(0, -1, 0) );
+        Camera camera = new Camera(Point3D.ZERO, new Vector(0, 0, 1), new Vector(0, -1, 0));
 
         // ============ Equivalence Partitions Tests ==============
 

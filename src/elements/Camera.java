@@ -6,11 +6,12 @@ import primitives.Vector;
 
 
 /**
- *  camera class represents camera in 3D Cartesian coordinate
+ * camera class represents camera in 3D Cartesian coordinate
  *
- *
- *   @author aaron
+ * @author aaron
  */
+
+
 public class Camera {
     private Point3D _p0;
     private Vector _vto;
@@ -18,18 +19,17 @@ public class Camera {
     private Vector _vright;
 
     /**
-     *
-     * @param p0-the place of the camera
-     * @param vto- where the vector point outgoing from the camera
+     * @param p0-the  place of the camera
+     * @param vto-    where the vector point outgoing from the camera
      * @param vup-the vector vertical to vto
      */
     public Camera(Point3D p0, Vector vto, Vector vup) {
 
 
         //if the two vectors are not orthogonal throw exception
-        if (vto.dotProduct(vup)!= 0)
+        if (vto.dotProduct(vup) != 0)
             throw new IllegalArgumentException("the vto not orthogonal to vup ");
-        _p0=new Point3D(p0);
+        _p0 = new Point3D(p0);
         _vto = vto.normalized();
         _vup = vup.normalized();
         _vright = _vto.crossProduct(_vup).normalize();
@@ -54,14 +54,15 @@ public class Camera {
     }
 
     /**
-     *the func should creat ray witch point
-     * @param nX-number of pixels in the x axis
-     * @param nY-number of pixels in the y axis
-     * @param j- horizontal index of pixel (from left to right)
-     * @param i-vertical index of pixel (from up to down)
-     * @param screenDistance- the distance between the _p0 and pc where the image are located
-     * @param screenWidth-width  of the screen
-     * @param screenHeight- height of the screen
+     * the func should creat ray witch point
+     *
+     * @param nX-number         of pixels in the x axis
+     * @param nY-number         of pixels in the y axis
+     * @param j-                horizontal index of pixel (from left to right)
+     * @param i-vertical        index of pixel (from up to down)
+     * @param screenDistance-   the distance between the _p0 and pc where the image are located
+     * @param screenWidth-width of the screen
+     * @param screenHeight-     height of the screen
      * @return ray where outgoing construct Ray Through Pixel
      */
     public Ray constructRayThroughPixel(int nX, int nY, int i, int j, double screenDistance, double screenWidth, double screenHeight) {
