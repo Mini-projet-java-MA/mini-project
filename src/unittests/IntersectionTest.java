@@ -10,14 +10,14 @@ import org.junit.Test;
 import java.util.List;
 
 /**
- * we test thw Intersection between package geometry and ray to the camera
+ * we test the Intersection between package geometry and ray to the camera
  */
 public class IntersectionTest {
 
     Camera cam1 = new Camera(Point3D.ZERO, new Vector(0, 0, 1), new Vector(0, -1, 0));
     Camera cam2 = new Camera(new Point3D(0, 0, -0.5), new Vector(0, 0, 1), new Vector(0, -1, 0));
 
-    //a first test of intersection with sphere we then compare the result with the expected result
+    // TC01 a first test of intersection with sphere we then compare the result with the expected result
     @Test
     public void constructRayThroughPixelWithFirstSphere() {
         Sphere sph = new Sphere(1, new Point3D(0, 0, 3));
@@ -38,7 +38,7 @@ public class IntersectionTest {
         assertEquals("not good", 2, count);
 
     }
-    //a second test of intersection with sphere we then compare the result with the expected result
+    // TC02 a second test of intersection with sphere we then compare the result with the expected result
     @Test
     public void constructRayThroughPixelWithSecondSphere() {
         Sphere sph = new Sphere(2.5, new Point3D(0, 0, 2.5));
