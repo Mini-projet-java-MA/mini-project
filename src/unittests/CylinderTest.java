@@ -8,12 +8,17 @@ import primitives.Vector;
 
 import static org.junit.Assert.assertEquals;
 
-
+/**
+ *Test method for {@link geometries.Cylinder}.
+ *  * Cylinder test class test cylinder in 3D Cartesian coordinate
+ *  @author Aaron
+ */
 public class CylinderTest {
     // ============ Equivalence Partitions Tests ==============
 
     /**
      * this func should test BVA of get normal
+     *
      */
     @Test
     public void testGetNormal() {

@@ -1,18 +1,26 @@
 package unittests;
 
-import geometries.Polygon;
+import geometries.Tube;
 import org.junit.Test;
-import primitives.Coordinate;
 import primitives.Point3D;
 import primitives.Ray;
 import primitives.Vector;
-import geometries.Tube;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+
+
+/**
+ Test method for {@link geometries.Tube}.
+ *  tube test class test tube in 3D Cartesian coordinate
+ *  @author Aaron
+ */
 
 public class TubeTest {
 
-
+    /**
+     * we test the constructor of tube
+     */
     @Test
     public void testConstructor() {
         try {
@@ -26,7 +34,10 @@ public class TubeTest {
         }
     }
 
-    @Test//test the get ray by comparing the result of the func and the expected result
+    /**
+     * test the get ray by comparing the result of the func and the expected result
+     */
+    @Test
     public void getRay() {
         // ============ Equivalence Partitions Tests ==============
 
@@ -42,6 +53,5 @@ public class TubeTest {
             assertEquals(result, expResult);
         } catch (IllegalArgumentException e) {
         }
-
     }
 }

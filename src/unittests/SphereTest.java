@@ -13,14 +13,16 @@ import static primitives.Util.alignZero;
 
 
 import static org.junit.Assert.*;
-
+/**
+ * Test method for {@link geometries.Sphere}.
+ * sphere test class test sphere in 3D Cartesian coordinate
+ * we test the sphere of cylinder
+ * @author aaron
+ */
 public class SphereTest {
     /**
-     * Test method for {@link geometries.Sphere}.
-     *
-     * @author aaron
+     * the test if we get the good of center of the sphere
      */
-
     @Test
     public void get_center() {
         // ============ Equivalence Partitions Tests ==============
@@ -40,6 +42,9 @@ public class SphereTest {
         }
     }//if the test worked it means the result and expected results are equal and then get center works
 
+    /**
+     * we test we get the good get normal
+     */
     @Test
     public void getNormal() {
         // ============ Equivalence Partitions Tests ==============
@@ -52,6 +57,9 @@ public class SphereTest {
         }
     }
 
+    /**
+     * we test the intersection with ray and sphere
+     */
     @Test
     public void findIntersections() {
         // ============ Equivalence Partitions Tests ==============

@@ -11,6 +11,11 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
+/**
+ * Test method for {@link geometries.Plane}.
+ * Plane test class test plane in 3D Cartesian coordinate
+ * we test the class plan if the func and param works good
+ */
 public class PlaneTest {
 
     @Test
@@ -32,6 +37,9 @@ public class PlaneTest {
         }
     }
 
+    /**
+     * we test the if the func get normal if it work cogently
+     */
     @Test
     public void getNormal() {
         // ============ Equivalence Partitions Tests ==============
@@ -46,6 +54,9 @@ public class PlaneTest {
         assertEquals(0, p1.subtract(p3).dotProduct(plane.getNormal(receivedPoint)), 0.00001);
     }
 
+    /**
+     * we test the intersection we we have a ray and plane if it work good
+     */
     @Test
     public void findIntersections() {
         // ============ Equivalence Partitions Tests ==============

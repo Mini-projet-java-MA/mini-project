@@ -10,8 +10,16 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
+/**
+Test method for {@link geometries.Triangle}.
+ *  Triangle test class test triangle in 3D Cartesian coordinate
+ *  @author Aaron
+ */
 
 public class TriangleTest {
+    /**
+     * we test if the constructor find the problem in this case
+     */
     @Test
     public void testConstructor() {
         // ============ Equivalence Partitions Tests ==============
@@ -23,6 +31,9 @@ public class TriangleTest {
         }
     }
 
+    /**
+     * we test if when we have intersection witch ray and triangle we find intersection if exist amd if he found the right intersection
+     */
     @Test
     public void findIntersections() {
         // ============ Equivalence Partitions Tests ==============
