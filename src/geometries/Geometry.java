@@ -6,10 +6,8 @@ import primitives.Vector;
 import java.util.List;
 
 /**
- *
+ * we do interface for geometry
  */
 public interface Geometry extends Intersectable {
 
-    List<Point3D> findIntersections(Ray ray);
-    Vector getNormal(Point3D p) ;
 }
