@@ -64,7 +64,9 @@ public class VectorTest {
         assertEquals(0, vr.dotProduct(v3), 0.0000001);
     }
 
-
+    /**
+     * test for the size of length in squared
+     */
     @Test
     public void lengthSquared() {
         // ============ Equivalence Partitions Tests ==============
@@ -72,6 +74,9 @@ public class VectorTest {
         assertEquals(25d, new Vector(0, 3, 4).lengthSquared(), 0.0000001);
     }
 
+    /**
+     * test for find the length vector
+     */
     @Test
     public void length() {
         // ============ Equivalence Partitions Tests ==============
@@ -79,6 +84,9 @@ public class VectorTest {
         assertEquals(5d, new Vector(3, 4, 0).length(), 0.0000001);
     }
 
+    /**
+     * test for dot prouduct vector
+     */
     @Test
     public void dotProduct() {
         Vector v1, v2;
@@ -111,6 +119,9 @@ public class VectorTest {
         assertEquals(42, v1.dotProduct(v2), 0.0000001);
     }
 
+    /**
+     * test for vector normalize
+     */
     @Test
     public void normalize() {
         // ============ Equivalence Partitions Tests ==============
@@ -122,6 +133,9 @@ public class VectorTest {
         assertEquals(v2, vr);
     }
 
+    /**
+     * test for vector normalized
+     */
     @Test
     public void normalized() {
         // ============ Equivalence Partitions Tests ==============
@@ -133,6 +147,9 @@ public class VectorTest {
         assertEquals(v2, vr);
     }
 
+    /**
+     * test for vector mult be scale
+     */
     @Test
     public void scale() {
         // ============ Equivalence Partitions Tests ==============
@@ -152,6 +169,9 @@ public class VectorTest {
         }
     }
 
+    /**
+     * test add for vector
+     */
     @Test
     public void add() {
         Vector v1, v2, result, expected;
@@ -173,6 +193,9 @@ public class VectorTest {
         }
     }
 
+    /**
+     * we test the subract in vector
+     */
     @Test
     public void subtract() {
         // ============ Equivalence Partitions Tests ==============
