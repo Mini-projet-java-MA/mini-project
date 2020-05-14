@@ -63,7 +63,7 @@ public class IntersectionTest {
      * @param cam the camera intersecting the plane
      * @return
      */
-    private int intersectionsSphere(Plane plane, Camera cam) {
+    private int intersectionsPlane(Plane plane, Camera cam) {
         List<Point3D> results = null;
         int count = 0;
         int Nx = 3;
@@ -96,9 +96,9 @@ public class IntersectionTest {
         //TC04:the sphere around the screen
         sph = new Sphere(4, new Point3D(0, 0, 2));
         assertEquals("not good", 9,  intersectionsSphere(sph, cam2));
-        //TC05: the sphere are behind the screen
+        //TC05: the sphere is behind the screen
         sph = new Sphere(0.5, new Point3D(0, 0, -1));
-        assertNull("not good", intersectionsSphere(sph, cam2));
+        assertEquals("must be equal to zero",0, intersectionsSphere(sph, cam2));
     }
 
     /**
@@ -109,7 +109,7 @@ public class IntersectionTest {
         // i think that the pbm is because somme test in class plane test that don't work
         Plane plane = new Plane(new Point3D(0, 0, -2), new Vector(0, 0, 1));
         //TC01:
-        assertEquals(9 , intersectionsSphere(plane, cam1));
+        assertEquals(9 , intersectionsPlane(plane, cam1));
 
     }
 
