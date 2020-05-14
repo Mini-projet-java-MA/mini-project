@@ -11,6 +11,23 @@ public class Render {
     private ImageWriter _imageWriter;
 
     public void renderImage() {
+        /***
+         * psodo code from cours
+         * Camera camera = _scene.getCamera();
+         * Intersectable geometries = _scene.getGeometries();
+         * java.awt.Color background = _scene.getBackground().getColor();
+         * int nX = _imageWriter.getNX();
+         * …
+         * for each point (i,j) in the view plane // i is pixel row number and j is pixel in the row number
+         * Ray ray = camera.constructRayThroughPixel(nX, nY, j, i, distance, width, height);
+         * List<Point3D> intersectionPoints = geometries.findIntersections(ray);
+         * if intersectionPoints is empty
+         * _imageWriter.writePixel(j, i, background);
+         * else
+         * Point3D closestPoint = getClosestPoint(intersectionPoints);
+         * _imageWriter.writePixel(j, i, calcColor(closestPoint).getColor())
+         */
+
     }
 
     /**
