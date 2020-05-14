@@ -6,6 +6,7 @@ import renderer.ImageWriter;
 
 /**
  * in this class we test image writer
+ * @author aaron
  */
 public class ImageWriterTest {
 
@@ -16,16 +17,15 @@ public class ImageWriterTest {
     public void writeToImage() {
         Color Green = new Color(0, 0, 0);
         Color white = new Color(255, 255, 255);
-        ImageWriter img = new ImageWriter("img1", 10, 16, 800, 500);
+        ImageWriter img = new ImageWriter("img1", 1600, 1000, 800, 500);
         for (int col = 0; col< 500; col++) {
             for (int row = 0; row < 800; row++) {
-                if (col % 50== 0 || row % 50 == 0)
+                if (col % 10== 0 || row % 16  == 0)
                     img.writePixel(col, row, white.getColor());
                 else
                     img.writePixel(row, row, Green.getColor());
 
             }
-            img.writeToImage();
 
         }
         img.writeToImage();

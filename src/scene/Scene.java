@@ -15,6 +15,7 @@ import primitives.Color;
  * _geometries objects/shapes that exist in scene
  * _camera point of view, that from there we look on the scene, through an imagine view plane
  * _distance distance from camere to the imagine view plane
+ * @author moshe
  */
 public class Scene {
     private String _name;
@@ -26,10 +27,17 @@ public class Scene {
 
     /**
      * constructor with only the name as a parameter
+     *
      * @param name name of the scene
      */
     public Scene(String name) {
+        // im not sure it what we need to do
         this._name = name;
+        _background = new Color(0, 0, 0);
+        _ambientLight = null;
+        _geometries = null;
+        _camera = null;
+        _distance = 0.0;
     }
 
     public String getName() {
@@ -40,39 +48,39 @@ public class Scene {
         return _background;
     }
 
-    public AmbientLight getAmbientLight() {
-        return _ambientLight;
-    }
-
-    public Camera getCamera() {
-        return _camera;
-    }
-
-    public double getDistance() {
-        return _distance;
-    }
-
     public void setBackground(Color _background) {
         this._background = _background;
+    }
+
+    public AmbientLight getAmbientLight() {
+        return _ambientLight;
     }
 
     public void setAmbientLight(AmbientLight _ambientLight) {
         this._ambientLight = _ambientLight;
     }
 
+    public Camera getCamera() {
+        return _camera;
+    }
+
     public void setCamera(Camera _camera) {
         this._camera = _camera;
+    }
+
+    public double getDistance() {
+        return _distance;
     }
 
     public void setDistance(double _distance) {
         this._distance = _distance;
     }
+
     /**
      * function to add geometries to scene
-     *
      * @param geometries one or more geometries, such sphere or triangle
      */
-    void addGeometries(Intersectable... geometries){
+    void addGeometries(Intersectable... geometries) {
         _geometries.add(geometries);
     }
 }
