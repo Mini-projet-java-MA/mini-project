@@ -54,39 +54,35 @@ public class Camera {
     }
 
     /**
-     * the func should creat ray witch point
+     * the func should create ray witch point
      *
-     * @param nX-number         of pixels in the x axis
-     * @param nY-number         of pixels in the y axis
-     * @param j-                horizontal index of pixel (from left to right)
-     * @param i-vertical        index of pixel (from up to down)
-     * @param screenDistance-   the distance between the _p0 and pc where the image are located
-     * @param screenWidth-width of the screen
-     * @param screenHeight-     height of the screen
+     * @param nX number         of pixels in the x axis
+     * @param nY number         of pixels in the y axis
+     * @param j               horizontal index of pixel (from left to right)
+     * @param i vertical        index of pixel (from up to down)
+     * @param screenDistance   the distance between the _p0 and pc where the image are located
+     * @param screenWidth width of the screen
+     * @param screenHeight    height of the screen
      * @return ray where outgoing construct Ray Through Pixel
      */
     public Ray constructRayThroughPixel(int nX, int nY, int i, int j, double screenDistance, double screenWidth, double screenHeight) {
         //image center
         Point3D screenCenter = _p0.add(_vto.scale(screenDistance));
         //ratio (pixel height&width)
-        double Ry = screenHeight / nY;
-        double Rx = screenWidth / nX;
+        double ry = screenHeight / nY;
+        double rx = screenWidth / nX;
         //pixel[i,j] center
         //multiplying of x value of pixel with the pixel width. and adding half of the width to get the distance till the center.
-        double Xpixsel = (i - nX / 2.0) * Rx + Rx / 2.0;
-        double Ypixsel = (j - nY / 2.0) * Ry + Ry / 2.0;
-        Point3D Pij = screenCenter;
-        if (Xpixsel != 0) Pij = Pij.add(_vright.scale(Xpixsel));
-        if (Ypixsel != 0) Pij = Pij.add(_vup.scale(-Ypixsel));
+        double xpixsel = (i - nX / 2.0) * rx + rx / 2.0;
+        double ypixsel = (j - nY / 2.0) * ry + ry / 2.0;
+        Point3D pij = screenCenter;
+        if (xpixsel != 0) pij = pij.add(_vright.scale(xpixsel));
+        if (ypixsel != 0) pij = pij.add(_vup.scale(-ypixsel));
         //direction vector to pixel center
-        Vector direction = Pij.subtract(_p0);
+        Vector direction = pij.subtract(_p0);
         return new Ray(_p0, direction);
     }
 
-
-    /**
-     * @return in string data of camera
-     */
     @Override
     public String toString() {
         return "Camera{" +
