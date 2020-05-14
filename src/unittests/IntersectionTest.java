@@ -106,9 +106,8 @@ public class IntersectionTest {
      */
     @Test
     public void constructRayThroughPixelWithPlane() {
+        // i think that the pbm is because somme test in class plane test that don't work
         Plane plane = new Plane(new Point3D(0, 0, -2), new Vector(0, 0, 1));
-        cam1 = new Camera(new Point3D(0, 0, 0), new Vector(0, -1, 0), new Vector(0, 0, -1));
-
         //TC01:
         assertEquals(9 , intersectionsSphere(plane, cam1));
 
