@@ -59,8 +59,8 @@ public class IntersectionTest {
     }
     /**
      * the func should find the all intersection between plane and came on screen 3*3
-     * @param plane
-     * @param cam
+     * @param plane the plane
+     * @param cam the camera intersecting the plane
      * @return
      */
     private int intersectionsSphere(Plane plane, Camera cam) {
@@ -102,7 +102,7 @@ public class IntersectionTest {
     }
 
     /**
-     * we test the all intersection betweem camera and plane on screen 3*3
+     * we test all the intersection between camera and plane on screen 3*3
      */
     @Test
     public void constructRayThroughPixelWithPlane() {
@@ -114,14 +114,14 @@ public class IntersectionTest {
     }
 
     /**
-     * we test the all intersection betweem camera and Triangle on screen 3*3
+     * we test all the intersection between camera and Triangle on screen 3*3
      */
     @Test
     public void constructRayThroughPixelWithTriangle() {
         Triangle triangle = new Triangle(new Point3D(0, -1, 2), new Point3D(1, 1, 2), new Point3D(-1, 1, 2));
-        //TC01: when triangle are smalle than the screen
+        //TC01: when triangle are smaller than the screen
         assertEquals("Not bad ", 1, intersectionsTriangle(triangle, cam1));
-        //TC02: when the triangle are biger than the triangle
+        //TC02: when the triangle is bigger than the screen
         triangle = new Triangle(new Point3D(0, -20, 2), new Point3D(1, 1, 2), new Point3D(-1, 1, 2));
         assertEquals("Not bad ", 2, intersectionsTriangle(triangle, cam1));
 

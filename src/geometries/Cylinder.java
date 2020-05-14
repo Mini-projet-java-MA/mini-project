@@ -10,9 +10,11 @@ import static primitives.Util.*;
 public class Cylinder extends Tube {
     private double _height;
 
-    /**  this is the basic constructor for a tube :
+    /**
+     * this is the basic constructor for a tube :
      * it receive ray and radius
-     * @param ray -the ray
+     *
+     * @param ray     -the ray
      * @param radius- the radius
      * @param height- the height of the (cylinder he limited with height)
      * @throws IllegalArgumentException the radius is equal or smaller to zero so we don't have a cylinder
@@ -21,12 +23,13 @@ public class Cylinder extends Tube {
     public Cylinder(Ray ray, double radius, double height) {
         super(ray, radius);
         if (height <= 0)    //if the radius equal on small to zero so we don't can't have a cylinder so his return IllegalArgumentException
-        throw new IllegalArgumentException("height must be equal or superior to zero.");
+            throw new IllegalArgumentException("height must be equal or superior to zero.");
         this._height = height;
     }
 
     /**
      * simple function get
+     *
      * @return the height of the cylinder
      */
     public double getHeight() {
@@ -43,7 +46,8 @@ public class Cylinder extends Tube {
     }
 
     /**
-     *function to find the normal of the cylinder
+     * function to find the normal of the cylinder
+     *
      * @param point to find the normal
      * @return a normal of the cylinder normalize (new vector in size one)
      */
@@ -67,6 +71,4 @@ public class Cylinder extends Tube {
         p0 = p0.add(v.scale(t));
         return point.subtract(p0).normalize();
     }
-
-
 }
