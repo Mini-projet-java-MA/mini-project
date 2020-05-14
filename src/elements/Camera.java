@@ -69,15 +69,15 @@ public class Camera {
         //image center
         Point3D screenCenter = _p0.add(_vto.scale(screenDistance));
         //ratio (pixel height&width)
-        double ry = screenHeight / nY;
-        double rx = screenWidth / nX;
+        double Ry = screenHeight / nY;
+        double Rx = screenWidth / nX;
         //pixel[i,j] center
         //multiplying of x value of pixel with the pixel width. and adding half of the width to get the distance till the center.
-        double xpixsel = (i - nX / 2.0) * rx + rx / 2.0;
-        double ypixsel = (j - nY / 2.0) * ry + ry / 2.0;
+        double xPixsel = (i - nX / 2.0) * Rx + Rx / 2.0;
+        double yPixsel = (j - nY / 2.0) * Ry + Ry / 2.0;
         Point3D pij = screenCenter;
-        if (xpixsel != 0) pij = pij.add(_vright.scale(xpixsel));
-        if (ypixsel != 0) pij = pij.add(_vup.scale(-ypixsel));
+        if (xPixsel != 0) pij = pij.add(_vright.scale(xPixsel));
+        if (yPixsel != 0) pij = pij.add(_vup.scale(-yPixsel));
         //direction vector to pixel center
         Vector direction = pij.subtract(_p0);
         return new Ray(_p0, direction);
