@@ -3,12 +3,26 @@ package renderer;
 import primitives.Color;
 import primitives.Point3D;
 import scene.Scene;
+
+import java.util.*;
+
 /**
- *th object of this class his to creat matrix of picture
+ * th object of this class his to creat matrix of picture
  */
 public class Render {
     private Scene _scene;
     private ImageWriter _imageWriter;
+
+    /**
+     * Build Render object with a scene and image writer
+     *
+     * @param imgWr Image Writer object
+     * @param sc    scene object
+     */
+    public Render(ImageWriter imgWr, Scene sc) {
+        _scene = sc;
+        _imageWriter = imgWr;
+    }
 
     public void renderImage() {
         /***
@@ -32,14 +46,14 @@ public class Render {
 
     /**
      * function to draw a grid on our image by pixsel
+     *
      * @param interval number that the pixels are multiple of this number, are part of the grid.
      */
-    public void printGrid(int interval) {
-        Color white = new Color(255, 255, 255);
+    public void printGrid(int interval, java.awt.Color color) {
         for (int i = 0; i < _imageWriter.getNx(); i++) {
             for (int j = 0; j < _imageWriter.getNy(); j++) {
                 if (i % interval == 0 || j % interval == 0)
-                    _imageWriter.writePixel(i, j, white.getColor());
+                    _imageWriter.writePixel(i, j, color);
             }
         }
     }
@@ -51,6 +65,16 @@ public class Render {
     private Color calcColor(Point3D point) {
         return _scene.getAmbientLight().getIntensity();
     }
-    private Point3D getClosestPoint(List<Point3D> intersectionPoints) {return  null;}
+
+    private Point3D getClosestPoint(List<Point3D> intersectionPoints) {
+        return null;
+    }
+
+    /**
+     * Create the image file in jpeg format
+     */
+    public void writeToImage() {
+        _imageWriter.writeToImage();
+    }
 
 }

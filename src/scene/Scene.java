@@ -80,7 +80,7 @@ public class Scene {
      * function to add geometries to scene
      * @param geometries one or more geometries, such sphere or triangle
      */
-    void addGeometries(Intersectable... geometries) {
+    public void addGeometries(Intersectable... geometries) {
         _geometries.add(geometries);
     }
 }
