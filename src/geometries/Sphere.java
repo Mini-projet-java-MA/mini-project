@@ -1,5 +1,6 @@
 package geometries;
 
+import elements.Camera;
 import primitives.Point3D;
 import primitives.Ray;
 import primitives.Vector;
@@ -96,5 +97,6 @@ public class Sphere extends RadialGeometry {
             return List.of(ray.getTargetPoint(t2));
         return null;
     }
+
 
 }
