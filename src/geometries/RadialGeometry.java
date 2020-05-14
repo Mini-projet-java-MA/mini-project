@@ -13,15 +13,14 @@ public abstract class RadialGeometry implements Geometry {
     protected double _radius;
     /**
      * this is simple constructor build the shapes witch radius
-     *
      * @param radius
      */
     public RadialGeometry(double radius) {
         _radius = radius;
     }
 
-    /**a simple func that return radius
-     *
+    /**
+     * a simple func that return radius
      * @return reduis
      */
     public double getRadius() {
