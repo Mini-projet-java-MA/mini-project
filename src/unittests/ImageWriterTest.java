@@ -19,7 +19,7 @@ public class ImageWriterTest {
         ImageWriter img = new ImageWriter("img1", 10, 16, 800, 500);
         for (int col = 0; col< 500; col++) {
             for (int row = 0; row < 800; row++) {
-                if (col % 50 == 0 || row % 50 == 0)
+                if (col % 50== 0 || row % 50 == 0)
                     img.writePixel(col, row, white.getColor());
                 else
                     img.writePixel(row, row, Green.getColor());

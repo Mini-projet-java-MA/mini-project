@@ -106,11 +106,15 @@ public class IntersectionTest {
      */
     @Test
     public void constructRayThroughPixelWithPlane() {
-        // i think that the pbm is because somme test in class plane test that don't work
-        Plane plane = new Plane(new Point3D(0, 0, -2), new Vector(0, 0, 1));
-        //TC01:
-        assertEquals(9 , intersectionsPlane(plane, cam1));
-
+        //TC01: Plane is parallel to view Plane (9 points)
+        Plane plane = new Plane(new Point3D(0, 0, 3), new Vector(0, 0, 1));
+        assertEquals("Plane is parallel",9,intersectionsPlane(plane, cam1));
+        //TC02: Plane is not parallel to view Plane(9 points)
+        plane = new Plane(new Point3D(0.5,-1.5,2),new Point3D(0,0,2.5),new Point3D(0,1.5,3));
+        assertEquals(" Plane is not parallel", 9, intersectionsPlane(plane ,cam1 ));
+        //TC03: Plane is not parallel to view Plane (6 points)
+        plane = new Plane(new Point3D(0.5, -2, 2), new Point3D(0, 0, 4), new Point3D(0, 2, 6));
+        assertEquals("Plane is not parallel to view", 6 , intersectionsPlane(plane, cam1));
     }
 
     /**
