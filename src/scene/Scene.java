@@ -5,6 +5,7 @@ import elements.Camera;
 import geometries.Geometries;
 import geometries.Intersectable;
 import primitives.Color;
+
 /**
  * scene class
  * contain 6 fields:
