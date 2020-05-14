@@ -7,6 +7,12 @@ import primitives.Color;
  */
 public class AmbientLight {
     Color _intensity;
-    public  AmbientLight(Color Ia, double Ka)
-    {}
+
+    public  AmbientLight(Color ia, double ka) {
+        this._intensity = ia.scale(ka);
+    }
+
+    public Color getIntensity() {
+        return _intensity;
+    }
 }
