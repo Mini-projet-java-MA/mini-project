@@ -6,12 +6,10 @@ import primitives.Color;
  * the class should represent
  */
 public class AmbientLight {
-    Color _intensity;
-
+    private Color _intensity;
     public  AmbientLight(Color ia, double ka) {
         this._intensity = ia.scale(ka);
     }
-
     public Color getIntensity() {
         return _intensity;
     }
