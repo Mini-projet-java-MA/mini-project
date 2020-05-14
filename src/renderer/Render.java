@@ -3,7 +3,6 @@ package renderer;
 import primitives.Color;
 import primitives.Point3D;
 import scene.Scene;
-
 /**
  *th object of this class his to creat matrix of picture
  */
@@ -35,5 +34,6 @@ public class Render {
     private Color calcColor(Point3D point) {
         return _scene.getAmbientLight().getIntensity();
     }
+    private Point3D getClosestPoint(List<Point3D> intersectionPoints) {return  null;}
 
 }
