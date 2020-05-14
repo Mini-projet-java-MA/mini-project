@@ -50,10 +50,12 @@ public class Render {
      * @param interval number that the pixels are multiple of this number, are part of the grid.
      */
     public void printGrid(int interval, java.awt.Color color) {
-        for (int i = 0; i < _imageWriter.getNx(); i++) {
-            for (int j = 0; j < _imageWriter.getNy(); j++) {
+        int nY =  _imageWriter.getNy();
+        int nX =  _imageWriter.getNx();
+        for (int i = 0; i < nY; i++) {
+            for (int j = 0; j < nX; j++) {
                 if (i % interval == 0 || j % interval == 0)
-                    _imageWriter.writePixel(i, j, color);
+                    _imageWriter.writePixel(j, i, color);
             }
         }
     }

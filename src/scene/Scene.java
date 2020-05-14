@@ -19,9 +19,9 @@ import primitives.Color;
  */
 public class Scene {
     private String _name;
-    private Color _background;
-    private AmbientLight _ambientLight;
-    private Geometries _geometries;
+    private Color _background = Color.BLACK;
+    private AmbientLight _ambientLight = new AmbientLight(Color.BLACK, 0d);
+    private Geometries _geometries = new Geometries();
     private Camera _camera;
     private double _distance;
 
@@ -33,11 +33,6 @@ public class Scene {
     public Scene(String name) {
         // im not sure it what we need to do
         this._name = name;
-        _background = new Color(0, 0, 0);
-        _ambientLight = null;
-        _geometries = null;
-        _camera = null;
-        _distance = 0.0;
     }
 
     public String getName() {
