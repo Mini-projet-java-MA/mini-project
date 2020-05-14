@@ -44,6 +44,7 @@ public class Tube extends RadialGeometry {
      * @param point- he recive a point on cycle tube
      * @return a normal of the tube normalize
      */
+    @Override
     public Vector getNormal(Point3D point) {
         // distance from axis start to the projection of the point onto axis
         double scaleNumber = _ray.getDirection().dotProduct(point.subtract(_ray.getP0()));

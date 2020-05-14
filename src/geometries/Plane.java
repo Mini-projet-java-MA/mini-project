@@ -12,7 +12,7 @@ import static primitives.Util.alignZero;
 /**
  * class plane represents a plane in 3D cartesian coordinate system
  */
-public class Plane {
+public class Plane implements Geometry {
     private Point3D _p;
     private Vector _normal;
 
@@ -63,6 +63,7 @@ public class Plane {
      * @param p the point where we want to compute the normal vector
      * @return the normal vector computed in the specific point
      */
+    @Override
     public Vector getNormal(Point3D p) {
         return _normal;
     }

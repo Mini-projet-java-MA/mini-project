@@ -9,5 +9,10 @@ import java.util.List;
  * we do interface for geometry
  */
 public interface Geometry extends Intersectable {
-
+    /**
+     *
+     * @param point
+     * @return
+     */
+    Vector getNormal(Point3D point);
 }
