@@ -9,7 +9,7 @@ import primitives.Vector;
 import static org.junit.Assert.assertEquals;
 
 /**
- * this is a class test for the java class camera
+ * this is a class test for the java class camera in 3D Cartesian coordinate
  */
 public class CameraTest {
 

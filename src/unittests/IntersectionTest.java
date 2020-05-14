@@ -3,6 +3,7 @@ package unittests;
 import elements.Camera;
 import geometries.Plane;
 import geometries.Sphere;
+import geometries.Triangle;
 import org.junit.Test;
 import primitives.Point3D;
 import primitives.Vector;
@@ -13,7 +14,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
 /**
- * we test the Intersection between package geometry and ray to the camera
+ * we test the Intersection between package geometry and ray to the camera in 3D Cartesian coordinate
  * @author aaron
  */
 public class IntersectionTest {
@@ -41,7 +42,21 @@ public class IntersectionTest {
         }
         return count;
     }
-
+    private int intersectionsTriangle(Triangle sph, Camera cam) {
+        List<Point3D> results = null;
+        int count = 0;
+        int Nx = 3;
+        int Ny = 3;
+        for (int i = 0; i < Ny; ++i) {
+            for (int j = 0; j < Nx; ++j) {
+                results = sph.findIntersections(cam.constructRayThroughPixel(Nx, Ny, j, i, 1, 3, 3));
+                ;
+                if (results != null)
+                    count += results.size();
+            }
+        }
+        return count;
+    }
     /**
      * the func should find the all intersection between plane and came on screen 3*3
      * @param plane
@@ -85,8 +100,31 @@ public class IntersectionTest {
         sph = new Sphere(0.5, new Point3D(0, 0, -1));
         assertNull("not good", intersectionsSphere(sph, cam2));
     }
+
+    /**
+     * we test the all intersection betweem camera and plane on screen 3*3
+     */
     @Test
     public void constructRayThroughPixelWithPlane() {
+        Plane plane = new Plane(new Point3D(0, 0, -2), new Vector(0, 0, 1));
+        cam1 = new Camera(new Point3D(0, 0, 0), new Vector(0, -1, 0), new Vector(0, 0, -1));
+
+        //TC01:
+        assertEquals(9 , intersectionsSphere(plane, cam1));
+
+    }
+
+    /**
+     * we test the all intersection betweem camera and Triangle on screen 3*3
+     */
+    @Test
+    public void constructRayThroughPixelWithTriangle() {
+        Triangle triangle = new Triangle(new Point3D(0, -1, 2), new Point3D(1, 1, 2), new Point3D(-1, 1, 2));
+        //TC01: when triangle are smalle than the screen
+        assertEquals("Not bad ", 1, intersectionsTriangle(triangle, cam1));
+        //TC02: when the triangle are biger than the triangle
+        triangle = new Triangle(new Point3D(0, -20, 2), new Point3D(1, 1, 2), new Point3D(-1, 1, 2));
+        assertEquals("Not bad ", 2, intersectionsTriangle(triangle, cam1));
 
     }
 }
