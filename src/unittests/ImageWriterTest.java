@@ -23,7 +23,7 @@ public class ImageWriterTest {
                 if (col % 10== 0 || row % 16  == 0)
                     img.writePixel(col, row, white.getColor());
                 else
-                    img.writePixel(row, row, Green.getColor());
+                        img.writePixel(row, row, Green.getColor());
 
             }
 
