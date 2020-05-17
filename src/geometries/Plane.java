@@ -63,6 +63,7 @@ public class Plane implements Geometry {
      * @param p the point where we want to compute the normal vector
      * @return the normal vector computed in the specific point
      */
+    @Override
     public Vector getNormal(Point3D p) {
         return _normal;
     }

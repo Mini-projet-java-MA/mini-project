@@ -15,15 +15,15 @@ public class ImageWriterTest {
      */
     @Test
     public void writeToImage() {
-        Color Green = new Color(0, 0, 0);
-        Color white = new Color(255, 255, 255);
+        Color green = new Color(0, 255, 0);
+        Color red = new Color(255, 0, 0);
         ImageWriter img = new ImageWriter("img1", 1600, 1000, 800, 500);
-        for (int col = 0; col< 500; col++) {
-            for (int row = 0; row < 800; row++) {
-                if (col % 10== 0 || row % 16  == 0)
-                    img.writePixel(col, row, white.getColor());
+        for (int col = 0; col< 800; col++) {
+            for (int row = 0; row < 500; row++) {
+                if (col % 50== 0 || row % 50  == 0)
+                    img.writePixel(col, row, red.getColor());
                 else
-                        img.writePixel(row, row, Green.getColor());
+                    img.writePixel(col, row, green.getColor());
 
             }
 
