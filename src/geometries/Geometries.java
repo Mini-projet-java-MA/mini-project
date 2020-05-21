@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * class with list of shape.
  */
-public class Geometries {
+public class Geometries implements Intersectable {
     List<Intersectable> intersectableList = new ArrayList<>();
 
     /**
@@ -36,4 +36,8 @@ public class Geometries {
             intersectableList.add(g);
     }
 
+    @Override
+    public List<Point3D> findIntersections(Ray ray) {
+        return null;
+    }
 }

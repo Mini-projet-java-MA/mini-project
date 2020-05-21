@@ -71,6 +71,14 @@ public class Scene {
         this._distance = _distance;
     }
 
+    public Geometries getGeometries() {
+        return _geometries;
+    }
+
+    public void setGeometries(Geometries _geometries) {
+        this._geometries = _geometries;
+    }
+
     /**
      * function to add geometries to scene
      * @param geometries one or more geometries, such sphere or triangle
