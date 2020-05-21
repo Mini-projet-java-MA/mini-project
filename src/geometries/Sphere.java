@@ -1,6 +1,6 @@
 package geometries;
 
-import elements.Camera;
+import primitives.Color;
 import primitives.Point3D;
 import primitives.Ray;
 import primitives.Vector;
@@ -19,10 +19,11 @@ public class Sphere extends RadialGeometry {
     /**
      * this is a basic constructor it receives two param radius and center
      *
-     * @param radius- the radius of the sphere
-     * @param center- point 3d that his the location of the sphere
+     * @param color
+     * @param radius - the radius of the sphere
+     * @param center - point 3d that his the location of the sphere
      */
-    public Sphere(double radius, Point3D center) {
+    public Sphere(Color color, double radius, Point3D center) {
         super(radius);
         _center = center;
     }

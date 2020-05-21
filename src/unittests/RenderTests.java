@@ -28,13 +28,13 @@ public class RenderTests {
         scene.setBackground(new Color(75, 127, 90));
         scene.setAmbientLight(new AmbientLight(new Color(255, 191, 191), 1));
 
-        scene.addGeometries(new Sphere(50, new Point3D(0, 0, 100)));
+        scene.addGeometries(new Sphere(new Color(java.awt.Color.PINK),50, new Point3D(0, 0, 100)));
 
         scene.addGeometries(
-                new Triangle(new Point3D(100, 0, 100), new Point3D(0, 100, 100), new Point3D(100, 100, 100)),
-                new Triangle(new Point3D(100, 0, 100), new Point3D(0, -100, 100), new Point3D(100, -100, 100)),
-                new Triangle(new Point3D(-100, 0, 100), new Point3D(0, 100, 100), new Point3D(-100, 100, 100)),
-                new Triangle(new Point3D(-100, 0, 100), new Point3D(0, -100, 100), new Point3D(-100, -100, 100)));
+                new Triangle((new Color(java.awt.Color.PINK)),new Point3D(100, 0, 100), new Point3D(0, 100, 100), new Point3D(100, 100, 100)),
+                new Triangle(new Color(java.awt.Color.PINK), new Point3D(100, 0, 100), new Point3D(0, -100, 100), new Point3D(100, -100, 100)),
+                new Triangle(new Color(java.awt.Color.PINK), new Point3D(-100, 0, 100), new Point3D(0, 100, 100), new Point3D(-100, 100, 100)),
+                new Triangle(new Color(java.awt.Color.PINK), new Point3D(-100, 0, 100), new Point3D(0, -100, 100), new Point3D(-100, -100, 100)));
 
         ImageWriter imageWriter = new ImageWriter("base render test", 500, 500, 500, 500);
         Render render = new Render(imageWriter, scene);

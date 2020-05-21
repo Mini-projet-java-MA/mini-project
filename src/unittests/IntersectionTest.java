@@ -9,6 +9,7 @@ import org.junit.Test;
 import primitives.Point3D;
 import primitives.Vector;
 
+import java.awt.*;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -52,19 +53,19 @@ public class IntersectionTest {
     @Test
     public void constructRayThroughPixelWithSphere() {
         // TC01 test of intersection with sphere when all the sphere are out from the screen 3*3
-        intersections(new Sphere(1, new Point3D(0, 0, 3)), 2, cam1);
+        intersections(new Sphere(primitives.Color.BLACK, 1, new Point3D(0, 0, 3)), 2, cam1);
 
         // TC02 test of intersection with sphere when the all screen are in sphere
-        intersections(new Sphere(2.5, new Point3D(0, 0, 2.5)), 18, cam2);
+        intersections(new Sphere(primitives.Color.BLACK, 2.5, new Point3D(0, 0, 2.5)), 18, cam2);
 
         //TC03:part of screen are in the sphere
-        intersections(new Sphere(2, new Point3D(0, 0, 2)), 10, cam2);
+        intersections(new Sphere(primitives.Color.BLACK, 2, new Point3D(0, 0, 2)), 10, cam2);
 
         //TC04:the sphere around the screen
-        intersections(new Sphere(4, new Point3D(0, 0, 2)), 9, cam2);
+        intersections(new Sphere(primitives.Color.BLACK, 4, new Point3D(0, 0, 2)), 9, cam2);
 
         //TC05: the sphere is behind the screen
-        intersections(new Sphere(0.5, new Point3D(0, 0, -1)), 0, cam2);
+        intersections(new Sphere(primitives.Color.BLACK, 0.5, new Point3D(0, 0, -1)), 0, cam2);
     }
 
     /**
@@ -90,11 +91,11 @@ public class IntersectionTest {
     @Test
     public void constructRayThroughPixelWithTriangle() {
         //TC01: when triangle are smaller than the screen
-        intersections(new Triangle(new Point3D(0, -1, 2), new Point3D(1, 1, 2), new Point3D(-1, 1, 2)),
+        intersections(new Triangle(primitives.Color.BLACK, new Point3D(0, -1, 2), new Point3D(1, 1, 2), new Point3D(-1, 1, 2)),
                 1, cam1);
 
         //TC02: when the triangle is bigger than the screen
-        intersections(new Triangle(new Point3D(0, -20, 2), new Point3D(1, 1, 2), new Point3D(-1, 1, 2)),
+        intersections(new Triangle(primitives.Color.BLACK, new Point3D(0, -20, 2), new Point3D(1, 1, 2), new Point3D(-1, 1, 2)),
                 2, cam1);
 
     }
