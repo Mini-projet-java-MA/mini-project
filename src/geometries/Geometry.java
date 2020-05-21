@@ -17,5 +17,5 @@ public abstract class Geometry implements Intersectable {
      */
     protected Color _emission;
 
-    Vector getNormal(Point3D point3D);
+    abstract public Vector getNormal(Point3D p);
 }
