@@ -1,16 +1,12 @@
 package geometries;
 
-import primitives.Ray;
-import primitives.Vector;
-
-import java.util.List;
 import java.awt.Color;
 
 
 /**
  *this is abstract class represent a shapes geometry that contain radius
   */
-public abstract class RadialGeometry implements Geometry {
+public abstract class RadialGeometry extends Geometry {
     protected double _radius;
 
     /**
@@ -18,6 +14,7 @@ public abstract class RadialGeometry implements Geometry {
      * @param radius
      */
     public RadialGeometry(double radius) {
+
         _radius = radius;
     }
 
