@@ -13,7 +13,6 @@ public class Geometries implements Intersectable {
 
     /**
      * constructor received many geometries and adding them to the list
-     *
      * @param geometries geometries to add the list
      */
     /* *********constructor*******/
@@ -28,7 +27,6 @@ public class Geometries implements Intersectable {
 
     /**
      * function who adding geometry shape to list of the class
-     *
      * @param geometry geometry shape
      */
     public void add(Intersectable... geometry) {

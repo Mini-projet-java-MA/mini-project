@@ -7,6 +7,9 @@ import primitives.Vector;
 
 import static org.junit.Assert.*;
 
+/**
+ *we test polygon
+ */
 public class PolygonTest {
 
 

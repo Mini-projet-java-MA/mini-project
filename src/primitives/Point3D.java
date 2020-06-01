@@ -41,7 +41,6 @@ public class Point3D {
 
     /**
      * this is the copy constructor that allows us to build a point from another one with the same parameters
-     *
      * @param other this is the point we copy to the new point
      */
     public Point3D(Point3D other) {
