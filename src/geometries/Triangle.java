@@ -23,13 +23,9 @@ public class Triangle extends Polygon {
      * @param p2 2nd point
      * @param p3 3rd point
      */
-    public Triangle(Point3D p1, Point3D p2, Point3D p3) {
+    public Triangle(Color color, Point3D p1, Point3D p2, Point3D p3) {
         super(p1, p2, p3);
     }
-    public Triangle(Color color, Point3D p1, Point3D p2, Point3D p3) {
-        super(color,p1, p2, p3);
-    }
-
 
     @Override
     public String toString() {
