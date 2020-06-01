@@ -4,7 +4,7 @@ import primitives.Ray;
 import primitives.Vector;
 
 import java.util.List;
-import primitives.Color;
+import java.awt.Color;
 
 
 /**
@@ -12,32 +12,14 @@ import primitives.Color;
   */
 public abstract class RadialGeometry implements Geometry {
     protected double _radius;
-    protected Color _emission;
 
     /**
      * this is simple constructor build the shapes witch radius
      * @param radius
-     * @param  color
      */
-    public RadialGeometry(double radius ,Color emission) {
-
+    public RadialGeometry(double radius) {
         _radius = radius;
-        this._emission = new Color(emission);
-
     }
-
-    /**
-     * this is simple constructor build the shapes witch radius
-     * @param radius
-     * @param  color-black
-     */
-    public RadialGeometry(double radius ) {
-
-        _radius = radius;
-        this._emission = new Color(java.awt.Color.black);
-
-    }
-
 
     /**
      * a simple func that return radius

@@ -7,16 +7,14 @@ import primitives.Vector;
 import java.util.List;
 
 import static primitives.Util.isZero;
-import primitives.Color;
 
 /**
  * Polygon class represents two-dimensional polygon in 3D Cartesian coordinate
  * system
+ *
  * @author Dan
  */
 public class Polygon implements Geometry {
-    private Color _emission;
-
     /**
      * List of polygon's vertices
      */
@@ -47,11 +45,6 @@ public class Polygon implements Geometry {
      *                                  <li>The polygon is concave (not convex></li>
      *                                  </ul>
      */
-    public Polygon(Color emissionLight, Point3D... vertices) {
-        this( vertices);
-        this._emission = new Color(emissionLight);
-
-    }
     public Polygon(Point3D... vertices) {
         if (vertices.length < 3)
             throw new IllegalArgumentException("A polygon can't have less than 3 vertices");
