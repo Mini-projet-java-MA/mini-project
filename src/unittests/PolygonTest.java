@@ -7,9 +7,14 @@ import primitives.Vector;
 
 import static org.junit.Assert.*;
 
+/**
+ * we check the class polygon in this test class
+ */
 public class PolygonTest {
 
-
+    /**
+     * this is tests for the constructor
+     */
     @Test
     public void testConstructor() {
         // ============ Equivalence Partitions Tests ==============
@@ -66,6 +71,9 @@ public class PolygonTest {
 
     }
 
+    /**
+     * here we test the getNormal of the polygon
+     */
     @Test
     public void getNormal() {
         // ============ Equivalence Partitions Tests ==============

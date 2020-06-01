@@ -17,7 +17,9 @@ import static org.junit.Assert.*;
  * we test the class plan if the func and param works good
  */
 public class PlaneTest {
-
+    /**
+     * here we test the constructor
+     */
     @Test
     public void testConstructor() {
         // ============ Equivalence Partitions Tests ==============
