@@ -7,7 +7,7 @@ import geometries.Intersectable;
 import primitives.Color;
 
 /**
- * scene class
+ * scene class create a scene to work on
  * contain 6 fields:
  * _name name of scene
  * _background color to paint the background of scene
@@ -31,7 +31,6 @@ public class Scene {
      * @param name name of the scene
      */
     public Scene(String name) {
-        // im not sure it what we need to do
         this._name = name;
     }
 
