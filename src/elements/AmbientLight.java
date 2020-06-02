@@ -3,7 +3,7 @@ package elements;
 import primitives.Color;
 
 /**
- * the class should represent
+ * the class should represent- 
  */
 public class AmbientLight {
     private Color _intensity;
