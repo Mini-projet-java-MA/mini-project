@@ -7,8 +7,7 @@ import primitives.Vector;
 import java.util.List;
 
 /**
- * tube class represents a tube in 3D Cartesian coordinate and he define it with a radius and ray
- *
+ * tube class represents a tube in 3D cartesian coordinate and he define it with a radius and ray
  * @author aaron
  */
 public class Tube extends RadialGeometry {
@@ -17,7 +16,6 @@ public class Tube extends RadialGeometry {
     /**
      * this is the basic constructor for a ray:
      * he receive ray and radius
-     *
      * @param radius
      * @param ray
      * @throws IllegalArgumentException when the radius is equal or smaller to zero so we don't have a tube
@@ -30,8 +28,7 @@ public class Tube extends RadialGeometry {
     }
 
     /**
-     * simple function get
-     *
+     * simple function get the ray of the tube
      * @return the ray
      */
     public Ray getRay() {
@@ -40,8 +37,7 @@ public class Tube extends RadialGeometry {
 
     /**
      * the fucnction should return the normal of tube in size one
-     *
-     * @param point- he recive a point on cycle tube
+     * @param point- he receive a point on cycle tube
      * @return a normal of the tube normalize
      */
     @Override
@@ -58,6 +54,7 @@ public class Tube extends RadialGeometry {
 
 
     /**
+     * the function find all point in 3D cartesian coordinate between ray and tube
      * @param ray - he his the ray that insert the object
      * @return a list of all intersection
      */

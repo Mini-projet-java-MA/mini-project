@@ -18,7 +18,6 @@ public class Sphere extends RadialGeometry {
 
     /**
      * this is a basic constructor it receives two param radius and center
-     *
      * @param radius - the radius of the sphere
      * @param center - point 3d that his the location of the sphere
      */
@@ -28,8 +27,7 @@ public class Sphere extends RadialGeometry {
     }
 
     /**
-     * a simple function that return the center a point 3d
-     *
+     * a simple function that return the center a point 3d of the position of the sphere
      * @return point 3d
      */
     public Point3D getCenter() {
@@ -38,7 +36,6 @@ public class Sphere extends RadialGeometry {
 
     /**
      * the function find the normal vector of the sphere at a specific point 3d
-     *
      * @param p the specified point
      * @return new vector normal of the sphere in size one
      */
@@ -51,7 +48,8 @@ public class Sphere extends RadialGeometry {
     }
 
     /**
-     * @param ray - he his the ray that insert the object
+     * the function find all poin in 3D cartesian coordinate between ray and sphere
+     * @param ray he his the ray that insert the object
      * @return a list of all intersection
      */
     @Override

@@ -9,7 +9,6 @@ import primitives.Vector;
 
 /**
  * Unit tests for primitives.Vector class
- *
  * @author aaron
  */
 public class VectorTest {
