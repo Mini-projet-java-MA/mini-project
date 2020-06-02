@@ -3,13 +3,13 @@ package geometries;
 import primitives.Point3D;
 import primitives.Ray;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 /**
  * class with list of shape.
  */
 public class Geometries implements Intersectable {
-    List<Intersectable> intersectableList = new ArrayList<>();
+    List<Intersectable> intersectableList = new LinkedList<>();
 
     /**
      * constructor received many geometries and adding them to the list
@@ -38,6 +38,15 @@ public class Geometries implements Intersectable {
 
     @Override
     public List<Point3D> findIntersections(Ray ray) {
-        return null;
+        List<Point3D> intersections = null;
+        for (Intersectable geo : intersectableList) {
+            List<Point3D> geoIntersections = geo.findIntersections(ray);
+            if (geoIntersections != null) {
+                if (intersections == null)
+                    intersections = new LinkedList<>();
+                intersections.addAll(geoIntersections);
+            }
+        }
+        return intersections;
     }
 }

@@ -3,7 +3,7 @@ package elements;
 import primitives.Color;
 
 /**
- * the class should represent
+ * The class represents ambient lighting in the scene - the fill color which is added to all objects of 3D model
  */
 public class AmbientLight {
     private Color _intensity;
@@ -16,6 +16,7 @@ public class AmbientLight {
     public  AmbientLight(Color ia, double ka) {
         this._intensity = ia.scale(ka);
     }
+
     public Color getIntensity() {
         return _intensity;
     }

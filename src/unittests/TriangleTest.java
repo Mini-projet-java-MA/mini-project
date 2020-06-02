@@ -26,7 +26,7 @@ public class TriangleTest {
         // ============ Equivalence Partitions Tests ==============
         //TC01:with two same points and so it's not a triangle it's a vector
         try {
-            new Triangle(primitives.Color.BLACK, new Point3D(0, 0, 0), new Point3D(0, 0, 0), new Point3D(1, 2, 3));
+            new Triangle(new Point3D(0, 0, 0), new Point3D(0, 0, 0), new Point3D(1, 2, 3));
             fail("Constructed a vector not a triangle ");
         } catch (IllegalArgumentException e) {
         }
@@ -40,7 +40,7 @@ public class TriangleTest {
         // ============ Equivalence Partitions Tests ==============
         //TC01 inside triangle
         Ray ray = new Ray(new Point3D(-4, 4, 3), new Vector(4, -2, -1));
-        Triangle triangle = new Triangle(primitives.Color.BLACK, new Point3D(0, 0, 0), new Point3D(0, 6, 0), new Point3D(0, 0, 8));
+        Triangle triangle = new Triangle(new Point3D(0, 0, 0), new Point3D(0, 6, 0), new Point3D(0, 0, 8));
         List<Point3D> intersectionsList = triangle.findIntersections(ray);
         assertNotNull("must be not empty", intersectionsList);
         assertEquals("must be equal to 1", 1, intersectionsList.size());
