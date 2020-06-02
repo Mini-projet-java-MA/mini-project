@@ -11,7 +11,7 @@ import renderer.ImageWriter;
 public class ImageWriterTest {
 
     /**
-     * we test to creat image 10*16 squared 1000*1600 unit light witch resolutions 500*800
+     * we test the creation image 10*16 squared 1000*1600 unit light witch resolutions 500*800
      */
     @Test
     public void writeToImage() {

@@ -10,12 +10,12 @@ import java.util.List;
  * we do interface for geometry
  */
 public abstract class Geometry implements Intersectable {
-    /**
-     * getNormal function to get the normal vector from a point on a geometry
-     * @param point3D a point on geometry
-     * @return the normal vector
-     */
     protected Color _emission;
 
+    /**
+     * getNormal function to get the normal vector (unit vector - length=1) from a point on a geometry surface
+     * @param p a point on geometry surface
+     * @return the normal vector
+     */
     abstract public Vector getNormal(Point3D p);
 }
