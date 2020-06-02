@@ -10,7 +10,7 @@ import java.awt.Color;
 /**
  *this is abstract class represent a shapes geometry that contain radius
   */
-public abstract class RadialGeometry implements     Geometry {
+public abstract class RadialGeometry implements Geometry {
     protected double _radius;
 
     /**
