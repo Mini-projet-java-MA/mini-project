@@ -10,7 +10,7 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 /**
- * in this class we are testing th intersection between geometries and ray in 3D cartesian coordinate
+ * in this class we are testing the intersection between geometries and ray in 3D cartesian coordinate system
  */
 public class GeometriesTest {
 

@@ -8,7 +8,7 @@ import scene.Scene;
 import java.util.*;
 
 /**
- * th object of this class his to create matrix of picture
+ * th object of this class is to create matrix of picture
  */
 public class Render {
     private Scene _scene;
@@ -16,7 +16,6 @@ public class Render {
 
     /**
      * Build Render object with a scene and image writer
-     *
      * @param imgWr Image Writer object
      * @param sc    scene object
      */

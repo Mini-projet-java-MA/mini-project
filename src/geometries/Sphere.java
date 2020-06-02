@@ -48,9 +48,9 @@ public class Sphere extends RadialGeometry {
     }
 
     /**
-     * the function find all poin in 3D cartesian coordinate between ray and sphere
-     * @param ray he his the ray that insert the object
-     * @return a list of all intersection
+     * the function find all intersections points in 3D cartesian coordinate between ray and sphere
+     * @param ray this is the ray that intersect the object
+     * @return a list of all the intersections points
      */
     @Override
     public List<Point3D> findIntersections(Ray ray) {

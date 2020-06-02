@@ -7,7 +7,7 @@ import primitives.Vector;
 import java.util.List;
 
 /**
- * we do interface for geometry
+ * interface for geometry
  */
 public abstract class Geometry implements Intersectable {
     protected Color _emission;

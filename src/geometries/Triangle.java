@@ -35,7 +35,8 @@ public class Triangle extends Polygon {
         return result;
     }
     /**
-     * @param ray - he his the ray that insert the object
+     * the function find all intersections points in 3D cartesian coordinate between ray and triangle
+     * @param ray this is the ray that intersect the object
      * @return list of Intersections
      */
     public List<Point3D> findIntersections(Ray ray) {

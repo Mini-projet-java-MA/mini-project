@@ -9,7 +9,7 @@ public class AmbientLight {
     private Color _intensity;
 
     /**
-     *the func refill light
+     *this function is the constructor it allows us to set an ambient light in our scene
      * @param ia-refill light
      * @param ka-promotes light refill
      */
@@ -18,7 +18,7 @@ public class AmbientLight {
     }
 
     /**
-     *the pususense vof the color
+     *the getter of the intensity of the light
      * @return
      */
     public Color getIntensity() {

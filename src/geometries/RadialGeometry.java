@@ -20,15 +20,15 @@ public abstract class RadialGeometry extends Geometry {
 
     /**
      * a simple func that return radius
-     * @return reduis
+     * @return radius
      */
     public double getRadius() {
         return _radius;
     }
 
     /**
-     * this func return the raduis in string
-     * @return raduis
+     * this func return the radius in string
+     * @return radius
      */
     public String toString() {
         return "RadialGeometry {radius=" + this._radius;

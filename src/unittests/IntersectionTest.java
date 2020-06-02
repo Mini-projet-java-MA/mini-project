@@ -24,7 +24,6 @@ public class IntersectionTest {
 
     /**
      * the func finds amount of intersections between a geometry and a camera
-     *
      * @param geometry the geometry to intersect in the test
      * @param expected expected amount of intersections
      * @param cam      the camera to generate the rays from

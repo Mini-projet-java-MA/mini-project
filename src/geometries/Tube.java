@@ -14,7 +14,7 @@ public class Tube extends RadialGeometry {
     private Ray _ray;
 
     /**
-     * this is the basic constructor for a ray:
+     * this is the basic constructor for a tube:
      * he receive ray and radius
      * @param radius
      * @param ray
@@ -36,7 +36,7 @@ public class Tube extends RadialGeometry {
     }
 
     /**
-     * the fucnction should return the normal of tube in size one
+     * the function should return the normal to the tube in size one
      * @param point- he receive a point on cycle tube
      * @return a normal of the tube normalize
      */
@@ -54,9 +54,9 @@ public class Tube extends RadialGeometry {
 
 
     /**
-     * the function find all point in 3D cartesian coordinate between ray and tube
-     * @param ray - he his the ray that insert the object
-     * @return a list of all intersection
+     * the function find all intersections point in 3D cartesian coordinate between ray and tube
+     * @param ray this the ray that intersect the object
+     * @return a list of all intersections points
      */
     @Override
     public List<Point3D> findIntersections(Ray ray) {
