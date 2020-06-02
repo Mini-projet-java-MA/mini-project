@@ -18,7 +18,7 @@ public class AmbientLight {
     }
 
     /**
-     *
+     *the pususense vof the color
      * @return
      */
     public Color getIntensity() {

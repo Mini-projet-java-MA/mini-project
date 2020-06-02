@@ -193,8 +193,5 @@ public class SphereTest {
         intersectionsList = sphere.findIntersections(ray);
         assertNull("must be empty", intersectionsList);
 
-
-
-
     }
 }

@@ -36,13 +36,13 @@ public class Render {
         int width = (int) _imageWriter.getWidth();
         int height = (int) _imageWriter.getHeight();
 
-        //Nx and Ny are the width and height of the image.
+        //Nx and nY are the width and height of the image.
         int Nx = _imageWriter.getNx(); //columns
-        int Ny = _imageWriter.getNy(); //rows
+        int nY = _imageWriter.getNy(); //rows
         //pixels grid
-        for (int row = 0; row < Ny; ++row) {
+        for (int row = 0; row < nY; ++row) {
             for (int column = 0; column < Nx; ++column) {
-                Ray ray = camera.constructRayThroughPixel(Nx, Ny, column, row, distance, width, height);
+                Ray ray = camera.constructRayThroughPixel(Nx, nY, column, row, distance, width, height);
                 List<Point3D> intersectionPoints = geometries.findIntersections(ray);
                 if (intersectionPoints == null) {
                     _imageWriter.writePixel(column, row, background);
