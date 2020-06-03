@@ -19,7 +19,7 @@ public class AmbientLight {
 
     /**
      *the getter of the intensity of the light
-     * @return
+     * @return color Intensity
      */
     public Color getIntensity() {
         return _intensity;
