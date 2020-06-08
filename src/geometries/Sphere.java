@@ -5,6 +5,8 @@ import primitives.Point3D;
 import primitives.Ray;
 import primitives.Vector;
 
+import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
 import static primitives.Util.alignZero;
@@ -53,7 +55,7 @@ public class Sphere extends RadialGeometry {
      * @return a list of all the intersections points
      */
     @Override
-    public List<Point3D> findIntersections(Ray ray) {
+    public List<GeoPoint> findIntersections(Ray ray) {
         Point3D p0 = ray.getP0();
         Vector v = ray.getDirection();
         Vector u;
@@ -61,7 +63,7 @@ public class Sphere extends RadialGeometry {
         try {
             u = _center.subtract(p0);
         } catch (IllegalArgumentException e) {
-            return List.of(ray.getTargetPoint(_radius));
+            return new LinkedList<>(Collections.singletonList(new GeoPoint(this, p0.add(v.scale(_radius)))));
         }
         //tm=v*u
         double tm = alignZero(v.dotProduct(u));
@@ -86,9 +88,9 @@ public class Sphere extends RadialGeometry {
         if (t1 > 0 && t2 > 0)
             return List.of(ray.getTargetPoint(t1), ray.getTargetPoint(t2)); //P1 , P2
         if (t1 > 0)
-            return List.of(ray.getTargetPoint(t1));
+            new LinkedList<>(Collections.singletonList(new GeoPoint(this, p0.add(v.scale(t1)))));
         if (t2 > 0)
-            return List.of(ray.getTargetPoint(t2));
+            new LinkedList<>(Collections.singletonList(new GeoPoint(this, p0.add(v.scale(t2)))));
         return null;
     }
 

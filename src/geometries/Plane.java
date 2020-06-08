@@ -77,7 +77,7 @@ public class Plane extends Geometry {
      * @param ray- he his the ray that insert the object
      * @return list of point in 3d
      */
-    public List<Point3D> findIntersections(Ray ray) {
+    public List<GeoPoint> findIntersections(Ray ray) {
         Vector pq0;
         try {
             pq0 = _p.subtract(ray.getP0());
