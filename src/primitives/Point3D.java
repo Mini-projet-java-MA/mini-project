@@ -47,14 +47,26 @@ public class Point3D {
         this._z = new Coordinate(other._z);
     }
 
+    /**
+     *
+     * @return cordinate x
+     */
     public Coordinate getX() {
         return _x;
     }
 
+    /**
+     *
+     * @return cordinate y
+     */
     public Coordinate getY() {
         return _y;
     }
 
+    /**
+     *
+     * @return cordinate z
+     */
     public Coordinate getZ() {
         return _z;
     }

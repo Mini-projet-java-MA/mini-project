@@ -31,11 +31,11 @@ public class IntersectionTest {
     private void intersections(Intersectable geometry, int expected, Camera cam) {
         List<Point3D> results = null;
         int count = 0;
-        int Nx = 3;
-        int Ny = 3;
-        for (int i = 0; i < Ny; ++i) {
-            for (int j = 0; j < Nx; ++j) {
-                results = geometry.findIntersections(cam.constructRayThroughPixel(Nx, Ny, j, i, 1, 3, 3));
+        int nX = 3;
+        int nY = 3;
+        for (int i = 0; i < nY; ++i) {
+            for (int j = 0; j < nX; ++j) {
+                results = geometry.findIntersections(cam.constructRayThroughPixel(nX, nY, j, i, 1, 3, 3));
                 ;
                 if (results != null)
                     count += results.size();

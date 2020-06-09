@@ -4,14 +4,11 @@ import primitives.Point3D;
 import primitives.Ray;
 import primitives.Vector;
 
-
 /**
  * camera class represents camera in 3D Cartesian coordinate
  *
  * @author aaron
  */
-
-
 public class Camera {
     private Point3D _p0;
     private Vector _vto;
@@ -19,13 +16,12 @@ public class Camera {
     private Vector _vright;
 
     /**
+     * a simple contractor for camera
      * @param p0-the  place of the camera
      * @param vto-    where the vector point outgoing from the camera
      * @param vup-the vector vertical to vto
      */
     public Camera(Point3D p0, Vector vto, Vector vup) {
-
-
         //if the two vectors are not orthogonal throw exception
         if (vto.dotProduct(vup) != 0)
             throw new IllegalArgumentException("the vto not orthogonal to vup ");
@@ -33,10 +29,12 @@ public class Camera {
         _vto = vto.normalized();
         _vup = vup.normalized();
         _vright = _vto.crossProduct(_vup).normalize();
-
-
     }
 
+    /**
+     *
+     * @return the position of the camera
+     */
     public Point3D getP0() {
         return _p0;
     }

@@ -75,7 +75,6 @@ public class Color {
     /**
      * Color setter to generate a color according to RGB components Each component
      * in range 0..255 (for printed white color) or more [for lights]
-     * 
      * @param r Red component
      * @param g Green component
      * @param b Blue component
@@ -92,7 +91,6 @@ public class Color {
 
     /**
      * Color setter to copy RGB components from another color
-     *
      * @param other source Color object
      * @return the Color object itself for chaining calls
      */
@@ -105,7 +103,6 @@ public class Color {
 
     /**
      * Color setter to take components from an base of java.awt.Color object
-     *
      * @param other java.awt.Color's source object
      * @return the Color object itself for chaining calls
      */
@@ -119,7 +116,6 @@ public class Color {
     /**
      * Color getter - returns the color after converting it into java.awt.Color
      * object During the conversion any component bigger than 255 is set to 255
-     *
      * @return java.awt.Color object based on this Color RGB components
      */
     public java.awt.Color getColor() {

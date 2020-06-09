@@ -13,13 +13,11 @@ public class Cylinder extends Tube {
     /**
      * this is the basic constructor for a tube :
      * it receive ray and radius
-     *
      * @param ray     -the ray
      * @param radius- the radius
      * @param height- the height of the (cylinder he limited with height)
      * @throws IllegalArgumentException the radius is equal or smaller to zero so we don't have a cylinder
      */
-
     public Cylinder(Ray ray, double radius, double height) {
         super(ray, radius);
         if (height <= 0)    //if the radius equal on small to zero so we don't can't have a cylinder so his return IllegalArgumentException
@@ -29,7 +27,6 @@ public class Cylinder extends Tube {
 
     /**
      * simple function get
-     *
      * @return the height of the cylinder
      */
     public double getHeight() {
@@ -45,12 +42,6 @@ public class Cylinder extends Tube {
                 '}';
     }
 
-    /**
-     * function to find the normal of the cylinder
-     *
-     * @param point to find the normal
-     * @return a normal of the cylinder normalize (new vector in size one)
-     */
     @Override
     public Vector getNormal(Point3D point) {
         Point3D p0 = getRay().getP0();

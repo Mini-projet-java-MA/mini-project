@@ -16,7 +16,6 @@ public final class Coordinate {
 
     /**
      * Coordinate constructor receiving a coordinate value
-     *
      * @param coord coordinate value as double
      */
     public Coordinate(double coord) {
@@ -26,7 +25,6 @@ public final class Coordinate {
 
     /**
      * Copy constructor for coordinate
-     *
      * @param other source Coordinate
      */
     public Coordinate(Coordinate other) {
@@ -35,7 +33,6 @@ public final class Coordinate {
 
     /**
      * Coordinate value getter
-     *
      * @return coordinate value in double representation
      */
     public double get() {

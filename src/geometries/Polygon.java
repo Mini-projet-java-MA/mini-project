@@ -27,7 +27,6 @@ public class Polygon extends Geometry {
     /**
      * Polygon constructor based on vertices list. The list must be ordered by edge
      * path. The polygon must be convex.
-     *
      * @param vertices list of vertices according to their order by edge path
      * @throws IllegalArgumentException in any case of illegal combination of
      *                                  vertices:
@@ -89,10 +88,6 @@ public class Polygon extends Geometry {
         return _plane.getNormal();
     }
 
-    /**
-     * @param ray - he his the ray that insert the object
-     * @return a list of all intersection
-     */
     @Override
     public List<Point3D> findIntersections(Ray ray) {
         return null;

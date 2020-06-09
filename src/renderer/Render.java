@@ -8,7 +8,7 @@ import scene.Scene;
 import java.util.*;
 
 /**
- * th object of this class is to create matrix of picture
+ * th object of this class is to create pixel matrix of picture basinc on scene with 3D model
  */
 public class Render {
     private Scene _scene;
@@ -36,12 +36,12 @@ public class Render {
         int height = (int) _imageWriter.getHeight();
 
         //Nx and nY are the width and height of the image.
-        int Nx = _imageWriter.getNx(); //columns
+        int nX = _imageWriter.getNx(); //columns
         int nY = _imageWriter.getNy(); //rows
         //pixels grid
         for (int row = 0; row < nY; ++row) {
-            for (int column = 0; column < Nx; ++column) {
-                Ray ray = camera.constructRayThroughPixel(Nx, nY, column, row, distance, width, height);
+            for (int column = 0; column < nX; ++column) {
+                Ray ray = camera.constructRayThroughPixel(nX, nY, column, row, distance, width, height);
                 List<Point3D> intersectionPoints = geometries.findIntersections(ray);
                 if (intersectionPoints == null) {
                     _imageWriter.writePixel(column, row, background);
@@ -61,7 +61,7 @@ public class Render {
      */
     private Point3D getClosestPoint(List<Point3D> intersectionPoints) {
         Point3D result = null;
-        double mindist = Double.MAX_VALUE;
+        double mindist = Double.POSITIVE_INFINITY;
 
         Point3D p0 = this._scene.getCamera().getP0();
 

@@ -4,7 +4,6 @@ import primitives.Point3D;
 import primitives.Ray;
 import primitives.Vector;
 
-import javax.management.ValueExp;
 import java.util.List;
 
 import static primitives.Util.alignZero;
@@ -29,7 +28,7 @@ public class Plane extends Geometry {
 
     /**
      * this constructor build a plane from a single point and a vector that will be normalized
-     * @param p the point in the plane
+     * @param p      the point in the plane
      * @param normal the vector normalized we'll use to build the plane
      */
     public Plane(Point3D p, Vector normal) {
@@ -51,14 +50,9 @@ public class Plane extends Geometry {
         // the points are in the same line
         Vector v1 = p2.subtract(p1);
         Vector v2 = p3.subtract(p1);
-      return v1.crossProduct(v2).normalize();
+        return v1.crossProduct(v2).normalize();
     }
 
-    /**
-     * this function allows us to compute the normal vector in a specific point in the plane
-     * @param p the point where we want to compute the normal vector
-     * @return the normal vector computed in the specific point
-     */
     @Override
     public Vector getNormal(Point3D p) {
         return _normal;
@@ -72,11 +66,7 @@ public class Plane extends Geometry {
         return _normal;
     }
 
-    /**
-     * the function find the intersections in 3D cartesian coordinate between ray and the plane
-     * @param ray- he his the ray that insert the object
-     * @return list of point in 3d
-     */
+    @Override
     public List<Point3D> findIntersections(Ray ray) {
         Vector pq0;
         try {

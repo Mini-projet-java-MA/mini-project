@@ -47,11 +47,6 @@ public class Sphere extends RadialGeometry {
         return normal_sphere.normalize();
     }
 
-    /**
-     * the function find all intersections points in 3D cartesian coordinate between ray and sphere
-     * @param ray this is the ray that intersect the object
-     * @return a list of all the intersections points
-     */
     @Override
     public List<Point3D> findIntersections(Ray ray) {
         Point3D p0 = ray.getP0();

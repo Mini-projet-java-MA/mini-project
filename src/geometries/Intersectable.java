@@ -11,8 +11,10 @@ import java.util.List;
  */
 public interface Intersectable {
     /**
-     * @param ray- he his the ray that insert the object
-     * @return a list of all intersection
+     * The function looks for intersection points between a ray and a geometry. <br/>
+     * If there are no intersections, the function returns null.
+     * @param ray the ray that intersects the object
+     * @return a list of all intersection points
      */
     List<Point3D> findIntersections(Ray ray);
 

@@ -15,7 +15,7 @@ public class ImageWriterTest {
      */
     @Test
     public void writeToImage() {
-        Color green = new Color(0, 255, 0);
+        Color green = new Color(0, 150, 0);
         Color red = new Color(255, 0, 0);
         ImageWriter img = new ImageWriter("img1", 1600, 1000, 800, 500);
         for (int col = 0; col< 800; col++) {
@@ -26,7 +26,6 @@ public class ImageWriterTest {
                     img.writePixel(col, row, green.getColor());
 
             }
-
         }
         img.writeToImage();
 

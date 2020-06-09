@@ -52,12 +52,6 @@ public class Tube extends RadialGeometry {
         return normal_tube.normalize();
     }
 
-
-    /**
-     * the function find all intersections point in 3D cartesian coordinate between ray and tube
-     * @param ray this the ray that intersect the object
-     * @return a list of all intersections points
-     */
     @Override
     public List<Point3D> findIntersections(Ray ray) {
         return null;

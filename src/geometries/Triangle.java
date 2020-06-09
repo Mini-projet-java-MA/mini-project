@@ -17,7 +17,6 @@ public class Triangle extends Polygon {
      * this is a basic triangle constructor that get 3 points and build a triangle from them
      * in did 3 points are already a triangle
      * this constructor uses the constructor of the parent class Polygon
-     *
      * @param p1 1st point
      * @param p2 2nd point
      * @param p3 3rd point
@@ -34,11 +33,8 @@ public class Triangle extends Polygon {
         }
         return result;
     }
-    /**
-     * the function find all intersections points in 3D cartesian coordinate between ray and triangle
-     * @param ray this is the ray that intersect the object
-     * @return list of Intersections
-     */
+
+    @Override
     public List<Point3D> findIntersections(Ray ray) {
         List<Point3D> intersections = _plane.findIntersections(ray);
         if (intersections == null) return null;
