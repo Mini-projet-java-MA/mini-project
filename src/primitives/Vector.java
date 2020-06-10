@@ -49,6 +49,10 @@ public class Vector {
         _head = new Point3D(other._head);
     }
 
+    /**
+     *
+     * @return the vector
+     */
     public Point3D getHead() {
         return _head;
     }

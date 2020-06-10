@@ -30,7 +30,7 @@ public class Sphere extends RadialGeometry {
 
     /**
      * a simple function that return the center a point 3d of the position of the sphere
-     * @return point 3d
+     * @return point 3d of center
      */
     public Point3D getCenter() {
         return _center;
@@ -63,17 +63,17 @@ public class Sphere extends RadialGeometry {
         //tm=v*u
         double tm = alignZero(v.dotProduct(u));
         //d=u^2+tm^2
-        double dsquared;
+        double dSquared;
         if (tm == 0)
-            dsquared = u.lengthSquared();
+            dSquared = u.lengthSquared();
         else {
-            dsquared = u.lengthSquared() - tm * tm;
+            dSquared = u.lengthSquared() - tm * tm;
         }
-        double thsquared = alignZero(_radius * _radius - dsquared);
+        double thSquared = alignZero(_radius * _radius - dSquared);
 
-        if (thsquared <= 0) return null;
+        if (thSquared <= 0) return null;
         //th=radius*radius-d*d
-        double th = alignZero(Math.sqrt(thsquared));
+        double th = alignZero(Math.sqrt(thSquared));
         if (th == 0) return null;
 
         double t1 = alignZero(tm - th);

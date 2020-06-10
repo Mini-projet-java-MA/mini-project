@@ -5,7 +5,7 @@ import primitives.*;
 import static primitives.Util.*;
 
 /**
- * the cylinder is a  tube with height so he is exactly like tube and he have one more param which is height
+ * the cylinder is a tube with height, so he is exactly like tube and he have one more param which is height
  */
 public class Cylinder extends Tube {
     private double _height;

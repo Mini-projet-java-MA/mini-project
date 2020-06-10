@@ -20,6 +20,10 @@ public class Geometries implements Intersectable {
             intersectableList.add(g);
     }
 
+    /**
+     *
+     * @return list of point 3D of intersectable
+     */
     public List<Intersectable> getIntersectableList() {
         return intersectableList;
     }

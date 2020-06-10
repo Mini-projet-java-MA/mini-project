@@ -77,8 +77,7 @@ public class Render {
     }
 
     /**
-     * function to draw a grid on our image by pixsel
-     *
+     * function to draw a grid on our image by pixel
      * @param interval number that the pixels are multiple of this number, are part of the grid.
      */
     public void printGrid(int interval, java.awt.Color color) {

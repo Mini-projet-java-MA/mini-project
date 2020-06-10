@@ -10,7 +10,7 @@ import java.util.Objects;
  *  this interface for all geometries that are able to intersect from a ray to their entity
  * @ auther aaron
  */
-public interface Intersectable {
+public interface Intersectablex {
     /**
      * The function looks for intersection points between a ray and a geometry. <br/>
      * If there are no intersections, the function returns null.
