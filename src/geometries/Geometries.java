@@ -4,6 +4,10 @@ import primitives.*;
 
 import java.util.LinkedList;
 import java.util.List;
+import geometries.Intersectable;
+import geometries.Intersectable.GeoPoint;
+
+
 /**
  * class with list of shape.
  */
@@ -38,8 +42,8 @@ public class Geometries implements Intersectable {
     }
 
     @Override
-    public List<GeoPoint> findIntersections(Ray ray) {
-        List<GeoPoint> intersections = null;
+    public List<Intersectable.GeoPoint> findIntersections(Ray ray) {
+        List<Intersectable.GeoPoint> intersections = null;
         for (Intersectable geo : intersectableList) {
             List<GeoPoint> geoIntersections = geo.findIntersections(ray);
             if (geoIntersections != null) {

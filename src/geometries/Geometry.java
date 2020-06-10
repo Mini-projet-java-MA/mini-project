@@ -15,7 +15,8 @@ public abstract class Geometry implements Intersectable {
 
     /**
      * constructor
-     * @param emission the emission light of the geometry
+     * @param emission the emission
+     *               light of the geometry
      */
     public Geometry(Color emission){
         this._emission=emission;
@@ -44,5 +45,5 @@ public abstract class Geometry implements Intersectable {
      * @param p a point on geometry surface
      * @return the normal vector
      */
-    abstract public Vector getNormal(Point3D p);
+     public abstract Vector getNormal(Point3D p);
 }
