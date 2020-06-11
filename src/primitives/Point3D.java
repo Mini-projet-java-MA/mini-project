@@ -1,5 +1,7 @@
 package primitives;
 
+import geometries.Intersectable;
+
 /**
  * class Point3d represents a point in cartesian coordinate system
  */

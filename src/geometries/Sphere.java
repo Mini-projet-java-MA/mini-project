@@ -81,11 +81,11 @@ public class Sphere extends RadialGeometry {
         if (t1 <= 0 && t2 <= 0) return null;
 
         if (t1 > 0 && t2 > 0)
-            return List.of(ray.getTargetPoint(t1), ray.getTargetPoint(t2)); //P1 , P2
+            return List.of((new GeoPoint(this , ray.getTargetPoint(t1))), (new GeoPoint(this , ray.getTargetPoint(t2)))); //P1 , P2
         if (t1 > 0)
-            new LinkedList<>(Collections.singletonList(new GeoPoint(this, p0.add(v.scale(t1)))));
+            return List.of(new GeoPoint( this , ray.getTargetPoint(t1)));
         if (t2 > 0)
-            new LinkedList<>(Collections.singletonList(new GeoPoint(this, p0.add(v.scale(t2)))));
+            return List.of(new GeoPoint(this, ray.getTargetPoint(t2)));
         return null;
     }
 

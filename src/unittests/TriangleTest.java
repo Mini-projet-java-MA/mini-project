@@ -1,5 +1,7 @@
 package unittests;
 
+import geometries.Geometries;
+import geometries.Intersectable;
 import geometries.Triangle;
 import org.junit.Test;
 import primitives.Point3D;
@@ -41,7 +43,7 @@ public class TriangleTest {
         //TC01 inside triangle
         Ray ray = new Ray(new Point3D(-4, 4, 3), new Vector(4, -2, -1));
         Triangle triangle = new Triangle(new Point3D(0, 0, 0), new Point3D(0, 6, 0), new Point3D(0, 0, 8));
-        List<Point3D> intersectionsList = triangle.findIntersections(ray);
+        List<Intersectable.GeoPoint> intersectionsList = triangle.findIntersections(ray);
         assertNotNull("must be not empty", intersectionsList);
         assertEquals("must be equal to 1", 1, intersectionsList.size());
         assertEquals("must be the same", new Point3D(0, 2, 2), intersectionsList.get(0));

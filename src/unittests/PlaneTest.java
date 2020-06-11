@@ -1,6 +1,7 @@
 package unittests;
 
 
+import geometries.Intersectable;
 import geometries.Plane;
 import org.junit.Test;
 import primitives.Point3D;
@@ -67,7 +68,7 @@ public class PlaneTest {
 
         //TC01: the ray not included parallel to the plane
         ray = new Ray(new Point3D(2, 6, 1), new Vector(3, 3, 0));
-        List<Point3D> intersectionsList = plane.findIntersections(ray);
+        List<Intersectable.GeoPoint> intersectionsList = plane.findIntersections(ray);
         assertNull("must be empty", intersectionsList);
 
         //TC02: the ray included parallel to the plane

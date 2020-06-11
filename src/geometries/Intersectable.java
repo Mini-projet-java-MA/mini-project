@@ -15,7 +15,7 @@ public interface Intersectable {
      * The function looks for intersection points between a ray and a geometry. <br/>
      * If there are no intersections, the function returns null.
      * @param ray the ray that intersects the object
-     * @return a list of all intersection points
+     * @return a list of all intersection of GeoPoint
      */
     List<GeoPoint> findIntersections(Ray ray);
 

@@ -42,7 +42,7 @@ public class Geometries implements Intersectable {
     }
 
     @Override
-    public List<Intersectable.GeoPoint> findIntersections(Ray ray) {
+    public List<GeoPoint> findIntersections(Ray ray) {
         List<Intersectable.GeoPoint> intersections = null;
         for (Intersectable geo : intersectableList) {
             List<GeoPoint> geoIntersections = geo.findIntersections(ray);

@@ -4,6 +4,7 @@ import primitives.*;
 import geometries.*;
 import elements.*;
 import scene.Scene;
+import geometries.Intersectable.GeoPoint;
 
 import java.util.*;
 
@@ -24,6 +25,9 @@ public class Render {
         _imageWriter = imgWr;
     }
 
+    /**
+     *this func creat image
+     */
     public void renderImage() {
         java.awt.Color background = _scene.getBackground().getColor();
         Camera camera = _scene.getCamera();
@@ -42,11 +46,11 @@ public class Render {
         for (int row = 0; row < nY; ++row) {
             for (int column = 0; column < nX; ++column) {
                 Ray ray = camera.constructRayThroughPixel(nX, nY, column, row, distance, width, height);
-                List<Point3D> intersectionPoints = geometries.findIntersections(ray);
+                List<Intersectable.GeoPoint> intersectionPoints = geometries.findIntersections(ray);
                 if (intersectionPoints == null) {
                     _imageWriter.writePixel(column, row, background);
                 } else {
-                    Point3D closestPoint = getClosestPoint(intersectionPoints);
+                    GeoPoint closestPoint = getClosestPoint(intersectionPoints);
                     java.awt.Color pixelColor = calcColor(closestPoint).getColor();
                     _imageWriter.writePixel(column, row, pixelColor);
                 }
@@ -59,17 +63,17 @@ public class Render {
      * this list the closet point to P0 of the camera in the scene.
      * @return  the closest point to the camera
      */
-    private Point3D getClosestPoint(List<Point3D> intersectionPoints) {
-        Point3D result = null;
+    private GeoPoint getClosestPoint(List<GeoPoint> intersectionPoints) {
+        Intersectable.GeoPoint result = null;
         double mindist = Double.POSITIVE_INFINITY;
 
         Point3D p0 = this._scene.getCamera().getP0();
 
-        for (Point3D pt: intersectionPoints ) {
-            double distance = p0.distance(pt);
+        for (Intersectable.GeoPoint pt: intersectionPoints ) {
+            double distance = p0.distance(pt._point);
             if (distance < mindist){
                 mindist= distance;
-                result =pt;
+                result = pt;
             }
         }
 
@@ -96,7 +100,7 @@ public class Render {
      * @param point the point for which the color is required
      * @return the color intensity
      */
-    private Color calcColor(Point3D point) {
+    private Color calcColor(GeoPoint point) {
         return _scene.getAmbientLight().getIntensity();
     }
 

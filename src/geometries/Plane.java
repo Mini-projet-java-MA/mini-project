@@ -1,9 +1,11 @@
 package geometries;
 
+import primitives.Color;
 import primitives.Point3D;
 import primitives.Ray;
 import primitives.Vector;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static primitives.Util.alignZero;
@@ -67,7 +69,7 @@ public class Plane extends Geometry {
     }
 
     @Override
-    public List<Point3D> findIntersections(Ray ray) {
+    public List<GeoPoint> findIntersections(Ray ray) {
         Vector pq0;
         try {
             pq0 = _p.subtract(ray.getP0());
@@ -85,7 +87,6 @@ public class Plane extends Geometry {
         //t>=0, and hence:
         if (t <= 0)
             return null;
-
-        return List.of(ray.getTargetPoint(t));
+        return List.of(new GeoPoint(this,ray.getTargetPoint(t)));
     }
 }
