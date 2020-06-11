@@ -8,6 +8,7 @@ import geometries.Triangle;
 import org.junit.Test;
 import primitives.Point3D;
 import primitives.Vector;
+import geometries.Intersectable.GeoPoint;
 
 import java.util.List;
 
@@ -29,7 +30,7 @@ public class IntersectionTest {
      * @param cam      the camera to generate the rays from
      */
     private void intersections(Intersectable geometry, int expected, Camera cam) {
-        List<Point3D> results = null;
+        List<GeoPoint> results = null;
         int count = 0;
         int nX = 3;
         int nY = 3;
