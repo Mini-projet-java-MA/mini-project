@@ -22,9 +22,10 @@ public class Sphere extends RadialGeometry {
      * this is a basic constructor it receives two param radius and center
      * @param radius - the radius of the sphere
      * @param center - point 3d that his the location of the sphere
+     * @param emission the emission light of the sphere
      */
-    public Sphere(double radius, Point3D center) {
-        super(radius);
+    public Sphere(double radius, Point3D center,Color emission) {
+        super(radius,emission);
         _center = center;
     }
 

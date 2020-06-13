@@ -1,6 +1,6 @@
 package geometries;
 
-import java.awt.Color;
+import primitives.Color;
 
 
 /**
@@ -12,9 +12,10 @@ public abstract class RadialGeometry extends Geometry {
     /**
      * this is simple constructor build the shapes witch radius
      * @param radius
+     * @param emission the emission light of the radialgeometry
      */
-    public RadialGeometry(double radius) {
-
+    public RadialGeometry(double radius, Color emission) {
+         super(emission);
         _radius = radius;
     }
 

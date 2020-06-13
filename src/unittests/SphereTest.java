@@ -77,7 +77,7 @@ public class SphereTest {
         intersectionsList = sphere.findIntersections(ray);
         assertNotNull("must not be empty", intersectionsList);
         assertEquals("must be equal to 2", 2, intersectionsList.size());
-        if (intersectionsList.get(0).getX().get() > intersectionsList.get(1).getX().get()) {
+        if (intersectionsList.get(0).getPoint().getX().get() > intersectionsList.get(1).getPoint().getX().get()) {
             intersectionsList = List.of(intersectionsList.get(1), intersectionsList.get(0));
         }
         assertEquals("must be equal", new Point3D(-1.732050807569, 1, 0), intersectionsList.get(0));

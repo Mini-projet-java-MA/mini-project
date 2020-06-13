@@ -38,6 +38,10 @@ public interface Intersectable {
             this._point = point;
         }
 
+        public Point3D getPoint() {
+            return _point;
+        }
+
         @Override
         public boolean equals(Object o) {
             if (this == o) return true;

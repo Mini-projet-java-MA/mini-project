@@ -22,8 +22,10 @@ public class Plane extends Geometry {
      * @param p1 1 st point
      * @param p2 2nd point
      * @param p3 3rd point
+     * @param emission the emission light of the plane
      */
-    public Plane(Point3D p1, Point3D p2, Point3D p3) {
+    public Plane(Point3D p1, Point3D p2, Point3D p3,Color emission) {
+        super(emission);
         _p = new Point3D(p1);
         _normal = getNormal(p1, p2, p3);
     }
@@ -32,8 +34,10 @@ public class Plane extends Geometry {
      * this constructor build a plane from a single point and a vector that will be normalized
      * @param p      the point in the plane
      * @param normal the vector normalized we'll use to build the plane
+     * @param emission the emission light of the plane
      */
-    public Plane(Point3D p, Vector normal) {
+    public Plane(Point3D p, Vector normal,Color emission) {
+        super(emission);
         _p = new Point3D(p);
         _normal = normal.normalized();
     }
