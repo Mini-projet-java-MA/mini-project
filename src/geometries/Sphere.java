@@ -28,6 +28,10 @@ public class Sphere extends RadialGeometry {
         super(radius,emission);
         _center = center;
     }
+    public Sphere(double radius, Point3D center) {
+        super(radius,Color.BLACK);
+        _center = center; 
+    }
 
     /**
      * a simple function that return the center a point 3d of the position of the sphere

@@ -29,7 +29,6 @@ public class Polygon extends Geometry {
      * Polygon constructor based on vertices list. The list must be ordered by edge
      * path. The polygon must be convex.
      * @param vertices list of vertices according to their order by edge path
-     * @param emission the emission light of the polygon
      * @throws IllegalArgumentException in any case of illegal combination of
      *                                  vertices:
      *                                  <ul>
@@ -46,8 +45,8 @@ public class Polygon extends Geometry {
      *                                  <li>The polygon is concave (not convex></li>
      *                                  </ul>
      */
-    public Polygon(Color emission, Point3D... vertices) {
-        super(emission);
+    public Polygon(Point3D... vertices) {
+        super(Color.BLACK);
         if (vertices.length < 3)
             throw new IllegalArgumentException("A polygon can't have less than 3 vertices");
         _vertices = List.of(vertices);

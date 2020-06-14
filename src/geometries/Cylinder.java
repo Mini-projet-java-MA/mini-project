@@ -15,12 +15,17 @@ public class Cylinder extends Tube {
      * it receive ray and radius
      * @param ray     the ray
      * @param radius  the radius
-     * @param height  the height of the (cylinder he limited with height)
-     * @param emission the color of th cylinder
+     * @param height  the height of the (cylinder is limited with height)
      * @throws IllegalArgumentException the radius is equal or smaller to zero so we don't have a cylinder
      */
+    public Cylinder(Ray ray, double radius, double height) {
+        super(ray, radius);
+        if (height <= 0)    //if the radius equal on small to zero so we don't can't have a cylinder so his return IllegalArgumentException
+            throw new IllegalArgumentException("height must be equal or superior to zero.");
+        this._height = height;
+    }
     public Cylinder(Ray ray, double radius, double height,Color emission) {
-        super(ray, radius, emission);
+        super(ray, radius);
         if (height <= 0)    //if the radius equal on small to zero so we don't can't have a cylinder so his return IllegalArgumentException
             throw new IllegalArgumentException("height must be equal or superior to zero.");
         this._height = height;

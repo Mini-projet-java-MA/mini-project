@@ -12,10 +12,12 @@ public abstract class RadialGeometry extends Geometry {
     /**
      * this is simple constructor build the shapes witch radius
      * @param radius
-     * @param emission the emission light of the radialgeometry
      */
-    public RadialGeometry(double radius, Color emission) {
-         super(emission);
+    public RadialGeometry(double radius) {
+         this(radius,Color.BLACK);
+    }
+    public RadialGeometry(double radius,Color emission) {
+        super(emission);
         _radius = radius;
     }
 
