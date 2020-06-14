@@ -22,6 +22,17 @@ public class Plane extends Geometry {
      * @param p1 1 st point
      * @param p2 2nd point
      * @param p3 3rd point
+     */
+    public Plane(Point3D p1, Point3D p2, Point3D p3) {
+        _p = new Point3D(p1);
+        _normal = getNormal(p1, p2, p3);
+    }
+
+    /**
+     * this is a basic constructor who build a plane from 3 points int cartesian coordinates system
+     * @param p1 1 st point
+     * @param p2 2nd point
+     * @param p3 3rd point
      * @param emission the emission light of the plane
      */
     public Plane(Point3D p1, Point3D p2, Point3D p3,Color emission) {
@@ -29,7 +40,6 @@ public class Plane extends Geometry {
         _p = new Point3D(p1);
         _normal = getNormal(p1, p2, p3);
     }
-
     /**
      * this constructor build a plane from a single point and a vector that will be normalized
      * @param p      the point in the plane

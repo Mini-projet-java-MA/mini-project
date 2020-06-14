@@ -4,7 +4,6 @@ import primitives.Color;
 import primitives.Point3D;
 import primitives.Ray;
 import primitives.Vector;
-
 import java.util.List;
 
 import static primitives.Util.isZero;
@@ -28,8 +27,8 @@ public class Polygon extends Geometry {
     /**
      * Polygon constructor based on vertices list. The list must be ordered by edge
      * path. The polygon must be convex.
+     *
      * @param vertices list of vertices according to their order by edge path
-     * @param emission the emission light of the polygon
      * @throws IllegalArgumentException in any case of illegal combination of
      *                                  vertices:
      *                                  <ul>
@@ -46,8 +45,7 @@ public class Polygon extends Geometry {
      *                                  <li>The polygon is concave (not convex></li>
      *                                  </ul>
      */
-    public Polygon(Color emission, Point3D... vertices) {
-        super(emission);
+    public Polygon(Point3D... vertices) {
         if (vertices.length < 3)
             throw new IllegalArgumentException("A polygon can't have less than 3 vertices");
         _vertices = List.of(vertices);
@@ -58,7 +56,7 @@ public class Polygon extends Geometry {
         if (vertices.length == 3) return; // no need for more tests for a Triangle
 
         Vector n = _plane.getNormal();
-
+ס
         // Subtracting any subsequent points will throw an IllegalArgumentException
         // because of Zero Vector if they are in the same point
         Vector edge1 = vertices[vertices.length - 1].subtract(vertices[vertices.length - 2]);
@@ -85,12 +83,25 @@ public class Polygon extends Geometry {
                 throw new IllegalArgumentException("All vertices must be ordered and the polygon must be convex");
         }
     }
+    /**
+     * Polycon Constructor receiving vertices and color
+     * @param emission
+     * @param vertices
+     */
+    public Polygon(Color emission, Point3D... vertices) {
+        this(vertices);
+        this._emission = emission;
+    }
 
     @Override
     public Vector getNormal(Point3D point) {
         return _plane.getNormal();
     }
 
+    /**
+     * @param ray - he his the ray that insert the object
+     * @return a list of all intersection
+     */
     @Override
     public List<GeoPoint> findIntersections(Ray ray) {
         return null;
