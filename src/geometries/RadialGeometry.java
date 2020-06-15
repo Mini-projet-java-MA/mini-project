@@ -14,7 +14,8 @@ public abstract class RadialGeometry extends Geometry {
      * @param radius
      */
     public RadialGeometry(double radius) {
-         this(radius,Color.BLACK);
+        super(Color.BLACK);
+        _radius = radius;
     }
     public RadialGeometry(double radius,Color emission) {
         super(emission);
