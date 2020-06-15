@@ -84,12 +84,12 @@ public class Polygon extends Geometry {
     }
     /**
      * Polycon Constructor receiving vertices and color
-     * @param emission
-     * @param vertices
+     * @param emission-the color
+     * @param vertices list of vertices according to their order by edge path
      */
     public Polygon(Color emission, Point3D... vertices) {
         this(vertices);
-        this._emission = emission;
+       _emission=emission;
     }
 
     @Override

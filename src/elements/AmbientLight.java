@@ -5,8 +5,7 @@ import primitives.Color;
 /**
  * The class represents ambient lighting in the scene - the fill color which is added to all objects of 3D model
  */
-public class AmbientLight {
-    private Color _intensity;
+public class AmbientLight extends Light  {
 
     /**
      *this function is the constructor it allows us to set an ambient light in our scene
@@ -14,14 +13,7 @@ public class AmbientLight {
      * @param ka-promotes light refill
      */
     public  AmbientLight(Color ia, double ka) {
-        this._intensity = ia.scale(ka);
+        super(ia, ka);
     }
 
-    /**
-     *the getter of the intensity of the light
-     * @return color Intensity
-     */
-    public Color getIntensity() {
-        return _intensity;
-    }
 }
