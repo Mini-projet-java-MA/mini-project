@@ -13,7 +13,7 @@ public class PointLight extends Light {
      * Contractor to build a Point light
      *
      * @param intensity
-     * @param position  localitation of the light
+     * @param position  localisation of the light
      * @param kC   coefficient of quadratic attenuation of the light in the distance
      * @param kL   coefficient of linear weakening of the light in the distance
      * @param kQ   coefficient of exponential weakening of the light at a distance
