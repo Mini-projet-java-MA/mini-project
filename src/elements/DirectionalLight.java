@@ -1,6 +1,7 @@
 package elements;
 
 import primitives.Color;
+import primitives.Point3D;
 import primitives.Vector;
 
 /**
@@ -17,6 +18,13 @@ public class DirectionalLight extends  Light {
     public DirectionalLight(Color intensity, Vector direction) {
         super(intensity);
         this._direction = new Vector(direction.normalized());
+    }
+
+    public Vector getL(Point3D p) {
+        return _direction;
+    }
+    public Color getIntensity(Point3D p) {
+        return getIntensity();
     }
 
 }
