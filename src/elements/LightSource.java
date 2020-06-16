@@ -16,7 +16,7 @@ public interface LightSource {
     public Color getIntensity(Point3D p);
 
     /**
-     * i dont know what i do here
+     * return the length of vector of light
      * @param p -place of light
      * @return the direction of the light point
      */

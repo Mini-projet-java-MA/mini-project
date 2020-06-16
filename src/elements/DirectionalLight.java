@@ -7,7 +7,7 @@ import primitives.Vector;
 /**
  * this class direction light of light in cartesian 3D coordinate system
  */
-public class DirectionalLight extends  Light {
+public class DirectionalLight extends  Light implements LightSource {
     private Vector  _direction;
 
     /**
@@ -20,9 +20,11 @@ public class DirectionalLight extends  Light {
         this._direction = new Vector(direction.normalized());
     }
 
+    @Override
     public Vector getL(Point3D p) {
         return _direction;
     }
+    @Override
     public Color getIntensity(Point3D p) {
         return getIntensity();
     }
