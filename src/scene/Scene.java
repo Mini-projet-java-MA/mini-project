@@ -2,9 +2,15 @@ package scene;
 
 import elements.AmbientLight;
 import elements.Camera;
+import elements.LightSource;
 import geometries.Geometries;
 import geometries.Intersectable;
 import primitives.Color;
+
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
 
 /**
  * scene class create a scene to work on
@@ -18,12 +24,32 @@ import primitives.Color;
  * @author moshe
  */
 public class Scene {
+   private List<LightSource> _light=new LinkedList<LightSource>();
     private String _name;
     private Color _background = Color.BLACK;
     private AmbientLight _ambientLight = new AmbientLight(Color.BLACK, 0d);
     private Geometries _geometries = new Geometries();
     private Camera _camera;
     private double _distance;
+
+    /**
+     * a simple geter of list of light souce
+     * @return list of light
+     */
+    public List<LightSource> getLight() {
+        return _light;
+    }
+
+    /**
+     *
+     * @param lights function to add in the list point of light
+     */
+    public void addLights(LightSource... lights) {
+        if(_lights == null){
+            _lights = new ArrayList<>();
+        }
+        _lights.addAll(Arrays.asList(lights));
+    }
 
     /**
      * constructor with only the name as a parameter
