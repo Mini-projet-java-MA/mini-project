@@ -27,6 +27,14 @@ public class Tube extends RadialGeometry {
             throw new IllegalArgumentException("It's not possible to have radius equals to 0");
         this._ray = new Ray(ray);
     }
+    /**
+     * this is the basic constructor for a tube:
+     * he receive ray and radius
+     * @param radius
+     * @param ray
+     * @param emission the emission light of the tube
+     * @throws IllegalArgumentException when the radius is equal or smaller to zero so we don't have a tube
+     */
     public Tube(Ray ray, double radius,Color emission) {
         super(radius,emission);
         if (radius <= 0)

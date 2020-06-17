@@ -57,46 +57,101 @@ public class Scene {
             _lights.add(ls);
     }
 
+    /**
+     * getter for the name of the scene
+     *
+     * @return the name of the scene
+     */
     public String getName() {
         return _name;
     }
 
+    /**
+     * getter for the background color of the scene
+     *
+     * @return the background color of the scene
+     */
     public Color getBackground() {
         return _background;
     }
 
+    /**
+     * setter for the background color of the scene
+     *
+     * @param _background
+     */
     public void setBackground(Color _background) {
         this._background = _background;
     }
 
+    /**
+     * getter for the ambient light of the scene
+     *
+     * @return ambient light of the scene
+     */
     public AmbientLight getAmbientLight() {
         return _ambientLight;
     }
 
+    /**
+     * setter for the ambient light of the scene
+     *
+     * @param _ambientLight
+     */
     public void setAmbientLight(AmbientLight _ambientLight) {
         this._ambientLight = _ambientLight;
     }
 
+    /**
+     * getter for the camera of the scene
+     *
+     * @return the camera of the scene
+     */
     public Camera getCamera() {
         return _camera;
     }
 
+    /**
+     * setter for the camera of the scene
+     *
+     * @param _camera
+     */
     public void setCamera(Camera _camera) {
         this._camera = _camera;
     }
 
+    /**
+     * getter for the distance of the scene
+     *
+     * @return the distance of the scene
+     */
     public double getDistance() {
         return _distance;
     }
 
+    /**
+     * setter for the distance of the scene
+     *
+     * @param _distance
+     */
     public void setDistance(double _distance) {
         this._distance = _distance;
     }
 
+    /**
+     * getter for the geometries of the scene
+     *
+     * @return the geometries of the scene
+     */
     public Geometries getGeometries() {
         return _geometries;
     }
 
+    /**
+     * setter for the geometries of the scene
+     *
+     * @param _geometries
+     */
     public void setGeometries(Geometries _geometries) {
         this._geometries = _geometries;
     }

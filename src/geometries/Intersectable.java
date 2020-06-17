@@ -38,6 +38,10 @@ public interface Intersectable {
             this._point = point;
         }
 
+        /**
+         * getter for the point
+         * @return
+         */
         public Point3D getPoint() {
             return _point;
         }
