@@ -7,10 +7,8 @@ import geometries.Geometries;
 import geometries.Intersectable;
 import primitives.Color;
 
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  * scene class create a scene to work on
@@ -21,10 +19,11 @@ import java.util.LinkedList;
  * _geometries objects/shapes that exist in scene
  * _camera point of view, that from there we look on the scene, through an imagine view plane
  * _distance distance from camere to the imagine view plane
+ *
  * @author moshe
  */
 public class Scene {
-   private List<LightSource> _light=new LinkedList<LightSource>();
+    private List<LightSource> _lights = new LinkedList<LightSource>();
     private String _name;
     private Color _background = Color.BLACK;
     private AmbientLight _ambientLight = new AmbientLight(Color.BLACK, 0d);
@@ -33,31 +32,29 @@ public class Scene {
     private double _distance;
 
     /**
-     * a simple geter of list of light souce
-     * @return list of light
-     */
-    public List<LightSource> getLight() {
-        return _light;
-    }
-
-    /**
-     *
-     * @param lights function to add in the list point of light
-     */
-    public void addLights(LightSource... lights) {
-        if(_lights == null){
-            _lights = new ArrayList<>();
-        }
-        _lights.addAll(Arrays.asList(lights));
-    }
-
-    /**
      * constructor with only the name as a parameter
      *
      * @param name name of the scene
      */
     public Scene(String name) {
         this._name = name;
+    }
+
+    /**
+     * a simple geter of list of light souce
+     *
+     * @return list of light
+     */
+    public List<LightSource> getLight() {
+        return _lights;
+    }
+
+    /**
+     * @param lights function to add in the list point of light
+     */
+    public void addLights(LightSource... lights) {
+        for (LightSource ls : lights)
+            _lights.add(ls);
     }
 
     public String getName() {
@@ -106,6 +103,7 @@ public class Scene {
 
     /**
      * function to add geometries to scene
+     *
      * @param geometries one or more geometries, such sphere or triangle
      */
     public void addGeometries(Intersectable... geometries) {
