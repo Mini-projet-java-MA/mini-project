@@ -97,13 +97,13 @@ public class Render {
 
     /**
      * Calculate the color intensity in a point
-     * @param point the point for which the color is required
      * @return the color intensity
      */
-    private Color calcColor(GeoPoint point) {
-        return _scene.getAmbientLight().getIntensity();
+    private Color calcColor(GeoPoint intersection) {
+        Color color = _scene.getAmbientLight().getIntensity();
+        color = color.add(intersection._geometry.getEmission());
+        return color;
     }
-
 
     /**
      * Create the image file in jpeg format

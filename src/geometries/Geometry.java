@@ -13,8 +13,7 @@ public abstract class Geometry implements Intersectable {
     /**
      * constructor
      *
-     * @param emission the emission
-     *                 light of the geometry
+     * @param emission the emission light of the geometry
      */
     public Geometry(Color emission) {
         this._emission = emission;
@@ -31,7 +30,7 @@ public abstract class Geometry implements Intersectable {
     /**
      * the getter for the emission light on the geometry
      *
-     * @return the emssion light
+     * @return the emission light
      */
     public Color getEmission() {
         return _emission;
