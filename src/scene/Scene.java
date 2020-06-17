@@ -13,6 +13,7 @@ import java.util.List;
 /**
  * scene class create a scene to work on
  * contain 6 fields:
+ * _lights the lights of the scene
  * _name name of scene
  * _background color to paint the background of scene
  * _ambientLight light/color that lights the environment
@@ -41,7 +42,7 @@ public class Scene {
     }
 
     /**
-     * a simple geter of list of light souce
+     * a simple getter of list of light source
      *
      * @return list of light
      */

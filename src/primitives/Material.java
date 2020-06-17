@@ -6,18 +6,42 @@ package primitives;
 public class Material {
     double _kD;
     double _kS;
-    int _nShiniess;
+    int _nShininess;
 
     /**
-     * a simple contreator for Material
-     * @param kD the distanse
-     * @param ks
-     * @param nShiniess
+     * a simple constructor for Material
+     * @param kD the factor for diffusive light
+     * @param ks the factor for specular light
+     * @param nShininess level of the object's shininess
      */
-    public Material(double kD, double ks, int nShiniess)
+    public Material(double kD, double ks, int nShininess)
     {
         _kD=kD;
         _kS=ks;
-        _nShiniess=nShiniess;
+        _nShininess=nShininess;
+    }
+
+    /**
+     * getter for the factor for diffusive light
+     * @return the factor for diffusive light
+     */
+    public double getKD() {
+        return _kD;
+    }
+
+    /**
+     * getter for the factor for specular light
+     * @return the factor for specular light
+     */
+    public double getKS() {
+        return _kS;
+    }
+
+    /**
+     * getter fot the level of the object's shininess
+     * @return the level of the object's shininess
+     */
+    public int getNShininess() {
+        return _nShininess;
     }
 }

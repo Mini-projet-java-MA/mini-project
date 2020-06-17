@@ -9,6 +9,7 @@ import java.util.List;
 
 /**
  * tube class represents a tube in 3D cartesian coordinate and he define it with a radius and ray
+ *
  * @author aaron
  */
 public class Tube extends RadialGeometry {
@@ -17,26 +18,29 @@ public class Tube extends RadialGeometry {
     /**
      * this is the basic constructor for a tube:
      * he receive ray and radius
+     *
      * @param radius
      * @param ray
      * @throws IllegalArgumentException when the radius is equal or smaller to zero so we don't have a tube
      */
     public Tube(Ray ray, double radius) {
-        super(radius,Color.BLACK);
+        super(radius, Color.BLACK);
         if (radius <= 0)
             throw new IllegalArgumentException("It's not possible to have radius equals to 0");
         this._ray = new Ray(ray);
     }
+
     /**
      * this is the basic constructor for a tube:
      * he receive ray and radius
+     *
      * @param radius
      * @param ray
      * @param emission the emission light of the tube
      * @throws IllegalArgumentException when the radius is equal or smaller to zero so we don't have a tube
      */
-    public Tube(Ray ray, double radius,Color emission) {
-        super(radius,emission);
+    public Tube(Ray ray, double radius, Color emission) {
+        super(radius, emission);
         if (radius <= 0)
             throw new IllegalArgumentException("It's not possible to have radius equals to 0");
         this._ray = new Ray(ray);
@@ -44,6 +48,7 @@ public class Tube extends RadialGeometry {
 
     /**
      * simple function get the ray of the tube
+     *
      * @return the ray
      */
     public Ray getRay() {
@@ -52,6 +57,7 @@ public class Tube extends RadialGeometry {
 
     /**
      * the function should return the normal to the tube in size one
+     *
      * @param point- he receive a point on cycle tube
      * @return a normal of the tube normalize
      */
