@@ -49,7 +49,6 @@ public class Polygon extends Geometry {
      */
     public Polygon(Color emission, Point3D... vertices) {
         super(emission);
-
         if (vertices.length < 3)
             throw new IllegalArgumentException("A polygon can't have less than 3 vertices");
         _vertices = List.of(vertices);

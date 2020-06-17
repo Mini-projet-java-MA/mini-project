@@ -5,7 +5,6 @@ import primitives.Point3D;
 import primitives.Ray;
 import primitives.Vector;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static primitives.Util.alignZero;
@@ -24,9 +23,7 @@ public class Plane extends Geometry {
      * @param p3 3rd point
      */
     public Plane(Point3D p1, Point3D p2, Point3D p3) {
-        super(Color.BLACK);
-        _p = new Point3D(p1);
-        _normal = getNormal(p1, p2, p3);
+        this(p1, p2, p3, Color.BLACK);
     }
 
     /**
@@ -58,9 +55,7 @@ public class Plane extends Geometry {
      * @param normal the vector normalized we'll use to build the plane
      */
     public Plane(Point3D p, Vector normal) {
-        super(Color.BLACK);
-        _p = new Point3D(p);
-        _normal = normal.normalized();
+        this(p, normal, Color.BLACK);
     }
 
     /**
