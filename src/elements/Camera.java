@@ -16,7 +16,7 @@ public class Camera {
     private Vector _vright;
 
     /**
-     * a simple contractor for camera
+     * a simple constuctor for camera
      * @param p0-the  place of the camera
      * @param vto-    where the vector point outgoing from the camera
      * @param vup-the vector vertical to vto

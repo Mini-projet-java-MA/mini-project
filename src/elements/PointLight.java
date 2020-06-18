@@ -11,7 +11,7 @@ public class PointLight extends Light implements LightSource {
     protected Point3D _position;
     protected   double _kC, _kL, _kQ;
     /**
-     * Contractor to build a Point light
+     * Constructor to build a Point light
      *
      * @param intensity
      * @param position  localisation of the light

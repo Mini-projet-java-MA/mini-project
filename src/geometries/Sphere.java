@@ -29,8 +29,7 @@ public class Sphere extends RadialGeometry {
         _center = center;
     }
     public Sphere(double radius, Point3D center) {
-        super(radius,Color.BLACK);
-        _center = center; 
+        this(radius, center, Color.BLACK);
     }
 
     /**

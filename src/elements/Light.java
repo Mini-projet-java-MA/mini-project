@@ -17,8 +17,8 @@ public abstract class Light {
     }
 
     /**
-     * corrector for the abrtrac class light to initialize Lights color intensity
-     * @param intensity his the color of the light in this abstrac class
+     * constructor for the abstract class light to initialize Lights color intensity
+     * @param intensity this is the color of the light in this abstract class
      */
     public Light(Color intensity)
     {

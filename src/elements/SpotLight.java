@@ -13,7 +13,7 @@ public class SpotLight extends PointLight {
     //***************** Constructors **********************//
 
     /**
-     * contractor for spot light
+     * constructor for spot light
      * @param intensity
      * @param position location  of the light
      * @param direction of light
