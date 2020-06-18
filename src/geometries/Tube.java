@@ -1,9 +1,6 @@
 package geometries;
 
-import primitives.Color;
-import primitives.Point3D;
-import primitives.Ray;
-import primitives.Vector;
+import primitives.*;
 
 import java.util.List;
 
@@ -19,32 +16,41 @@ public class Tube extends RadialGeometry {
      * this is the basic constructor for a tube:
      * he receive ray and radius
      *
-     * @param radius
-     * @param ray
-     * @throws IllegalArgumentException when the radius is equal or smaller to zero so we don't have a tube
+     * @param radius  radius of tube
+     * @param ray the ray of tube
      */
     public Tube(Ray ray, double radius) {
-        super(radius, Color.BLACK);
-        if (radius <= 0)
-            throw new IllegalArgumentException("It's not possible to have radius equals to 0");
-        this._ray = new Ray(ray);
+        this(ray, radius, Color.BLACK);
+
     }
 
     /**
      * this is the basic constructor for a tube:
      * he receive ray and radius
      *
-     * @param radius
-     * @param ray
+     * @param radius raduis of the tube
+     * @param ray ray of the tube
      * @param emission the emission light of the tube
-     * @throws IllegalArgumentException when the radius is equal or smaller to zero so we don't have a tube
      */
     public Tube(Ray ray, double radius, Color emission) {
-        super(radius, emission);
+        this(ray, radius, emission, new Material(0, 0, 0));
+    }
+    /**
+     * this is the basic constructor for a tube:
+     * he receive ray and radius
+     * @param radius raduis of the tube
+     * @param ray ray of the tube
+     * @param emission the emission light of the tube
+     * @param material his the material that represent the objet
+     * @throws IllegalArgumentException when the radius is equal or smaller to zero so we don't have a tube
+     */
+    public Tube(Ray ray, double radius, Color emission ,Material material) {
+        super(radius, emission, material);
         if (radius <= 0)
             throw new IllegalArgumentException("It's not possible to have radius equals to 0");
         this._ray = new Ray(ray);
     }
+
 
     /**
      * simple function get the ray of the tube

@@ -10,6 +10,19 @@ import static primitives.Util.isZero;
  * class Triangle represents a triangle in 3D cartesian coordinate system
  */
 public class Triangle extends Polygon {
+
+    /**
+     * this is a basic triangle constructor that get 3 points and build a triangle from them
+     * in did 3 points are already a triangle
+     * this constructor uses the constructor of the parent class Polygon
+     * The Triangle will not have it's own color (initialized to BLACK)
+     * @param p1 1st point
+     * @param p2 2nd point
+     * @param p3 3rd point
+     */
+    public Triangle(Point3D p1, Point3D p2, Point3D p3) {
+        this(Color.BLACK, p1, p2, p3);
+    }
     /**
      * this is a basic triangle constructor that get 3 points and build a triangle from them
      * in did 3 points are already a triangle
@@ -21,21 +34,20 @@ public class Triangle extends Polygon {
      * @param p3       3rd point
      */
     public Triangle(Color emission, Point3D p1, Point3D p2, Point3D p3) {
-        super(emission, p1, p2, p3);
+        this(emission, new Material(0,0,0),p1, p2, p3);
     }
-
     /**
      * this is a basic triangle constructor that get 3 points and build a triangle from them
      * in did 3 points are already a triangle
      * this constructor uses the constructor of the parent class Polygon
-     * The Triangle will not have it's own color (initialized to BLACK)
      *
-     * @param p1 1st point
-     * @param p2 2nd point
-     * @param p3 3rd point
+     * @param emission the emission light of the triangle
+     * @param p1       1st point
+     * @param p2       2nd point
+     * @param p3       3rd point
      */
-    public Triangle(Point3D p1, Point3D p2, Point3D p3) {
-        this(Color.BLACK, p1, p2, p3);
+    public Triangle(Color emission,Material material, Point3D p1, Point3D p2, Point3D p3) {
+        super(emission, material,p1, p2, p3);
     }
 
     @Override

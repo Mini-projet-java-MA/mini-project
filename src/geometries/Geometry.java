@@ -13,6 +13,14 @@ public abstract class Geometry implements Intersectable {
     protected Material _material;
 
     /**
+     * constructor just without Material
+     *
+     * @param emission the emission light of the geometry
+     */
+    public Geometry(Color emission) {
+    this(emission, new Material(0,0,0));
+    }
+    /**
      * constructor
      *
      * @param emission the emission light of the geometry
@@ -21,14 +29,12 @@ public abstract class Geometry implements Intersectable {
         this._emission = emission;
         this._material=material;
     }
-
     /**
      * default constructor
      * initiate the emission light with the Color.Black
      */
     public Geometry() {
-        this._emission = Color.BLACK;
-        this._material=new Material(0,0,0);
+        this(Color.BLACK);
     }
 
     /**

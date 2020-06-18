@@ -14,10 +14,10 @@ public class Material {
      * @param ks the factor for specular light
      * @param nShininess level of the object's shininess
      */
-    public Material(double kD, double ks, int nShininess)
+    public Material(double kD, double kS, int nShininess)
     {
         _kD=kD;
-        _kS=ks;
+        _kS=kS;
         _nShininess=nShininess;
     }
 
@@ -45,10 +45,6 @@ public class Material {
         return _nShininess;
     }
 
-    /**
-     *
-     * @return
-     */
-    public double getKd(){return _kD}
-    public
+
+
 }
