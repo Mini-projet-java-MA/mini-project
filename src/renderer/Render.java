@@ -1,13 +1,13 @@
 package renderer;
 
-import primitives.*;
-import geometries.*;
-import elements.*;
-import primitives.Vector;
-import scene.Scene;
+import elements.Camera;
+import elements.LightSource;
+import geometries.Intersectable;
 import geometries.Intersectable.GeoPoint;
+import primitives.*;
+import scene.Scene;
 
-import java.util.*;
+import java.util.List;
 
 /**
  * th object of this class is to create pixel matrix of picture basinc on scene with 3D model
@@ -111,10 +111,10 @@ public class Render {
     }
 
     /**
-     * Calculate the color intensity in a point
+     * Calculate the color intensity in a point aproch phong model
      *
      * @return the color intensity
-     */
+*/
     private Color calcColor(GeoPoint intersection) {
         Color color = _scene.getAmbientLight().getIntensity();
         color = color.add(intersection._geometry.getEmission());
@@ -122,31 +122,58 @@ public class Render {
         Vector n = intersection._geometry.getNormal(intersection.getPoint());
         Material material = intersection._geometry.getMaterial();
         int nShininess = material.getNshininess();
-        double kd = material.getKd();
-        double ks = material.getKs();
+        double kD = material.getKd();
+        double kS = material.getKs();
         for (LightSource lightSource : _scene.getLight()) {
             Vector l = lightSource.getL(intersection.getPoint());
             if (sign(n.dotProduct(l)) == sign(n.dotProduct(v))) {
                 Color lightIntensity = lightSource.getIntensity(intersection.getPoint());
-                color = color.add(calcDiffusive(kd, l, n, lightIntensity),
-                        calcSpecular(ks, l, n, v, nShininess, lightIntensity));
+                color = color.add(calcDiffusive(kD, l, n, lightIntensity),
+                        calcSpecular(kS, l, n, v, nShininess, lightIntensity));
             }
         }
+        return  color;
+    }
 
-        private Color calcDiffusive(double kd, double nl, Color intensity)
-        {
-            if (nl < 0) {
-                nl = -nl;
-            }
-            return intensity.scale(nl * kd);
+    /**
+     *
+     * @param kS
+     * @param l
+     * @param n
+     * @param v
+     * @param nShininess
+     * @param lightIntensity
+     * @return
+     */
+
+    private Color calcSpecular(double kS, Vector l, Vector n, Vector v, int nShininess, Color lightIntensity) {
+
+        double p = nShininess;
+
+        Vector r = l.add(n.scale(-2 *l.dotProduct(n))); // nl must not be zero!
+        double minusVr = Util.alignZero(r.dotProduct(v));
+        if (minusVr <= 0) {
+            return Color.BLACK; // view from direction opposite to r vector
         }
-            /**
-             * Create the image file in jpeg format
-             */
-            public void writeToImage () {
-                _imageWriter.writeToImage();
-            }
-
+        return lightIntensity.scale(kS* Math.pow(minusVr, p));
+    }
+    /**
+     *this function calculate the diffusive ligh
+     * @param kD the factor of the diffusive light
+     * @param l the vector of the light source
+     * @param n the normal vector to the object
+     * @param lightIntensity the intensity of the light
+     * @return the diffusive light
+     */
+        private Color calcDiffusive(double kD, Vector l,Vector n,  Color lightIntensity) {
+            return lightIntensity.scale(kD * Math.abs(l.dotProduct(n)));
+        }
+        /**
+         * Create the image file in jpeg format
+         */
+        public void writeToImage() {
+            _imageWriter.writeToImage();
         }
 
 }
+

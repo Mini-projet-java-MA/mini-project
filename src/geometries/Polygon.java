@@ -89,6 +89,7 @@ public class Polygon extends Geometry {
      */
     public Polygon(Point3D... vertices) {
         this(Color.BLACK, vertices);
+
     }
     /**
      * Polygon Constructor receiving vertices but without color (which will be BLACK)
@@ -96,7 +97,7 @@ public class Polygon extends Geometry {
      * @param emission color of plane
      */
     public Polygon(Color emission,Point3D... vertices) {
-        this(Color.BLACK, new Material(0,0,0), vertices);
+        this(emission, new Material(0,0,0), vertices);
     }
     @Override
     public Vector getNormal(Point3D point) {
@@ -105,6 +106,28 @@ public class Polygon extends Geometry {
 
     @Override
     public List<GeoPoint> findIntersections(Ray ray) {
-        return null;
+        List<GeoPoint> intersection = _plane.findIntersections(ray);
+        if (intersection == null) return null;
+
+        Point3D p0 = ray.getP0();
+        Vector v = ray.getDirection();
+
+        Vector v1 = _vertices.get(1).subtract(p0);
+        Vector v2 = _vertices.get(0).subtract(p0);
+
+        double sign = v.dotProduct(v1.crossProduct(v2));
+        if (isZero(sign)) return null;
+
+        boolean positive = sign > 0;
+        for (int i = _vertices.size() - 1; i > 0; --i) {
+            v1 = v2;
+            v2 = _vertices.get(i).subtract(p0);
+            sign = Util.alignZero(v.dotProduct(v1.crossProduct(v2)));
+            if (isZero(sign)) return null;
+            if (positive != (sign > 0)) return null;
+        }
+
+        intersection.get(0)._geometry = this;
+        return intersection;
     }
 }
