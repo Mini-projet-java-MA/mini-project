@@ -46,8 +46,19 @@ public abstract class Geometry implements Intersectable {
         return _emission;
     }
 
+    /**
+     *
+     * @return material of the geometry object
+     */
     public Material getMaterial() {
         return _material;
+    }
+    /**
+     *
+     * @return material of the geometry object
+     */
+    public Geometry getGeometry() {
+        return this;
     }
 
     /**

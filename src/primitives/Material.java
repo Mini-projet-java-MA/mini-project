@@ -11,7 +11,7 @@ public class Material {
     /**
      * a simple constructor for Material
      * @param kD the factor for diffusive light
-     * @param ks the factor for specular light
+     * @param kS the factor for specular light
      * @param nShininess level of the object's shininess
      */
     public Material(double kD, double kS, int nShininess)
@@ -25,7 +25,7 @@ public class Material {
      * getter for the factor for diffusive light
      * @return the factor for diffusive light
      */
-    public double getKD() {
+    public double getKd() {
         return _kD;
     }
 
@@ -33,15 +33,14 @@ public class Material {
      * getter for the factor for specular light
      * @return the factor for specular light
      */
-    public double getKS() {
+    public double getKs() {
         return _kS;
     }
-
     /**
      * getter fot the level of the object's shininess
      * @return the level of the object's shininess
      */
-    public int getNShininess() {
+    public int getNshininess() {
         return _nShininess;
     }
 
