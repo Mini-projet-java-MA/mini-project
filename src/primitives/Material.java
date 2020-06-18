@@ -20,4 +20,11 @@ public class Material {
         _kS=ks;
         _nShiniess=nShiniess;
     }
+
+    /**
+     *
+     * @return
+     */
+    public double getKd(){return _kD}
+    public
 }
