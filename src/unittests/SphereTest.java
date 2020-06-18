@@ -80,8 +80,8 @@ public class SphereTest {
         if (intersectionsList.get(0).getPoint().getX().get() > intersectionsList.get(1).getPoint().getX().get()) {
             intersectionsList = List.of(intersectionsList.get(1), intersectionsList.get(0));
         }
-        assertEquals("must be equal", new Point3D(-1.732050807569, 1, 0), intersectionsList.get(0));
-        assertEquals("must be equal", new Point3D(1.732050807569, 1, 0), intersectionsList.get(1));
+        assertEquals("must be equal", new Point3D(-1.732050807569, 1, 0), intersectionsList.get(0).getPoint());
+        assertEquals("must be equal", new Point3D(1.732050807569, 1, 0), intersectionsList.get(1).getPoint());
 
 
         //TC03 ray start inside sphere:1 intersection
@@ -90,7 +90,7 @@ public class SphereTest {
         intersectionsList = sphere.findIntersections(ray);
         assertNotNull("must be not empty", intersectionsList);
         assertEquals("must be equal to one", 1, intersectionsList.size());
-        assertEquals("must be equal", new Point3D(0, 0, -5.898979485566), intersectionsList.get(0));
+        assertEquals("must be equal", new Point3D(0, 0, -5.898979485566), intersectionsList.get(0).getPoint());
 
         //TC04 ray starts outside sphere after it, due to direction- no intersection
         ray = new Ray(new Point3D(0, 0, 0), new Vector(0, 0, -1));
@@ -107,7 +107,7 @@ public class SphereTest {
         intersectionsList = sphere.findIntersections(ray);
         assertNotNull("must be not empty", intersectionsList);
         assertEquals("must be equal to one", 1, intersectionsList.size());
-        assertEquals("must be equal", new Point3D(0, 0, 2), intersectionsList.get(0));
+        assertEquals("must be equal", new Point3D(0, 0, 2), intersectionsList.get(0).getPoint());
 
         // TC12; Ray starts at sphere and goes outside
         ray = new Ray(new Point3D(2, 0, 0), new Vector(2.29, 4.67, 0));
@@ -123,7 +123,7 @@ public class SphereTest {
         intersectionsList = sphere.findIntersections(ray);
         assertNotNull("must be not empty", intersectionsList);
         assertEquals("must be equal to one", 1, intersectionsList.size());
-        assertEquals("must be equal", new Point3D(0, 0, -5), intersectionsList.get(0));
+        assertEquals("must be equal", new Point3D(0, 0, -5), intersectionsList.get(0).getPoint());
 
         //TC14 ray starts on sphere surface, to the outside:
         //no intersection because we don't take in account the ray head
@@ -131,9 +131,6 @@ public class SphereTest {
         sphere = new Sphere(2, new Point3D(0, 0, 1));
         intersectionsList = sphere.findIntersections(ray);
         assertNull("must be empty",intersectionsList);
-        /*assertNotNull("must be not empty", intersectionsList);
-        assertEquals("must be equal to one", 1, intersectionsList.size());
-        assertEquals("must be equal", new Point3D(0, 0, 3), intersectionsList.get(0));*/
 
         //TC15 ray starts on sphere surface, to the inside:
         //1 intersection because we don't take in account the ray head
@@ -142,7 +139,7 @@ public class SphereTest {
         intersectionsList = sphere.findIntersections(ray);
         assertNotNull("must be not empty", intersectionsList);
         assertEquals("must be equal to one", 1, intersectionsList.size());
-        assertEquals("must be equal", new Point3D(0, 0, 8), intersectionsList.get(0));
+        assertEquals("must be equal", new Point3D(0, 0, 8), intersectionsList.get(0).getPoint());
 
 
         //TC16 ray starts outside of the sphere to the outside but on a line aligned with the center: no intersections
@@ -157,8 +154,8 @@ public class SphereTest {
         intersectionsList = sphere.findIntersections(ray);
         assertNotNull("must be not empty", intersectionsList);
         assertEquals("must be equal to one", 2, intersectionsList.size());
-        assertEquals("must be equal", new Point3D(0, 0, -1), intersectionsList.get(0));
-        assertEquals("must be equal", new Point3D(0, 0, -11), intersectionsList.get(1));
+        assertEquals("must be equal", new Point3D(0, 0, -1), intersectionsList.get(0).getPoint());
+        assertEquals("must be equal", new Point3D(0, 0, -11), intersectionsList.get(1).getPoint());
 
         //TC18 ray starts on sphere surface, to the outside on the same line that the center: 1 intersection
         ray = new Ray(new Point3D(0, 0, 1), new Vector(0, 0, 1));
@@ -166,7 +163,7 @@ public class SphereTest {
         intersectionsList = sphere.findIntersections(ray);
         assertNotNull("must be not empty", intersectionsList);
         assertEquals("must be equal to one", 1, intersectionsList.size());
-        assertEquals("must be equal", new Point3D(0, 0, 5), intersectionsList.get(0));
+        assertEquals("must be equal", new Point3D(0, 0, 5), intersectionsList.get(0).getPoint());
 
         // **** Group: Special cases
         //TC19 ray is on a line that vertical to radius- ray starts on the radius line
