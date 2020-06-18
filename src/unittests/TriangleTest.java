@@ -46,7 +46,7 @@ public class TriangleTest {
         List<Intersectable.GeoPoint> intersectionsList = triangle.findIntersections(ray);
         assertNotNull("must be not empty", intersectionsList);
         assertEquals("must be equal to 1", 1, intersectionsList.size());
-        assertEquals("must be the same", new Point3D(0, 2, 2), intersectionsList.get(0));
+        assertEquals("must be the same", new Point3D(0, 2, 2), intersectionsList.get(0).getPoint());
 
         //TC02 outside against edge
         ray = new Ray(new Point3D(5, 6, 0), new Vector(0, 0, -1));
