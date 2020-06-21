@@ -5,7 +5,7 @@ import primitives.Point3D;
 import primitives.Vector;
 
 /**
- * this class direction light of light in cartesian 3D coordinate system
+ * this is the class for the direction of light in cartesian 3D coordinate system
  */
 public class DirectionalLight extends  Light implements LightSource {
     private Vector  _direction;
