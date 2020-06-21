@@ -10,7 +10,7 @@ import scene.Scene;
 import java.util.List;
 
 /**
- * th object of this class is to create pixel matrix of picture basinc on scene with 3D model
+ * the object of this class is to create pixel matrix of picture basic on scene with 3D model
  */
 public class Render {
     private Scene _scene;
@@ -28,7 +28,7 @@ public class Render {
     }
 
     /**
-     * this func creat image
+     * this func create an image
      */
     public void renderImage() {
         java.awt.Color background = _scene.getBackground().getColor();
@@ -137,13 +137,13 @@ public class Render {
 
     /**
      *
-     * @param kS
-     * @param l
-     * @param n
-     * @param v
-     * @param nShininess
-     * @param lightIntensity
-     * @return
+     * @param kS factor reduces the specular light.
+     * @param l direction vector from light source to intersection point on geometry.
+     * @param n normal vector from geometry.
+     * @param v direction vector
+     * @param nShininess level of shininess (for calculate the specular light)
+     * @param lightIntensity color of light from light source
+     * @return specular light (color).
      */
 
     private Color calcSpecular(double kS, Vector l, Vector n, Vector v, int nShininess, Color lightIntensity) {
