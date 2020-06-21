@@ -32,8 +32,8 @@ public class Sphere extends RadialGeometry {
      * @param center - point 3d that his the location of the sphere
      * @param emission the emission light of the sphere
      */
-    public Sphere(double radius, Point3D center,Color emission) {
-        this((radius, center, emission, new Material(0, 0, 0));
+    public Sphere(Color emission,double radius, Point3D center) {
+        this(emission, new Material(0, 0, 0),radius, center);
     }
     /**
      * this is a basic constructor it receives two param radius and center
@@ -41,7 +41,7 @@ public class Sphere extends RadialGeometry {
      * @param center - point 3d that his the location of the sphere
      */
     public Sphere(double radius, Point3D center) {
-        this(radius, center, Color.BLACK);
+        this( Color.BLACK,radius, center);
     }
 
     /**
