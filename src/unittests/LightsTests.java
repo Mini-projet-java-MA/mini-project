@@ -9,6 +9,7 @@ import renderer.*;
 import scene.Scene;
 import primitives.Color;
 
+
 /**
  * Test rendering abasic image
  * 
