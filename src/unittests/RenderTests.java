@@ -50,7 +50,7 @@ public class RenderTests {
         scene.setCamera(new Camera(Point3D.ZERO, new Vector(0, 0, 1), new Vector(0, -1, 0)));
         scene.setDistance(100);
         scene.setBackground(Color.BLACK);
-        scene.setAmbientLight(new AmbientLight(new Color(java.awt.Color.WHITE), 0.2));
+        scene.setAmbientLight(new AmbientLight(new Color(java.awt.Color.WHITE), 0.4));
 
         scene.addGeometries(new Sphere(50, new Point3D(0, 0, 100)));
 
