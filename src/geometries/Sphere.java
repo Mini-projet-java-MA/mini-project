@@ -22,7 +22,7 @@ public class Sphere extends RadialGeometry {
      * @param emission the emission light of the sphere
      * @param material his the material that represent the objet
      */
-    public Sphere(double radius, Point3D center, Color emission , Material material) {
+    public Sphere(Color emission , Material material,double radius, Point3D center, ) {
             super(radius,emission, material);
             _center = center;
     }
