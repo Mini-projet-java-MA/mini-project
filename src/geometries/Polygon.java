@@ -51,7 +51,7 @@ public class Polygon extends Geometry {
         _vertices = List.of(vertices);
         // Generate the plane according to the first three vertices and associate the
         // polygon with this plane.
-        
+
         // The plane holds the invariant normal (orthogonal unit) vector to the polygon
         _plane = new Plane(vertices[0], vertices[1], vertices[2],emission);
         if (vertices.length == 3) return; // no need for more tests for a Triangle
