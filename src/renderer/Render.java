@@ -166,7 +166,7 @@ public class Render {
      * @return the diffusive light
      */
         private Color calcDiffusive(double kD, Vector l,Vector n,  Color lightIntensity) {
-             return lightIntensity.scale(kD * Math.abs(l.dotProduct(n)));
+            return lightIntensity.scale(kD * Math.abs(l.dotProduct(n)));
         }
         /**
          * Create the image file in jpeg format
