@@ -33,11 +33,11 @@ public abstract class Light {
     }
     /**
      *this function is the constructor it allows us to set an ambient light in our scene
-     * @param ia-refill light
+     * @param intensity-refill light
      * @param ka-promotes light refill
      */
-    public  Light(Color ia, double ka) {
-        this._intensity = ia.scale(ka);
+    public  Light(Color intensity, double ka) {
+        this._intensity = intensity.scale(ka);
     }
 
 }

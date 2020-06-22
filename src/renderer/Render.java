@@ -69,14 +69,14 @@ public class Render {
      */
     private GeoPoint getClosestPoint(List<GeoPoint> intersectionPoints) {
         Intersectable.GeoPoint result = null;
-        double mindist = Double.POSITIVE_INFINITY;
+        double minDist = Double.POSITIVE_INFINITY;
 
         Point3D p0 = this._scene.getCamera().getP0();
 
         for (Intersectable.GeoPoint pt : intersectionPoints) {
             double distance = p0.distance(pt._point);
-            if (distance < mindist) {
-                mindist = distance;
+            if (distance < minDist) {
+                minDist = distance;
                 result = pt;
             }
         }
@@ -115,7 +115,7 @@ public class Render {
      *
      * @return the color intensity
 */
-    private Color calcColor(GeoPoint intersection) {
+    private Color calcColor(GeoPoint intersection ) {
         Color color = _scene.getAmbientLight().getIntensity();
         color = color.add(intersection._geometry.getEmission());
         Vector v = intersection.getPoint().subtract(_scene.getCamera().getP0()).normalize();
@@ -151,7 +151,7 @@ public class Render {
         double p = nShininess;
 
         Vector r = l.add(n.scale(-2 *l.dotProduct(n))); // nl must not be zero!
-        double minusVr = Util.alignZero(r.dotProduct(v));
+        double minusVr = - Util.alignZero(r.dotProduct(v));
         if (minusVr <= 0) {
             return Color.BLACK; // view from direction opposite to r vector
         }
@@ -166,7 +166,7 @@ public class Render {
      * @return the diffusive light
      */
         private Color calcDiffusive(double kD, Vector l,Vector n,  Color lightIntensity) {
-            return lightIntensity.scale(kD * Math.abs(l.dotProduct(n)));
+             return lightIntensity.scale(kD * Math.abs(l.dotProduct(n)));
         }
         /**
          * Create the image file in jpeg format
