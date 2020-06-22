@@ -13,7 +13,7 @@ public class PointLight extends Light implements LightSource {
     /**
      * Constructor to build a Point light
      *
-     * @param intensity
+     * @param intensity light intensity
      * @param position  localisation of the light
      * @param kC   coefficient of quadratic attenuation of the light in the distance
      * @param kL   coefficient of linear weakening of the light in the distance
