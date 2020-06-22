@@ -53,7 +53,7 @@ public class Camera {
     }
 
     /**
-     * 
+     *
      * @return the vector right of camera
      */
     public Vector getVright() {
