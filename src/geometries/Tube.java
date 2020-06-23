@@ -46,9 +46,7 @@ public class Tube extends RadialGeometry {
      */
     public Tube(Ray ray, double radius, Color emission ,Material material) {
         super(radius, emission, material);
-        if (radius <= 0)
-            throw new IllegalArgumentException("It's not possible to have radius equals to 0");
-        this._ray = new Ray(ray);
+        this._ray = ray;
     }
 
 
@@ -77,7 +75,6 @@ public class Tube extends RadialGeometry {
         Vector normal_tube = point.subtract(o);
         //rerun normal tube vector in size one
         return normal_tube.normalize();
-
     }
 
     @Override
