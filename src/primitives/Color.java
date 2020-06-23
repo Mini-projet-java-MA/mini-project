@@ -116,13 +116,13 @@ public class Color {
     /**
      * Color getter - returns the color after converting it into java.awt.Color
      * object During the conversion any component bigger than 255 is set to 255
+     *
      * @return java.awt.Color object based on this Color RGB components
      */
     public java.awt.Color getColor() {
-        int r = (int)_r, g = (int)_g, b = (int)_b;
-        return new java.awt.Color(r > 255 ? 255 : r, g > 255 ? 255 : g, b > 255 ? 255 : b);
+        int r = (int) _r, g = (int) _g, b = (int) _b;
+        return new java.awt.Color(Math.min(r, 255), Math.min(g, 255), Math.min(b, 255));
     }
-
     /**
      * Operation of adding this and one or more other colors (by component)
      *

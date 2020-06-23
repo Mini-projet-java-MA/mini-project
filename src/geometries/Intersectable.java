@@ -40,12 +40,12 @@ public interface Intersectable {
 
         /**
          * getter for the point
-         * @return
+         * @return point
          */
         public Point3D getPoint() {
             return _point;
         }
-
+        
         @Override
         public boolean equals(Object o) {
             if (this == o) return true;
