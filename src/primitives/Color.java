@@ -5,7 +5,7 @@ package primitives;
  * non-negative RGB values. The colors are maintained without upper limit of
  * 255. Some additional operations are added that are useful for manipulating
  * light's colors
- * 
+ *
  * @author Dan Zilberstein
  */
 public class Color {
@@ -20,7 +20,8 @@ public class Color {
     /**
      * Default constructor - to generate Black Color (privately)
      */
-    private Color() {}
+    private Color() {
+    }
 
     /**
      * Constructor to generate a color according to RGB components Each component in
@@ -40,7 +41,7 @@ public class Color {
 
     /**
      * Copy constructor for Color
-     * 
+     *
      * @param other the source color
      */
     public Color(Color other) {
@@ -51,7 +52,7 @@ public class Color {
 
     /**
      * Constructor on base of java.awt.Color object
-     * 
+     *
      * @param other java.awt.Color's source object
      */
     public Color(java.awt.Color other) {
@@ -62,7 +63,7 @@ public class Color {
 
     /**
      * Color setter to reset the color to BLACK
-     * 
+     *
      * @return the Color object itself for chaining calls
      */
     public Color setColor() {
@@ -75,6 +76,7 @@ public class Color {
     /**
      * Color setter to generate a color according to RGB components Each component
      * in range 0..255 (for printed white color) or more [for lights]
+     *
      * @param r Red component
      * @param g Green component
      * @param b Blue component
@@ -91,6 +93,7 @@ public class Color {
 
     /**
      * Color setter to copy RGB components from another color
+     *
      * @param other source Color object
      * @return the Color object itself for chaining calls
      */
@@ -103,6 +106,7 @@ public class Color {
 
     /**
      * Color setter to take components from an base of java.awt.Color object
+     *
      * @param other java.awt.Color's source object
      * @return the Color object itself for chaining calls
      */
@@ -123,6 +127,7 @@ public class Color {
         int r = (int) _r, g = (int) _g, b = (int) _b;
         return new java.awt.Color(Math.min(r, 255), Math.min(g, 255), Math.min(b, 255));
     }
+
     /**
      * Operation of adding this and one or more other colors (by component)
      *
@@ -156,6 +161,7 @@ public class Color {
 
     /**
      * Scale the color by (1 / reduction factor)
+     *
      * @param k reduction factor
      * @return new Color object which is the result of the operation
      */

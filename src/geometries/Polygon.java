@@ -25,6 +25,7 @@ public class Polygon extends Geometry {
     /**
      * Polygon constructor based on vertices list. The list must be ordered by edge
      * path. The polygon must be convex.
+     *
      * @param emission own color of the polygon
      * @param vertices list of vertices according to their order by edge path
      * @param material material of plane
@@ -49,11 +50,11 @@ public class Polygon extends Geometry {
         if (vertices.length < 3)
             throw new IllegalArgumentException("A polygon can't have less than 3 vertices");
         _vertices = List.of(vertices);
-            // Generate the plane according to the first three vertices and associate the
+        // Generate the plane according to the first three vertices and associate the
         // polygon with this plane.
 
         // The plane holds the invariant normal (orthogonal unit) vector to the polygon
-        _plane = new Plane(vertices[0], vertices[1], vertices[2],emission,material);
+        _plane = new Plane(vertices[0], vertices[1], vertices[2], emission, material);
         if (vertices.length == 3) return; // no need for more tests for a Triangle
 
         Vector n = _plane.getNormal();
@@ -86,20 +87,24 @@ public class Polygon extends Geometry {
 
     /**
      * Polygon Constructor receiving vertices but without color (which will be BLACK)
-     * @param vertices     list of vertices according to their order by edge path
+     *
+     * @param vertices list of vertices according to their order by edge path
      */
     public Polygon(Point3D... vertices) {
         this(Color.BLACK, vertices);
 
     }
+
     /**
      * Polygon Constructor receiving vertices but without color (which will be BLACK)
-     * @param vertices  list of vertices according to their order by edge path
+     *
+     * @param vertices list of vertices according to their order by edge path
      * @param emission color of plane
      */
-    public Polygon(Color emission,Point3D... vertices) {
-        this(emission, new Material(0,0,0), vertices);
+    public Polygon(Color emission, Point3D... vertices) {
+        this(emission, new Material(0, 0, 0), vertices);
     }
+
     @Override
     public Vector getNormal(Point3D point) {
         return _plane.getNormal();

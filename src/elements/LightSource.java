@@ -1,4 +1,5 @@
 package elements;
+
 import primitives.Color;
 import primitives.Point3D;
 import primitives.Vector;
@@ -9,6 +10,7 @@ import primitives.Vector;
 public interface LightSource {
     /**
      * get the Intensity of the lamp
+     *
      * @param p the palce of the Intensity
      * @return the Intensity
      */
@@ -16,6 +18,7 @@ public interface LightSource {
 
     /**
      * return the length of vector of light
+     *
      * @param p -place of light
      * @return the direction of the light point
      */

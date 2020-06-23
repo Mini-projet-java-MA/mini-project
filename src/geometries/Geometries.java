@@ -4,6 +4,7 @@ import primitives.*;
 
 import java.util.LinkedList;
 import java.util.List;
+
 import geometries.Intersectable;
 import geometries.Intersectable.GeoPoint;
 
@@ -12,10 +13,11 @@ import geometries.Intersectable.GeoPoint;
  * class with list of shape.
  */
 public class Geometries implements Intersectable {
-   private List<Intersectable> intersectableList = new LinkedList<>();
+    private List<Intersectable> intersectableList = new LinkedList<>();
 
     /**
      * constructor received many geometries and adding them to the list
+     *
      * @param geometries geometries to add the list
      */
     /* *********constructor*******/
@@ -25,7 +27,6 @@ public class Geometries implements Intersectable {
     }
 
     /**
-     *
      * @return list of point 3D of intersectable
      */
     public List<Intersectable> getIntersectableList() {
@@ -34,6 +35,7 @@ public class Geometries implements Intersectable {
 
     /**
      * function who adding geometry shape to list of the class
+     *
      * @param geometry geometry shape
      */
     public void add(Intersectable... geometry) {

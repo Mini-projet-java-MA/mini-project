@@ -29,6 +29,7 @@ public class ImageWriter {
     private Logger _logger = Logger.getLogger("ImageWriter");
 
     // ***************** Constructors ********************** //
+
     /**
      * Image Writer constructor accepting image name and View Plane parameters,
      *
@@ -49,6 +50,7 @@ public class ImageWriter {
     }
 
     // ***************** Getters/Setters ********************** //
+
     /**
      * View Plane width getter
      *

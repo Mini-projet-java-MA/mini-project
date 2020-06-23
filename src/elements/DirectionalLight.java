@@ -7,13 +7,14 @@ import primitives.Vector;
 /**
  * this is the class for the direction of light in cartesian 3D coordinate system
  */
-public class DirectionalLight extends  Light implements LightSource {
-    private Vector  _direction;
+public class DirectionalLight extends Light implements LightSource {
+    private Vector _direction;
 
     /**
-     *a simple constructor for directional light with it's intensity and direction,
+     * a simple constructor for directional light with it's intensity and direction,
+     *
      * @param intensity intensity of the light
-     * @param direction      direction vector
+     * @param direction direction vector
      */
     public DirectionalLight(Color intensity, Vector direction) {
         super(intensity);
@@ -24,6 +25,7 @@ public class DirectionalLight extends  Light implements LightSource {
     public Vector getL(Point3D p) {
         return _direction;
     }
+
     @Override
     public Color getIntensity(Point3D p) {
         return getIntensity();

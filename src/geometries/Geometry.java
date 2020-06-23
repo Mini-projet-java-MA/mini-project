@@ -18,23 +18,25 @@ public abstract class Geometry implements Intersectable {
      * @param emission the emission light of the geometry
      */
     public Geometry(Color emission) {
-    this(emission, new Material(0,0,0));
+        this(emission, new Material(0, 0, 0));
     }
+
     /**
      * constructor
      *
      * @param emission the emission light of the geometry
      */
-    public Geometry(Color emission,Material material) {
+    public Geometry(Color emission, Material material) {
         this._emission = emission;
-        this._material=material;
+        this._material = material;
     }
+
     /**
      * default constructor
      * initiate the emission light with the Color.Black
      */
     public Geometry() {
-        this(Color.BLACK );
+        this(Color.BLACK);
 
     }
 
@@ -48,7 +50,6 @@ public abstract class Geometry implements Intersectable {
     }
 
     /**
-     *
      * @return material of the geometry object
      */
     public Material getMaterial() {

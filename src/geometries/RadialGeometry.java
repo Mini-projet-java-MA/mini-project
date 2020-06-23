@@ -5,7 +5,7 @@ import primitives.Material;
 
 
 /**
- * this is abstract class represent a shapes geometry that contain radius
+ * this is an abstract class who represents a radial geometry shape
  */
 public abstract class RadialGeometry extends Geometry {
     protected double _radius;
@@ -22,7 +22,7 @@ public abstract class RadialGeometry extends Geometry {
     /**
      * this is simple constructor build the shapes witch radius and default color are black and material is null
      *
-     * @param radius raduis of Radial Geometry
+     * @param radius   raduis of Radial Geometry
      * @param emission color of the Radial Geometry
      */
     public RadialGeometry(double radius, Color emission) {
@@ -31,7 +31,8 @@ public abstract class RadialGeometry extends Geometry {
 
     /**
      * this is simple constructor build the shapes witch radius
-     * @param radius raduis of Radial Geometry
+     *
+     * @param radius   radius of Radial Geometry
      * @param emission color of the Radial Geometry
      * @param material the material that represent the objet
      */

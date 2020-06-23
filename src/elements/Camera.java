@@ -19,8 +19,9 @@ public class Camera {
 
     /**
      * a simple constuctor for camera
+     *
      * @param p0-the  place of the camera
-     * @param vTo where the vector point outgoing from the camera
+     * @param vTo     where the vector point outgoing from the camera
      * @param vUp-the vector vertical to vto
      */
     public Camera(Point3D p0, Vector vTo, Vector vUp) {
@@ -57,7 +58,6 @@ public class Camera {
     }
 
     /**
-     *
      * @return the vector right of camera
      */
     public Vector getVright() {
@@ -67,13 +67,13 @@ public class Camera {
     /**
      * the func should create ray witch point
      *
-     * @param nX number         of pixels in the x axis
-     * @param nY number         of pixels in the y axis
-     * @param j               horizontal index of pixel (from left to right)
-     * @param i vertical        index of pixel (from up to down)
-     * @param screenDistance   the distance between the _p0 and pc where the image are located
-     * @param screenWidth width of the screen
-     * @param screenHeight    height of the screen
+     * @param nX             number         of pixels in the x axis
+     * @param nY             number         of pixels in the y axis
+     * @param j              horizontal index of pixel (from left to right)
+     * @param i              vertical        index of pixel (from up to down)
+     * @param screenDistance the distance between the _p0 and pc where the image are located
+     * @param screenWidth    width of the screen
+     * @param screenHeight   height of the screen
      * @return ray where outgoing construct Ray Through Pixel
      */
     public Ray constructRayThroughPixel(int nX, int nY, int i, int j, double screenDistance, double screenWidth, double screenHeight) {

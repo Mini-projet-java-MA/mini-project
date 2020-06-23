@@ -7,13 +7,15 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- *  this interface for all geometries that are able to intersect from a ray to their entity
+ * this interface for all geometries that are able to intersect from a ray to their entity
+ *
  * @ auther aaron
  */
 public interface Intersectable {
     /**
      * The function looks for intersection points between a ray and a geometry. <br/>
      * If there are no intersections, the function returns null.
+     *
      * @param ray the ray that intersects the object
      * @return a list of all intersection of GeoPoint
      */
@@ -30,8 +32,9 @@ public interface Intersectable {
 
         /**
          * constructor for GeoPoint
+         *
          * @param geometry the geometry we work with
-         * @param point the point we work with
+         * @param point    the point we work with
          */
         public GeoPoint(Geometry geometry, Point3D point) {
             this._geometry = geometry;
@@ -40,12 +43,13 @@ public interface Intersectable {
 
         /**
          * getter for the point
+         *
          * @return point
          */
         public Point3D getPoint() {
             return _point;
         }
-        
+
         @Override
         public boolean equals(Object o) {
             if (this == o) return true;
@@ -54,6 +58,7 @@ public interface Intersectable {
             return Objects.equals(_geometry, geoPoint._geometry) &&
                     Objects.equals(_point, geoPoint._point);
         }
+
         @Override
         public String toString() {
             return "GeoPoint{" +
