@@ -54,6 +54,13 @@ public interface Intersectable {
             return Objects.equals(_geometry, geoPoint._geometry) &&
                     Objects.equals(_point, geoPoint._point);
         }
+        @Override
+        public String toString() {
+            return "GeoPoint{" +
+                    "geometry=" + _geometry +
+                    ", point=" + _point +
+                    '}';
+        }
 
     }
 

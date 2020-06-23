@@ -8,7 +8,6 @@ import primitives.Vector;
  */
 public interface LightSource {
     /**
-     * **********************i not sure
      * get the Intensity of the lamp
      * @param p the palce of the Intensity
      * @return the Intensity

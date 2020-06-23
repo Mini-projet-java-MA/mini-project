@@ -6,8 +6,8 @@ import static primitives.Util.*;
  * this class spot light in of light in cartesian 3D coordinate system
  */
 public class SpotLight extends PointLight {
-    private Vector _direction;
-    //protected Vector _direction - i dont understand  if the variable should be in protected or in private
+    protected Vector _direction;
+
     //***************** Constructors **********************//
 
     /**
