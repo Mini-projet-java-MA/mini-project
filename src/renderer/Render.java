@@ -88,7 +88,6 @@ public class Render {
      *
      * @param val
      * @return boolean value if double and val>0
-     * @auther eliezergensburger
      */
     private boolean sign(double val) {
         return (val > 0d);
@@ -96,7 +95,6 @@ public class Render {
 
     /**
      * function to draw a grid on our image by pixel
-     *
      * @param interval number that the pixels are multiple of this number, are part of the grid.
      */
     public void printGrid(int interval, java.awt.Color color) {
@@ -114,7 +112,8 @@ public class Render {
      * Calculate the color intensity in a point aproch phong model
      *
      * @return the color intensity
-*/
+    */
+
     private Color calcColor(GeoPoint intersection ) {
         Color color = _scene.getAmbientLight().getIntensity();
         color = color.add(intersection._geometry.getEmission());

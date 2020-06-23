@@ -20,6 +20,14 @@ public class Vector {
     }
 
     /**
+     * Vector Constructor receiving two 3D Points
+     * @param p1 head
+     * @param p2
+     */
+    public Vector(Point3D p1, Point3D p2) {
+        this(p1.subtract(p2));
+    }
+    /**
      * this is a basic constructor it receives three numbers and set them as the point head of the vector
      * @param x 1st coordinate
      * @param y 2nd coordinate

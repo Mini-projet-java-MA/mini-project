@@ -77,6 +77,7 @@ public class Tube extends RadialGeometry {
         Vector normal_tube = point.subtract(o);
         //rerun normal tube vector in size one
         return normal_tube.normalize();
+
     }
 
     @Override
