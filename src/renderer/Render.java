@@ -38,8 +38,8 @@ public class Render {
 
         //width and height are the number of pixels in the rows
         //and columns of the view plane
-        double width = (int) _imageWriter.getWidth();
-        double height = (int) _imageWriter.getHeight();
+        int width = (int) _imageWriter.getWidth();
+        int height = (int) _imageWriter.getHeight();
 
         //Nx and nY are the width and height of the image.
         int nX = _imageWriter.getNx(); //columns
@@ -124,10 +124,9 @@ public class Render {
         int nShininess = material.getNshininess();
         double kD = material.getKd();
         double kS = material.getKs();
-        if(_scene.getLight()!=null)
         for (LightSource lightSource : _scene.getLight()) {
             Vector l = lightSource.getL(intersection.getPoint());
-            if (sign(Util.alignZero(n.dotProduct(l))) == sign(Util.alignZero(n.dotProduct(v)))) {
+            if (sign(n.dotProduct(l)) == sign(n.dotProduct(v))) {
                 Color lightIntensity = lightSource.getIntensity(intersection.getPoint());
                 color = color.add(calcDiffusive(kD, l, n, lightIntensity),
                         calcSpecular(kS, l, n, v, nShininess, lightIntensity));
@@ -151,7 +150,7 @@ public class Render {
 
         double p = nShininess;
 
-        Vector r = l.add(n.scale(-2 *Util.alignZero(l.dotProduct(n)))); // nl must not be zero!
+        Vector r = l.add(n.scale(-2 *l.dotProduct(n))); // nl must not be zero!
         double minusVr = - Util.alignZero(r.dotProduct(v));
         if (minusVr <= 0) {
             return Color.BLACK; // view from direction opposite to r vector

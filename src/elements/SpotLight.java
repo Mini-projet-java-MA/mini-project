@@ -14,7 +14,7 @@ public class SpotLight extends PointLight {
 
     /**
      * constructor for spot light
-     * @param intensity
+     * @param intensity light intensity
      * @param position location  of the light
      * @param direction of light
      * @param kC   coefficient of quadratic attenuation of the light in the distance
