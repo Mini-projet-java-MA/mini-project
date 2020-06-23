@@ -145,14 +145,8 @@ public class Render {
 
     private Color calcSpecular(double kS, Vector l, Vector n, Vector v, int nShininess, Color lightIntensity) {
 
-        double p = nShininess;
-
-        Vector r = l.add(n.scale(-2 * l.dotProduct(n))); // nl must not be zero!
-        double minusVr = -Util.alignZero(r.dotProduct(v));
-        if (minusVr <= 0) {
-            return Color.BLACK; // view from direction opposite to r vector
-        }
-        return lightIntensity.scale(kS * Math.pow(minusVr, p));
+        Vector reflection= l.subtract(n.scale(2*l.dotProduct(n))).normalize();
+        return lightIntensity.scale(Math.pow(v.scale(-1).dotProduct(reflection),nShininess));
     }
 
     /**
@@ -165,7 +159,7 @@ public class Render {
      * @return the diffusive light
      */
     private Color calcDiffusive(double kD, Vector l, Vector n, Color lightIntensity) {
-        return lightIntensity.scale(kD * Math.abs(l.dotProduct(n)));
+        return lightIntensity.scale(kD*Math.abs(l.dotProduct(n)));
     }
 
     /**
