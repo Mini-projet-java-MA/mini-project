@@ -4,6 +4,8 @@ import primitives.Point3D;
 import primitives.Ray;
 import primitives.Vector;
 
+import static primitives.Util.isZero;
+
 /**
  * camera class represents camera in 3D Cartesian coordinate
  *
@@ -11,24 +13,26 @@ import primitives.Vector;
  */
 public class Camera {
     private Point3D _p0;
-    private Vector _vto;
-    private Vector _vup;
-    private Vector _vright;
+    private Vector _vTo;
+    private Vector _vUp;
+    private Vector _vRight;
 
     /**
      * a simple constuctor for camera
      * @param p0-the  place of the camera
-     * @param vto where the vector point outgoing from the camera
-     * @param vup-the vector vertical to vto
+     * @param vTo where the vector point outgoing from the camera
+     * @param vUp-the vector vertical to vto
      */
-    public Camera(Point3D p0, Vector vto, Vector vup) {
-        //if the two vectors are not orthogonal throw exception
-        if (vto.dotProduct(vup) != 0)
-            throw new IllegalArgumentException("the vto not orthogonal to vup ");
-        _p0 = new Point3D(p0);
-        _vto = vto.normalized();
-        _vup = vup.normalized();
-        _vright = _vto.crossProduct(_vup).normalize();
+    public Camera(Point3D p0, Vector vTo, Vector vUp) {
+        //if the vectors are not orthogonal, throw exception.
+        if (!isZero(vUp.dotProduct(vTo)))
+            throw new IllegalArgumentException("the vector must be orthogonal");
+
+        this._p0 = p0;
+        this._vTo = vTo.normalized();
+        this._vUp = vUp.normalized();
+
+        _vRight = this._vTo.crossProduct(this._vUp).normalize();
     }
 
     /**
@@ -42,14 +46,14 @@ public class Camera {
      * @return the position of vector camera
      */
     public Vector getVto() {
-        return _vto;
+        return _vTo;
     }
 
     /**
      * @return the vector up of camera
      */
     public Vector getVup() {
-        return _vup;
+        return _vUp;
     }
 
     /**
@@ -57,7 +61,7 @@ public class Camera {
      * @return the vector right of camera
      */
     public Vector getVright() {
-        return _vright;
+        return _vRight;
     }
 
     /**
@@ -73,8 +77,9 @@ public class Camera {
      * @return ray where outgoing construct Ray Through Pixel
      */
     public Ray constructRayThroughPixel(int nX, int nY, int i, int j, double screenDistance, double screenWidth, double screenHeight) {
+        if (isZero(screenDistance)) throw new IllegalArgumentException("distance cannot be 0");
         //image center
-        Point3D screenCenter = _p0.add(_vto.scale(screenDistance));
+        Point3D screenCenter = _p0.add(_vTo.scale(screenDistance));
         //ratio (pixel height&width)
         double ry = screenHeight / nY;
         double rx = screenWidth / nX;
@@ -83,8 +88,8 @@ public class Camera {
         double xPixel = (i - nX / 2.0) * rx + rx / 2.0;
         double yPixel = (j - nY / 2.0) * ry + ry / 2.0;
         Point3D pij = screenCenter;
-        if (xPixel != 0) pij = pij.add(_vright.scale(xPixel));
-        if (yPixel != 0) pij = pij.add(_vup.scale(-yPixel));
+        if (xPixel != 0) pij = pij.add(_vRight.scale(xPixel));
+        if (yPixel != 0) pij = pij.add(_vUp.scale(-yPixel));
         //direction vector to pixel center
         Vector direction = pij.subtract(_p0);
         return new Ray(_p0, direction);
@@ -94,9 +99,9 @@ public class Camera {
     public String toString() {
         return "Camera{" +
                 "_p0=" + _p0 +
-                ", _vUp=" + _vup +
-                ", _vTo=" + _vto +
-                ", _vRight=" + _vright +
+                ", _vUp=" + _vUp +
+                ", _vTo=" + _vTo +
+                ", _vRight=" + _vRight +
                 '}';
     }
 }

@@ -13,7 +13,7 @@ public class AmbientLight extends Light  {
      * @param ka-promotes light refill
      */
     public  AmbientLight(Color intensity, double ka) {
-        super(intensity, ka);
+        super(intensity.scale(ka));
     }
 
 }

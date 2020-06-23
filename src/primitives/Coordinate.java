@@ -25,24 +25,6 @@ public final class Coordinate {
         _coord = alignZero(coord);
     }
 
-    /**
-     * Copy constructor for coordinate
-     *
-     * @param other source Coordinate
-     */
-    public Coordinate(Coordinate other) {
-        _coord = other._coord;
-    }
-
-    /**
-     * Coordinate value getter
-     *
-     * @return coordinate value in double representation
-     */
-    public double get() {
-        return _coord;
-    }
-
     /*************** Admin *****************/
     @Override
     public boolean equals(Object obj) {

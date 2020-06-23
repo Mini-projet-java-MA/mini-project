@@ -28,7 +28,7 @@ public class Render {
     }
 
     /**
-     * this function is used to create an image
+     * this func create an image
      */
     public void renderImage() {
         java.awt.Color background = _scene.getBackground().getColor();
@@ -85,7 +85,8 @@ public class Render {
     }
 
     /**
-     * @param val the value
+     *
+     * @param val
      * @return boolean value if double and val>0
      */
     private boolean sign(double val) {
@@ -94,7 +95,6 @@ public class Render {
 
     /**
      * function to draw a grid on our image by pixel
-     *
      * @param interval number that the pixels are multiple of this number, are part of the grid.
      */
     public void printGrid(int interval, java.awt.Color color) {
@@ -109,11 +109,12 @@ public class Render {
     }
 
     /**
-     * Calculate the color intensity in a point approach phong model
+     * Calculate the color intensity in a point aproch phong model
      *
      * @return the color intensity
-     */
-    private Color calcColor(GeoPoint intersection) {
+    */
+
+    private Color calcColor(GeoPoint intersection ) {
         Color color = _scene.getAmbientLight().getIntensity();
         color = color.add(intersection._geometry.getEmission());
         Vector v = intersection.getPoint().subtract(_scene.getCamera().getP0()).normalize();
@@ -130,44 +131,48 @@ public class Render {
                         calcSpecular(kS, l, n, v, nShininess, lightIntensity));
             }
         }
-        return color;
+        return  color;
     }
 
     /**
-     * @param kS             factor reduces the specular light.
-     * @param l              direction vector from light source to intersection point on geometry.
-     * @param n              normal vector from geometry.
-     * @param v              direction vector
-     * @param nShininess     level of shininess (for calculate the specular light)
+     *
+     * @param kS factor reduces the specular light.
+     * @param l direction vector from light source to intersection point on geometry.
+     * @param n normal vector from geometry.
+     * @param v direction vector
+     * @param nShininess level of shininess (for calculate the specular light)
      * @param lightIntensity color of light from light source
      * @return specular light (color).
      */
 
     private Color calcSpecular(double kS, Vector l, Vector n, Vector v, int nShininess, Color lightIntensity) {
 
-        Vector reflection= l.subtract(n.scale(2*l.dotProduct(n))).normalize();
-        return lightIntensity.scale(Math.pow(v.scale(-1).dotProduct(reflection),nShininess));
-    }
+        double p = nShininess;
 
+        Vector r = l.add(n.scale(-2 *l.dotProduct(n))); // nl must not be zero!
+        double minusVr = - Util.alignZero(r.dotProduct(v));
+        if (minusVr <= 0) {
+            return Color.BLACK; // view from direction opposite to r vector
+        }
+        return lightIntensity.scale(kS* Math.pow(minusVr, p));
+    }
     /**
-     * this function calculate the diffusive ligh
-     *
-     * @param kD             the factor of the diffusive light
-     * @param l              the vector of the light source
-     * @param n              the normal vector to the object
+     *this function calculate the diffusive ligh
+     * @param kD the factor of the diffusive light
+     * @param l the vector of the light source
+     * @param n the normal vector to the object
      * @param lightIntensity the intensity of the light
      * @return the diffusive light
      */
-    private Color calcDiffusive(double kD, Vector l, Vector n, Color lightIntensity) {
-        return lightIntensity.scale(kD*Math.abs(l.dotProduct(n)));
-    }
-
-    /**
-     * Create the image file in jpeg format
-     */
-    public void writeToImage() {
-        _imageWriter.writeToImage();
-    }
+        private Color calcDiffusive(double kD, Vector l,Vector n,  Color lightIntensity) {
+            return lightIntensity.scale(kD * Math.abs(l.dotProduct(n)));
+        }
+        /**
+         * Create the image file in jpeg format
+         */
+        public void writeToImage() {
+            _imageWriter.writeToImage();
+        }
 
 }
 

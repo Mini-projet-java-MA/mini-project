@@ -15,69 +15,80 @@ public class Plane extends Geometry {
 
     /**
      * this is a basic constructor who build a plane from 3 points int cartesian coordinates system
+     *
      * @param p1 1 st point
      * @param p2 2nd point
      * @param p3 3rd point
      */
     public Plane(Point3D p1, Point3D p2, Point3D p3) {
-        this(p1, p2, p3,Color.BLACK);
+        this(p1, p2, p3, Color.BLACK);
     }
 
     /**
      * this is a basic constructor who build a plane from 3 points int cartesian coordinates system
-     * @param p1 1 st point
-     * @param p2 2nd point
-     * @param p3 3rd point
+     *
+     * @param p1       1 st point
+     * @param p2       2nd point
+     * @param p3       3rd point
      * @param emission the emission light of the plane
      */
-    public Plane(Point3D p1, Point3D p2, Point3D p3,Color emission) {
+    public Plane(Point3D p1, Point3D p2, Point3D p3, Color emission) {
         this(p1, p2, p3, emission, new Material(0, 0, 0));
     }
+
     /**
      * this is a basic constructor who build a plane from 3 points int cartesian coordinates system
-     * @param p1 1 st point
-     * @param p2 2nd point
-     * @param p3 3rd point
+     *
+     * @param p1       1 st point
+     * @param p2       2nd point
+     * @param p3       3rd point
      * @param emission the emission light of the plane
      */
-    public Plane(Point3D p1, Point3D p2, Point3D p3,Color emission ,Material material) {
+    public Plane(Point3D p1, Point3D p2, Point3D p3, Color emission, Material material) {
         super(emission, material);
-        _p = new Point3D(p1);
+        _p = p1;
         _normal = getNormal(p1, p2, p3);
     }
+
     /**
      * this constructor build a plane from a single point and a vector that will be normalized
+     *
      * @param p      the point in the plane
      * @param normal the vector normalized we'll use to build the plane
      */
     public Plane(Point3D p, Vector normal) {
-        this(p ,normal,Color.BLACK);
+        this(p, normal, Color.BLACK);
     }
+
     /**
      * this constructor build a plane from a single point and a vector that will be normalized
-     * @param p      the point in the plane
-     * @param normal the vector normalized we'll use to build the plane
+     *
+     * @param p        the point in the plane
+     * @param normal   the vector normalized we'll use to build the plane
      * @param emission the emission light of the plane
      */
-    public Plane(Point3D p, Vector normal,Color emission) {
+    public Plane(Point3D p, Vector normal, Color emission) {
         this(p, normal, emission, new Material(0, 0, 0));
     }
+
     /**
      * this constructor build a plane from a single point and a vector that will be normalized
-     * @param p      the point in the plane
-     * @param normal the vector normalized we'll use to build the plane
+     *
+     * @param p        the point in the plane
+     * @param normal   the vector normalized we'll use to build the plane
      * @param emission the emission light of the plane
      * @param material param material his the material that represent the objet
      */
     public Plane(Point3D p, Vector normal, Color emission, Material material) {
         super(emission, material);
-        _p = new Point3D(p);
+        _p = p;
         _normal = normal.normalized();
     }
 
 
     /**
      * Produce normal vector (orthogonal unit vector) from 3 points in the plane)
+     *
      * @param p1 1st point
      * @param p2 2nd point
      * @param p3 3rd point
@@ -100,6 +111,7 @@ public class Plane extends Geometry {
 
     /**
      * this function returns the normal vector to the plane
+     *
      * @return the vector normal to the plane
      */
     public Vector getNormal() {
@@ -125,6 +137,6 @@ public class Plane extends Geometry {
         //t>=0, and hence:
         if (t <= 0)
             return null;
-        return List.of(new GeoPoint(this,ray.getTargetPoint(t)));
+        return List.of(new GeoPoint(this, ray.getTargetPoint(t)));
     }
 }

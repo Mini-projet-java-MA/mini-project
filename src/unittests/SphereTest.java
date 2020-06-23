@@ -27,14 +27,11 @@ public class SphereTest {
         // ============ Equivalence Partitions Tests ==============
         //TC01:we test the get center of sphere by comparing the result of the func and the expected result:
         try {
-            Coordinate x = new Coordinate(2);
-            Coordinate y = new Coordinate(3);
-            Coordinate z = new Coordinate(4);
-            Point3D centerPoint = new Point3D(x, y, z);
+            Point3D centerPoint = new Point3D(2,3,4);
             double radius = 2;
             Sphere mySphere = new Sphere(radius, centerPoint);
             Point3D result = mySphere.getCenter();
-            Point3D expResult = new Point3D(centerPoint);
+            Point3D expResult = centerPoint;
 
             assertEquals(result, expResult);
         } catch (IllegalArgumentException e) {
@@ -77,7 +74,7 @@ public class SphereTest {
         intersectionsList = sphere.findIntersections(ray);
         assertNotNull("must not be empty", intersectionsList);
         assertEquals("must be equal to 2", 2, intersectionsList.size());
-        if (intersectionsList.get(0).getPoint().getX().get() > intersectionsList.get(1).getPoint().getX().get()) {
+        if (intersectionsList.get(0).getPoint().getX() > intersectionsList.get(1).getPoint().getX()) {
             intersectionsList = List.of(intersectionsList.get(1), intersectionsList.get(0));
         }
         assertEquals("must be equal", new Point3D(-1.732050807569, 1, 0), intersectionsList.get(0).getPoint());

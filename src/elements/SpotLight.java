@@ -1,9 +1,7 @@
 package elements;
 
-import primitives.Color;
-import primitives.Point3D;
-import primitives.Vector;
-
+import primitives.*;
+import static primitives.Util.*;
 /**
  * this class spot light in of light in cartesian 3D coordinate system
  */
@@ -23,28 +21,15 @@ public class SpotLight extends PointLight {
      */
     public SpotLight(Color intensity, Point3D position, Vector direction, double kC, double kL, double kQ) {
         super(intensity, position, kC,kL, kQ);
-        this._direction = new Vector(direction).normalized();
+        this._direction = direction.normalized();
     }
+
     @Override
     public Color getIntensity(Point3D p) {
+        Vector l = getL(p);
+        double dl = _direction.dotProduct(l);
+        if (alignZero(dl) <= 0) return Color.BLACK; // behind the spot
 
-        double dSquared = p.distanceSquared(_position);
-        double d = p.distance(_position);
-
-        Vector vector;
-        if(p.subtract(_position).normalized() == null)
-            vector = new Vector(_direction);
-        else
-            vector = p.subtract(_position).normalized();
-
-        return (_intensity.scale(Math.max(0,_direction.dotProduct(vector)))
-                .reduce(_kC + _kL * d + _kQ * dSquared));
-
+        return super.getIntensity(p).scale(dl);
     }
-    @Override
-    public Vector getL(Point3D p) {
-        return _direction;
-    }
-
-
 }

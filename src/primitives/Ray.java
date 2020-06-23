@@ -16,7 +16,7 @@ public class Ray {
      */
     public Ray(Point3D p, Vector v) {
         this._direction = v.normalized();
-        this._p0 = new Point3D(p);
+        this._p0 = p;
     }
 
     /**
@@ -26,15 +26,6 @@ public class Ray {
      */
     public Point3D getTargetPoint(double distance) {
         return _p0.add(_direction.scale(distance));
-    }
-
-    /**
-     * this is the copy constructor that allow us to build a new ray from an existing one
-     * @param other the ray we copy in the new one
-     */
-    public Ray(Ray other) {
-        this._direction = new Vector(other._direction);
-        this._p0 = new Point3D(other._p0);
     }
 
     /**

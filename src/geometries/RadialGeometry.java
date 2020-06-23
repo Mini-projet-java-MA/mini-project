@@ -38,6 +38,7 @@ public abstract class RadialGeometry extends Geometry {
     public RadialGeometry(double radius, Color emission, Material material) {
         super(emission, material);
         _radius = radius;
+
     }
 
     /**

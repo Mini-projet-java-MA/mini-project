@@ -1,4 +1,6 @@
 /.idea/
 /out/
-/targil1.iml
+/*.iml
 /docs/
+/*.jpg
+/*.png
