@@ -76,7 +76,7 @@ public class Camera {
      * @param screenHeight   height of the screen
      * @return ray where outgoing construct Ray Through Pixel
      */
-    public Ray constructRayThroughPixel(int nX, int nY, int i, int j, double screenDistance, double screenWidth, double screenHeight) {
+    public Ray constructRayThroughPixel(double nX, double nY, int i, int j, double screenDistance, double screenWidth, double screenHeight) {
         if (isZero(screenDistance)) throw new IllegalArgumentException("distance cannot be 0");
         //image center
         Point3D screenCenter = _p0.add(_vTo.scale(screenDistance));

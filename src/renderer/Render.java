@@ -38,12 +38,12 @@ public class Render {
 
         //width and height are the number of pixels in the rows
         //and columns of the view plane
-        int width = (int) _imageWriter.getWidth();
-        int height = (int) _imageWriter.getHeight();
+        double width = (double) _imageWriter.getWidth();
+        double height = (double) _imageWriter.getHeight();
 
         //Nx and nY are the width and height of the image.
-        int nX = _imageWriter.getNx(); //columns
-        int nY = _imageWriter.getNy(); //rows
+        double nX = _imageWriter.getNx(); //columns
+        double nY = _imageWriter.getNy(); //rows
         //pixels grid
         for (int row = 0; row < nY; ++row) {
             for (int column = 0; column < nX; ++column) {
