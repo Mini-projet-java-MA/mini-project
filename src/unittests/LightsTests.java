@@ -39,7 +39,28 @@ public class LightsTests {
         render.renderImage();
         render.writeToImage();
     }
+    /**
+     * Produce a picture of a sphere lighted by a directional light
+     */
+    @Test
+    public void sphereDirectionalMyTest() {
+        Scene scene = new Scene("Test scene");
+        scene.setCamera(new Camera(new Point3D(0, 0, -1000), new Vector(0, 0, 1), new Vector(0, -1, 0)));
+        scene.setDistance(1000);
+        scene.setBackground(Color.BLACK);
+        scene.setAmbientLight(new AmbientLight(Color.BLACK, 0));
 
+        scene.addGeometries(
+                new Sphere(new Color(java.awt.Color.RED), new Material(2.5, 3.5, 50), 50, new Point3D(0, 0, 50)));
+
+        scene.addLights(new DirectionalLight(new Color(500, 300, 0), new Vector(1, -1, 1)));
+
+        ImageWriter imageWriter = new ImageWriter("sphereDirectional", 150, 150, 500, 500);
+        Render render = new Render(imageWriter, scene);
+
+        render.renderImage();
+        render.writeToImage();
+    }
     /**
      * Produce a picture of a sphere lighted by a point light
      */
@@ -112,7 +133,6 @@ public class LightsTests {
         render.renderImage();
         render.writeToImage();
     }
-
     /**
      * Produce a picture of a two triangles lighted by a point light
      */
@@ -168,6 +188,10 @@ public class LightsTests {
         render.renderImage();
         render.writeToImage();
     }
+
+    /**
+     * the test bonus of trianglesSpot with light concentration
+     */
     @Test
     public void trianglesSpotImproved() {
         Scene scene = new Scene("Test scene");
@@ -194,6 +218,9 @@ public class LightsTests {
         render.renderImage();
         render.writeToImage();
     }
+    /**
+     * the test bonus of Sphere spot with light concentration
+     */
     @Test
     public void SphereSpotImproved() {
         Scene scene = new Scene("Test scene");
