@@ -186,7 +186,7 @@ public class LightsTests {
                         new Point3D(-70, -70, 50), new Point3D(75, -75, 150)));
 
         scene.addLights(new SpotLightImproved (
-                new Color(500, 250, 250), new Point3D(10, 10, 130), new Vector(-2, 2, 1), 1, 0.0001, 0.000005,10));
+                new Color(500, 250, 250), new Point3D(10, 10, 130), new Vector(-2, 2, 1), 1, 0.0001, 0.000005,15));
 
         ImageWriter imageWriter = new ImageWriter("TrianglesSpotImproved", 200, 200, 500, 500);
         Render render = new Render(imageWriter, scene);
@@ -207,7 +207,7 @@ public class LightsTests {
                 new Sphere(new Color(java.awt.Color.BLUE), new Material(0.5, 0.5, 100), 50, new Point3D(0, 0, 50)));
 
         scene.addLights(new SpotLightImproved(new Color(500, 300, 0), new Point3D(-50, 50, -50),
-                new Vector(1, -1, 2), 1, 0.00001, 0.00000001 ,10));
+                new Vector(1, -1, 2), 1, 0.00001, 0.00000001 ,15));
 
 
         ImageWriter imageWriter = new ImageWriter("TrianglesSpotImproved", 200, 200, 500, 500);
