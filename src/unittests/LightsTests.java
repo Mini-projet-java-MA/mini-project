@@ -51,7 +51,7 @@ public class LightsTests {
         scene.setAmbientLight(new AmbientLight(Color.BLACK, 0));
 
         scene.addGeometries(
-                new Sphere(new Color(java.awt.Color.RED), new Material(2.5, 3.5, 50), 50, new Point3D(0, 0, 50)));
+                new Sphere(new Color(java.awt.Color.BLUE), new Material(0.5, 0.5, 100), 50, new Point3D(0, 0, 50)));
 
         scene.addLights(new DirectionalLight(new Color(500, 300, 0), new Vector(1, -1, 1)));
 
@@ -237,7 +237,7 @@ public class LightsTests {
                 new Vector(1, -1, 2), 1, 0.00001, 0.00000001 ,15));
 
 
-        ImageWriter imageWriter = new ImageWriter("TrianglesSpotImproved", 200, 200, 500, 500);
+        ImageWriter imageWriter = new ImageWriter("SphereSpotImproved", 200, 200, 500, 500);
         Render render = new Render(imageWriter, scene);
 
         render.renderImage();
