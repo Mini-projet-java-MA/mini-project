@@ -8,8 +8,8 @@ import primitives.Vector;
  * this class represents a point in of light in cartesian 3D coordinate system
  */
 public class PointLight extends Light implements LightSource {
-    protected Point3D _position;
-    protected double _kC, _kL, _kQ;
+    private Point3D _position;
+    private double _kC, _kL, _kQ;
 
     /**
      * Constructor to build a Point light
