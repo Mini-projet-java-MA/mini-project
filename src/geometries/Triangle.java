@@ -80,6 +80,7 @@ public class Triangle extends Polygon {
         if (isZero(side2)) return null;
         double side3 = v.dotProduct(v3.crossProduct(v1));
         if (isZero(side3)) return null;
+        intersections.get(0)._geometry = this;
 
         if ((side1 > 0 && side2 > 0 && side3 > 0) || (side1 < 0 && side2 < 0 && side3 < 0)) return intersections;
 

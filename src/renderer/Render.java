@@ -9,6 +9,8 @@ import scene.Scene;
 
 import java.util.List;
 
+import static primitives.Util.alignZero;
+
 /**
  * the object of this class is to create pixel matrix of picture basic on scene with 3D model
  */
@@ -123,9 +125,11 @@ public class Render {
         int nShininess = material.getNshininess();
         double kD = material.getKd();
         double kS = material.getKs();
+        double nv =alignZero(n.dotProduct(v));
+        if(nv!=0) return color;//ne to check if is good
         for (LightSource lightSource : _scene.getLight()) {
             Vector l = lightSource.getL(intersection.getPoint());
-            if (sign(n.dotProduct(l)) == sign(n.dotProduct(v))) {
+            if (alignZero(n.dotProduct(l)) == alignZero(nv)) {
                 Color lightIntensity = lightSource.getIntensity(intersection.getPoint());
                 color = color.add(calcDiffusive(kD, l, n, lightIntensity),
                         calcSpecular(kS, l, n, v, nShininess, lightIntensity));
@@ -149,7 +153,7 @@ public class Render {
         double p = nShininess;
 
         Vector r = l.add(n.scale(-2 * l.dotProduct(n))); // nl must not be zero!
-        double minusVr = -Util.alignZero(r.dotProduct(v));
+        double minusVr = -alignZero(r.dotProduct(v));
         if (minusVr <= 0) {
             return Color.BLACK; // view from direction opposite to r vector
         }
