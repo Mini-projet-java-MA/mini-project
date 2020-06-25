@@ -4,9 +4,9 @@ package primitives;
  * a class to represent material
  */
 public class Material {
-    private double _kD;
-    private double _kS;
-    private int _nShininess;
+   private double _kD;
+   private double _kS;
+   private int _nShininess;
 
     /**
      * a simple constructor for Material
