@@ -5,7 +5,7 @@ import primitives.Point3D;
 import primitives.Vector;
 
 /**
- * class for improve the spot light (sharp spot beam)
+ * class for improve the spot light  concentration
  */
 public class SpotLightImproved extends SpotLight {
     private double _concentration;
@@ -28,7 +28,7 @@ public class SpotLightImproved extends SpotLight {
         double dSquared = p.distanceSquared(_position);
         double d = p.distance(_position);
         Vector vector;
-        if(p.subtract(_position).normalized() == null)
+        if(p.subtract(_position) == null)
             vector = new Vector(_direction);
         else
             vector = p.subtract(_position).normalized();

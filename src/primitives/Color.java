@@ -146,7 +146,6 @@ public class Color {
 
     /**
      * Scale the color by a scalar
-     *
      * @param k scale factor
      * @return new Color object which is the result of the operation
      */
