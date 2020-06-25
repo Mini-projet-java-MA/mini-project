@@ -32,7 +32,6 @@ public class SpotLight extends PointLight {
         Vector l = getL(p);
         double dl = _direction.dotProduct(l);
         if (alignZero(dl) <= 0) return Color.BLACK; // behind the spot
-
         return super.getIntensity(p).scale(dl);
     }
 }
