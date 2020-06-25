@@ -126,7 +126,7 @@ public class Render {
         double kD = material.getKd();
         double kS = material.getKs();
         double nv =alignZero(n.dotProduct(v));
-        if(nv!=0) return color;
+        if(nv!=0) return color;//ne to check if is good
         for (LightSource lightSource : _scene.getLight()) {
             Vector l = lightSource.getL(intersection.getPoint());
             if (alignZero(n.dotProduct(l)) == alignZero(nv)) {
