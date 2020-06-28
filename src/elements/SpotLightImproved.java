@@ -25,14 +25,14 @@ public class SpotLightImproved extends SpotLight {
 
     @Override
     public Color getIntensity(Point3D p) {
-        double dSquared = p.distanceSquared(_position);
-        double d = p.distance(_position);
+        double dSquared = p.distanceSquared(getPosition());
+        double d = p.distance(getPosition());
         Vector vector;
-        if(p.subtract(_position) == null)
+        if(p.subtract(getPosition()) == null)
             vector = new Vector(_direction);
         else
-            vector = p.subtract(_position).normalized();
+            vector = p.subtract(getPosition()).normalized();
         return (_intensity.scale(Math.max(0,Math.pow(_direction.dotProduct(vector),_concentration)))
-                .reduce(_kC + _kL * d + _kQ * dSquared));
+                .reduce(getKC() + getKL() * d + getKQ() * dSquared));
     }
 }

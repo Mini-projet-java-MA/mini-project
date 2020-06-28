@@ -17,6 +17,10 @@ import static primitives.Util.alignZero;
 public class Render {
     private Scene _scene;
     private ImageWriter _imageWriter;
+    /**
+     * constant for the size of the ray sources moving for shading rays
+     */
+    private static final double DELTA = 0.1;
 
     /**
      * Build Render object with a scene and image writer
@@ -85,6 +89,23 @@ public class Render {
 
         return result;
     }
+    /**
+     * unshaded function check if specific ray from light source to geometry passes through other geometry
+     *
+     * @param l        vector from light source to point on geometry
+     * @param n   a unit vector from, vertical to intersection point.
+     * @param geopoint current geoPoint (the intersection point)
+     * @return true if there is no hindrance, and false otherwise
+     */
+    private boolean unshaded(Vector l, Vector n, GeoPoint geopoint) {
+        Vector lightDirection = l.scale(-1); // from point to light source
+        Vector delta = n.scale(n.dotProduct(lightDirection) > 0 ? DELTA : - DELTA);
+        Point3D point = geopoint._point.add(delta);
+        Ray lightRay = new Ray(point, lightDirection);
+        List<GeoPoint> intersections = _scene.getGeometries().findIntersections(lightRay);
+        return intersections == null;
+    }
+
 
     /**
      * @param val the tested value
@@ -116,21 +137,22 @@ public class Render {
      * @return the color intensity
      */
 
-    private Color calcColor(GeoPoint intersection) {
+    private Color calcColor(GeoPoint geopoint) {
         Color color = _scene.getAmbientLight().getIntensity();
-        color = color.add(intersection._geometry.getEmission());
-        Vector v = intersection.getPoint().subtract(_scene.getCamera().getP0()).normalize();
-        Vector n = intersection._geometry.getNormal(intersection.getPoint());
-        Material material = intersection._geometry.getMaterial();
+        color = color.add(geopoint._geometry.getEmission());
+        Vector v = geopoint.getPoint().subtract(_scene.getCamera().getP0()).normalize();
+        Vector n = geopoint._geometry.getNormal(geopoint.getPoint());
+        Material material = geopoint._geometry.getMaterial();
         int nShininess = material.getNshininess();
         double kD = material.getKd();
         double kS = material.getKs();
-        double nv =alignZero(n.dotProduct(v));
-        if(nv!=0) return color;//ne to check if is good
+        double nv = alignZero(n.dotProduct(v));
+        if (nv != 0) return color;//ne to check if is good
         for (LightSource lightSource : _scene.getLight()) {
-            Vector l = lightSource.getL(intersection.getPoint());
-            if (alignZero(n.dotProduct(l)) == alignZero(nv)) {
-                Color lightIntensity = lightSource.getIntensity(intersection.getPoint());
+            Vector l = lightSource.getL(geopoint.getPoint());
+            if (n.dotProduct(l) * n.dotProduct(v) > 0)
+                if (unshaded(l, n, geopoint)){
+                Color lightIntensity = lightSource.getIntensity(geopoint.getPoint());
                 color = color.add(calcDiffusive(kD, l, n, lightIntensity),
                         calcSpecular(kS, l, n, v, nShininess, lightIntensity));
             }

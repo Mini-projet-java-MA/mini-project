@@ -28,6 +28,22 @@ public class PointLight extends Light implements LightSource {
         _kQ = kQ;
     }
 
+    public Point3D getPosition() {
+        return _position;
+    }
+
+    public double getKC() {
+        return _kC;
+    }
+
+    public double getKL() {
+        return _kL;
+    }
+
+    public double getKQ() {
+        return _kQ;
+    }
+
     @Override
     public Color getIntensity(Point3D p) {
         double dSquared = p.distanceSquared(_position);
