@@ -21,7 +21,6 @@ public class Render {
      * constant for the size of the ray sources moving for shading rays
      */
     private static final double DELTA = 0.1;
-
     /**
      * Build Render object with a scene and image writer
      *
@@ -34,7 +33,7 @@ public class Render {
     }
 
     /**
-     * this function is used to create an image
+     * this func create an image
      */
     public void renderImage() {
         java.awt.Color background = _scene.getBackground().getColor();
@@ -44,12 +43,12 @@ public class Render {
 
         //width and height are the number of pixels in the rows
         //and columns of the view plane
-        double width = (double) _imageWriter.getWidth();
-        double height = (double) _imageWriter.getHeight();
+        int width = (int) _imageWriter.getWidth();
+        int height = (int) _imageWriter.getHeight();
 
         //Nx and nY are the width and height of the image.
-        double nX = _imageWriter.getNx(); //columns
-        double nY = _imageWriter.getNy(); //rows
+        int nX = _imageWriter.getNx(); //columns
+        int nY = _imageWriter.getNy(); //rows
         //pixels grid
         for (int row = 0; row < nY; ++row) {
             for (int column = 0; column < nX; ++column) {
@@ -89,26 +88,10 @@ public class Render {
 
         return result;
     }
+
     /**
-     * unshaded function check if specific ray from light source to geometry passes through other geometry
      *
-     * @param l        vector from light source to point on geometry
-     * @param n   a unit vector from, vertical to intersection point.
-     * @param geopoint current geoPoint (the intersection point)
-     * @return true if there is no hindrance, and false otherwise
-     */
-    private boolean unshaded(Vector l, Vector n, GeoPoint geopoint) {
-        Vector lightDirection = l.scale(-1); // from point to light source
-        Vector delta = n.scale(n.dotProduct(lightDirection) > 0 ? DELTA : - DELTA);
-        Point3D point = geopoint._point.add(delta);
-        Ray lightRay = new Ray(point, lightDirection);
-        List<GeoPoint> intersections = _scene.getGeometries().findIntersections(lightRay);
-        return intersections == null;
-    }
-
-
-    /**
-     * @param val the tested value
+     * @param val
      * @return boolean value if double and val>0
      */
     private boolean sign(double val) {
@@ -117,7 +100,6 @@ public class Render {
 
     /**
      * function to draw a grid on our image by pixel
-     *
      * @param interval number that the pixels are multiple of this number, are part of the grid.
      */
     public void printGrid(int interval, java.awt.Color color) {
@@ -130,14 +112,36 @@ public class Render {
             }
         }
     }
+    /**
+     * unshaded function check if specific ray from light source to geometry passes through other geometry
+     *
+     * @param l        vector from light source to point on geometry
+     * @param n   a unit vector from, vertical to intersection point.
+     * @param geopoint current geoPoint (the intersection point)
+     * @return true if there is no hindrance, and false otherwise
+     */
+    private boolean unshaded(LightSource light,Vector l, Vector n, GeoPoint geopoint) {
+        Vector lightDirection = l.scale(-1); // from point to light source
+        Vector delta = n.scale(n.dotProduct(lightDirection) > 0 ? DELTA : - DELTA);
+        Point3D point = geopoint._point.add(delta);
+        Ray lightRay = new Ray(point, lightDirection);
+        List<GeoPoint> intersections = _scene.getGeometries().findIntersections(lightRay);
+        if (intersections == null) return true;
+        double lightDistance = light.getDistance(geopoint._point);
+        for (GeoPoint gp : intersections) {
+            if (alignZero(gp._point.distance(geopoint._point) - lightDistance) <= 0)
+                return false;
+        }
+        return true;
+    }
 
     /**
-     * Calculate the color intensity in a point approach phong model
+     * Calculate the color intensity in a point aproch phong model
      *
      * @return the color intensity
      */
 
-    private Color calcColor(GeoPoint geopoint) {
+    private Color calcColor(GeoPoint geopoint ) {
         Color color = _scene.getAmbientLight().getIntensity();
         color = color.add(geopoint._geometry.getEmission());
         Vector v = geopoint.getPoint().subtract(_scene.getCamera().getP0()).normalize();
@@ -146,26 +150,25 @@ public class Render {
         int nShininess = material.getNshininess();
         double kD = material.getKd();
         double kS = material.getKs();
-        double nv = alignZero(n.dotProduct(v));
-        if (nv != 0) return color;//ne to check if is good
         for (LightSource lightSource : _scene.getLight()) {
             Vector l = lightSource.getL(geopoint.getPoint());
-            if (n.dotProduct(l) * n.dotProduct(v) > 0)
+            if (sign(n.dotProduct(l)) == sign(n.dotProduct(v)))
                 if (unshaded(l, n, geopoint)){
                 Color lightIntensity = lightSource.getIntensity(geopoint.getPoint());
                 color = color.add(calcDiffusive(kD, l, n, lightIntensity),
                         calcSpecular(kS, l, n, v, nShininess, lightIntensity));
             }
         }
-        return color;
+        return  color;
     }
 
     /**
-     * @param kS             factor reduces the specular light.
-     * @param l              direction vector from light source to intersection point on geometry.
-     * @param n              normal vector from geometry.
-     * @param v              direction vector
-     * @param nShininess     level of shininess (for calculate the specular light)
+     *
+     * @param kS factor reduces the specular light.
+     * @param l direction vector from light source to intersection point on geometry.
+     * @param n normal vector from geometry.
+     * @param v direction vector
+     * @param nShininess level of shininess (for calculate the specular light)
      * @param lightIntensity color of light from light source
      * @return specular light (color).
      */
@@ -174,27 +177,24 @@ public class Render {
 
         double p = nShininess;
 
-        Vector r = l.add(n.scale(-2 * l.dotProduct(n))); // nl must not be zero!
-        double minusVr = -alignZero(r.dotProduct(v));
+        Vector r = l.add(n.scale(-2 *l.dotProduct(n))); // nl must not be zero!
+        double minusVr = - alignZero(r.dotProduct(v));
         if (minusVr <= 0) {
             return Color.BLACK; // view from direction opposite to r vector
         }
-        return lightIntensity.scale(kS * Math.pow(minusVr, p));
+        return lightIntensity.scale(kS* Math.pow(minusVr, p));
     }
-
     /**
-     * this function calculate the diffusive ligh
-     *
-     * @param kD             the factor of the diffusive light
-     * @param l              the vector of the light source
-     * @param n              the normal vector to the object
+     *this function calculate the diffusive ligh
+     * @param kD the factor of the diffusive light
+     * @param l the vector of the light source
+     * @param n the normal vector to the object
      * @param lightIntensity the intensity of the light
      * @return the diffusive light
      */
-    private Color calcDiffusive(double kD, Vector l, Vector n, Color lightIntensity) {
+    private Color calcDiffusive(double kD, Vector l,Vector n,  Color lightIntensity) {
         return lightIntensity.scale(kD * Math.abs(l.dotProduct(n)));
     }
-
     /**
      * Create the image file in jpeg format
      */
