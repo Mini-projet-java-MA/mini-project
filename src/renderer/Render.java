@@ -153,7 +153,7 @@ public class Render {
         for (LightSource lightSource : _scene.getLight()) {
             Vector l = lightSource.getL(geopoint.getPoint());
             if (sign(n.dotProduct(l)) == sign(n.dotProduct(v)))
-                if (unshaded(l, n, geopoint)){
+                if (unshaded(lightSource, l, n, geopoint)){
                 Color lightIntensity = lightSource.getIntensity(geopoint.getPoint());
                 color = color.add(calcDiffusive(kD, l, n, lightIntensity),
                         calcSpecular(kS, l, n, v, nShininess, lightIntensity));
