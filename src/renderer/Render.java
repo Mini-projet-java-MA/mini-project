@@ -17,6 +17,9 @@ import static primitives.Util.alignZero;
 public class Render {
     private Scene _scene;
     private ImageWriter _imageWriter;
+    private static final int MAX_CALC_COLOR_LEVEL = 10;
+    private static final double MIN_CALC_COLOR_K = 0.001;
+
     /**
      * constant for the size of the ray sources moving for shading rays
      */
