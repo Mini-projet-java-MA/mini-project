@@ -19,7 +19,6 @@ public class Render {
     private ImageWriter _imageWriter;
     private static final int MAX_CALC_COLOR_LEVEL = 10;
     private static final double MIN_CALC_COLOR_K = 0.001;
-
     /**
      * constant for the size of the ray sources moving for shading rays
      */
@@ -204,6 +203,23 @@ public class Render {
     public void writeToImage() {
         _imageWriter.writeToImage();
     }
+    /**
+     * Returns reflected Ray
+     *
+     * @param point
+     * @param ray
+     * @param n
+     * @return reflected ray
+     */
+    private Ray constructReflectedRay(Point3D point, Ray ray, Vector n){
+        Vector v = ray.getDirection();
+        double vNormal = v.dotProduct(n);
 
+        if (vNormal == 0)
+            return null;
+
+        Vector r = v.subtract(n.scale(2 * vNormal));
+        return new Ray(point,  n);
+    }
 }
 

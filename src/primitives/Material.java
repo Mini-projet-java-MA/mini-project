@@ -10,6 +10,7 @@ public class Material {
    private  double _kT;
    private double _kR;
 
+
     /**
      * a simple constructor for Material
      *
@@ -34,9 +35,8 @@ public class Material {
      * @param nShininess level of the object's shininess
      */
     public Material(double kD, double kS, int nShininess) {
-        _kD = kD;
-        _kS = kS;
-        _nShininess = nShininess;
+
+        this(kD, kS, nShininess, 0, 0);
     }
 
     /**
