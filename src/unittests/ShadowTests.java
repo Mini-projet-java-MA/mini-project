@@ -10,7 +10,7 @@ import scene.Scene;
 
 /**
  * Testing basic shadows
- * 
+ *
  * @author Dan
  */
 public class ShadowTests {
@@ -27,7 +27,7 @@ public class ShadowTests {
 		scene.setAmbientLight(new AmbientLight(Color.BLACK, 0));
 
 		scene.addGeometries(new Sphere(new Color(java.awt.Color.BLUE), new Material(0.5, 0.5, 30), //
-				60, new Point3D(0, 0, 200)), //
+						60, new Point3D(0, 0, 200)), //
 				new Triangle(new Color(java.awt.Color.BLUE), new Material(0.5, 0.5, 30), //
 						new Point3D(-70, 40, 0), new Point3D(-40, 70, 0), new Point3D(-68, 68, 4)));
 
@@ -53,9 +53,9 @@ public class ShadowTests {
 		scene.setAmbientLight(new AmbientLight(Color.BLACK, 0));
 
 		scene.addGeometries(new Sphere(new Color(java.awt.Color.BLUE), new Material(0.5, 0.5, 30), //
-				60, new Point3D(0, 0, 200)), //
+						60, new Point3D(0, 0, 200)), //
 				new Triangle(new Color(java.awt.Color.BLUE), new Material(0.5, 0.5, 30), //
-						new Point3D(-70, 40, 0), new Point3D(-40, 70, 0), new Point3D(-68, 68, 4)));
+						new Point3D(-60, 30, 0), new Point3D(-30, 60, 0), new Point3D(-58, 58, 4)));
 
 		scene.addLights(new SpotLight(new Color(400, 240, 0), //
 				new Point3D(-100, 100, -200), new Vector(1, -1, 3), 1, 1E-5, 1.5E-7));
@@ -66,7 +66,7 @@ public class ShadowTests {
 		render.renderImage();
 		render.writeToImage();
 	}
-	
+
 	/**
 	 * Sphere-Triangle shading - move triangle upper-righter
 	 */
@@ -79,9 +79,9 @@ public class ShadowTests {
 		scene.setAmbientLight(new AmbientLight(Color.BLACK, 0));
 
 		scene.addGeometries(new Sphere(new Color(java.awt.Color.BLUE), new Material(0.5, 0.5, 30), //
-				60, new Point3D(0, 0, 200)), //
+						60, new Point3D(0, 0, 200)), //
 				new Triangle(new Color(java.awt.Color.BLUE), new Material(0.5, 0.5, 30), //
-						new Point3D(-70, 40, 0), new Point3D(-40, 70, 0), new Point3D(-68, 68, 4)));
+						new Point3D(-50, 20, 0), new Point3D(-20, 50, 0), new Point3D(-48, 48, 4)));
 
 		scene.addLights(new SpotLight(new Color(400, 240, 0), //
 				new Point3D(-100, 100, -200), new Vector(1, -1, 3), 1, 1E-5, 1.5E-7));
@@ -105,20 +105,20 @@ public class ShadowTests {
 		scene.setAmbientLight(new AmbientLight(Color.BLACK, 0));
 
 		scene.addGeometries(new Sphere(new Color(java.awt.Color.BLUE), new Material(0.5, 0.5, 30), //
-				60, new Point3D(0, 0, 200)), //
+						60, new Point3D(0, 0, 200)), //
 				new Triangle(new Color(java.awt.Color.BLUE), new Material(0.5, 0.5, 30), //
 						new Point3D(-70, 40, 0), new Point3D(-40, 70, 0), new Point3D(-68, 68, 4)));
 
 		scene.addLights(new SpotLight(new Color(400, 240, 0), //
-				new Point3D(-100, 100, -200), new Vector(1, -1, 3), 1, 1E-5, 1.5E-7));
+				new Point3D(-90, 90, -140), new Vector(1, -1, 3), 1, 1E-5, 1.5E-7));
 
 		ImageWriter imageWriter = new ImageWriter("sphereTriangleSpot1", 200, 200, 400, 400);
 		Render render = new Render(imageWriter, scene);
 
 		render.renderImage();
 		render.writeToImage();
-	}	
-	
+	}
+
 	/**
 	 * Sphere-Triangle shading - move spot even more close
 	 */
@@ -131,20 +131,20 @@ public class ShadowTests {
 		scene.setAmbientLight(new AmbientLight(Color.BLACK, 0));
 
 		scene.addGeometries(new Sphere(new Color(java.awt.Color.BLUE), new Material(0.5, 0.5, 30), //
-				60, new Point3D(0, 0, 200)), //
+						60, new Point3D(0, 0, 200)), //
 				new Triangle(new Color(java.awt.Color.BLUE), new Material(0.5, 0.5, 30), //
 						new Point3D(-70, 40, 0), new Point3D(-40, 70, 0), new Point3D(-68, 68, 4)));
 
 		scene.addLights(new SpotLight(new Color(400, 240, 0), //
-				new Point3D(-100, 100, -200), new Vector(1, -1, 3), 1, 1E-5, 1.5E-7));
+				new Point3D(-80, 80, -120), new Vector(1, -1, 3), 1, 1E-5, 1.5E-7));
 
 		ImageWriter imageWriter = new ImageWriter("sphereTriangleSpot2", 200, 200, 400, 400);
 		Render render = new Render(imageWriter, scene);
 
 		render.renderImage();
 		render.writeToImage();
-	}	
-	
+	}
+
 	/**
 	 * Produce a picture of a two triangles lighted by a spot light with a Sphere producing a shading
 	 */
@@ -173,5 +173,4 @@ public class ShadowTests {
 		render.renderImage();
 		render.writeToImage();
 	}
-
 }
