@@ -11,7 +11,7 @@ import primitives.Vector;
  * Unit tests for primitives.Vector class
  * @author aaron
  */
-public class VectorTest {
+public class    VectorTest {
     /**
      * Test method for {@link primitives.Vector#crossProduct(primitives.Vector)}.
      */

@@ -119,19 +119,20 @@ public class Render {
      *
      * @param l        vector from light source to point on geometry
      * @param n   a unit vector from, vertical to intersection point.
-     * @param geopoint current geoPoint (the intersection point)
+     * @param geoPoint current geoPoint (the intersection point)
      * @return true if there is no hindrance, and false otherwise
      */
-    private boolean unshaded(LightSource light,Vector l, Vector n, GeoPoint geopoint) {
+    private boolean unshaded(LightSource light,Vector l, Vector n, GeoPoint geoPoint) {
+
         Vector lightDirection = l.scale(-1); // from point to light source
         Vector delta = n.scale(n.dotProduct(lightDirection) > 0 ? DELTA : - DELTA);
-        Point3D point = geopoint._point.add(delta);
+        Point3D point = geoPoint._point.add(delta);
         Ray lightRay = new Ray(point, lightDirection);
         List<GeoPoint> intersections = _scene.getGeometries().findIntersections(lightRay);
         if (intersections == null) return true;
-        double lightDistance = light.getDistance(geopoint._point);
+        double lightDistance = light.getDistance(geoPoint._point);
         for (GeoPoint gp : intersections) {
-            if (alignZero(gp._point.distance(geopoint._point) - lightDistance) <= 0)
+            if (alignZero(gp._point.distance(geoPoint._point) - lightDistance) <= 0)
                 return false;
         }
         return true;
@@ -221,5 +222,115 @@ public class Render {
         Vector r = v.subtract(n.scale(2 * vNormal));
         return new Ray(point,  n);
     }
+
+    /**
+     * the function should calculate reflection of ray
+     * @param point the poitn of the ray
+     * @param ray the ray
+     * @param n the normal of vector
+     * @return ray reflection
+     */
+    private Ray rayReflected(Point3D point, Ray ray, Vector n) {
+        Vector v=ray.getDirection();
+        double vn = v.dotProduct(n);
+        if (vn == 0)
+            return null;
+        Vector r = v.subtract(n.scale(2 * vn));
+        return new Ray(point, r);
+    }
+    /**
+     * the function should calculatr the refraction of ray
+     *
+     * @param point point
+     * @param ray
+     * @param n     the normal of vector
+     * @return the reflation of the ray
+     */
+    private Ray constructRefractedRay(Point3D point, Ray ray, Vector n) {
+        return new Ray(point, ray.getDirection(), n);
+    }
+    /**
+     * the function should find the intercetion most close
+     *
+     * @param ray ray
+     * @return the closest intersection
+     */
+    private GeoPoint findClosestIntersection(Ray ray) {
+        GeoPoint closestPoint = null;
+        double closestDistance = Double.POSITIVE_INFINITY;
+        Point3D ray_p0 = ray.getP0();
+        List<GeoPoint> intersections = _scene.getGeometries().findIntersections(ray);
+        if (intersections == null)
+            return null;
+        for (GeoPoint gp : intersections) {
+            double distance = ray_p0.distance(gp.getPoint());
+            if (distance < closestDistance) {
+                closestPoint = gp;
+                closestDistance = distance;
+            }
+        }
+        return closestPoint;
+    }
+    /**
+     * Calc the color intensity in a intersection point
+     *
+     * @param gp geo point
+     * @param ray    ray
+     * @return the color
+     */
+    private Color calcColor(GeoPoint gp, Ray ray) {
+        return calcColor(gp, ray, MAX_CALC_COLOR_LEVEL, 1.0).add(
+                _scene.getAmbientLight().getIntensity());
+    }
+
+    /**
+     * calColor recusive function
+     *
+     * @param geoPoint geo point
+     * @param inRay    ray
+     * @param level    parameter of limit times recursive
+     * @param k        stop condition
+     * @return the color
+     */
+    private Color calcColor(GeoPoint geoPoint, Ray inRay, int level, double k) {
+        if (level == 1 || k < MIN_CALC_COLOR_K) {
+            return Color.BLACK;
+        }
+        Color result = geoPoint._geometry.getEmission();
+        Point3D pointGeo = geoPoint._point;
+        Vector v = pointGeo.subtract(_scene.getCamera()..normalize();
+        // the normal vector of geometric object in the geoPoint
+        Vector n = geoPoint._geometry.getNormal(pointGeo);
+
+        double nv = alignZero(n.dotProduct(v));
+        if (nv == 0)
+            return result;
+
+        //the material of the geometric object
+        Material material = geoPoint._geometry.getMaterial();
+        //the shininess of the geometric object
+        int nShininess = material.getNshininess();
+        double kkr = k * material.getKr();
+        double kkt = k * material.getKt();
+        result = result.add(getLightSourcesColors(geoPoint, k, result, v, n, nv, nShininess, material.getKd(), material.getKs()));
+        // if the reflection factor after multiplication to the 'k' is bigger than MIN_CALC_COLOR_K
+        if (kkr > MIN_CALC_COLOR_K) {
+            Ray reflectedRay = constructReflectedRay(pointGeo, inRay, n);
+            GeoPoint reflectedPoint = findClosestIntersection(reflectedRay);
+            if (reflectedPoint != null) {
+                result = result.add(calcColor(reflectedPoint, reflectedRay, level - 1, kkr).scale(material.getKr()));
+            }
+        }
+        // if the transparency factor after multiplication to the 'k' is bigger than MIN_CALC_COLOR_K
+        if (kkt > MIN_CALC_COLOR_K) {
+            Ray refractedRay = constructRefractedRay(pointGeo, inRay, n);
+            GeoPoint refractedPoint = findClosestIntersection(refractedRay);
+            if (refractedPoint != null) {
+                result = result.add(calcColor(refractedPoint, refractedRay, level - 1, kkt).scale(material.getKt()));
+            }
+        }
+        return result;
+    }
+
 }
 
