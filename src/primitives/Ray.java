@@ -5,6 +5,7 @@ import static primitives.Util.*;
  * the class ray represents 3D ray in cartesian coordinate system
  */
 public class Ray {
+    private static final double DELTA = 0.1;
     private Point3D _p0;
     private Vector _direction;
 
@@ -18,6 +19,21 @@ public class Ray {
         this._direction = v.normalized();
         this._p0 = p;
     }
+    /**
+     * this is the basic constructor of ray it receive a point a vector and a light direction and
+     * create a new ray from this point and the vector normalized for his direction and the light dir
+     *
+     * @param p0  point
+     * @param dir light dir
+     * @param n   normal
+     */
+    public Ray(Point3D p0, Vector dir, Vector n) {
+        _direction = dir.normalized();
+        double nv = n.dotProduct(dir);
+        Vector delta = n.scale((nv > 0 ? DELTA : -DELTA));
+        _p0 = p0.add(delta);
+    }
+
 
     /**
      * Get a point on the ray at a given distance from the ray head
