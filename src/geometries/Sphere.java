@@ -73,44 +73,36 @@ public class Sphere extends RadialGeometry {
     }
 
     @Override
-    public List<GeoPoint> findIntersections(Ray ray) {
+    public List<GeoPoint> findIntersections(Ray ray, double maxDistance) {
         Point3D p0 = ray.getP0();
         Vector v = ray.getDirection();
         Vector u;
-        // 𝑢 = 𝑂 − 𝑃0
+        //check if p0 same as _center
         try {
             u = _center.subtract(p0);
         } catch (IllegalArgumentException e) {
-            return new LinkedList<>(Collections.singletonList(new GeoPoint(this, p0.add(v.scale(_radius)))));
+            return List.of(new GeoPoint(this, ray.getTargetPoint(getRadius())));
         }
-        //tm=v*u
         double tm = alignZero(v.dotProduct(u));
-        //d=u^2+tm^2
-        double dSquared;
-        if (tm == 0)
-            dSquared = u.lengthSquared();
-        else {
-            dSquared = u.lengthSquared() - tm * tm;
-        }
-        double thSquared = alignZero(_radius * _radius - dSquared);
+        double dSquared = u.lengthSquared() - tm * tm;
+        double thSquared = alignZero(getRadius() * getRadius() - dSquared);
 
-        if (thSquared <= 0) return null;
-        //th=radius*radius-d*d
+        if (thSquared <= 0)
+            return null;
         double th = alignZero(Math.sqrt(thSquared));
-        if (th == 0) return null;
-
         double t1 = alignZero(tm - th);
         double t2 = alignZero(tm + th);
-        if (t1 <= 0 && t2 <= 0) return null;
-
-        if (t1 > 0 && t2 > 0)
-            return List.of((new GeoPoint(this, ray.getTargetPoint(t1))), (new GeoPoint(this, ray.getTargetPoint(t2)))); //P1 , P2
-        if (t1 > 0)
+        if (t1 <= 0 && t2 <= 0)
+            return null;
+        if (t1 > 0 && t2 > 0 && t1 - maxDistance <= 0 && t2 - maxDistance <= 0)
+            return List.of(new GeoPoint(this, ray.getTargetPoint(t1)), new GeoPoint(this, ray.getTargetPoint(t2)));
+        if (t1 > 0 && t1 - maxDistance <= 0)
             return List.of(new GeoPoint(this, ray.getTargetPoint(t1)));
-        if (t2 > 0)
-            return List.of(new GeoPoint(this, ray.getTargetPoint(t2)));
-        return null;
+        if (t2 - maxDistance > 0)
+            return null;
+        return List.of(new GeoPoint(this, ray.getTargetPoint(t2)));
     }
+
 
     @Override
     public String toString() {

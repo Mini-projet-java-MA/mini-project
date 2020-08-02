@@ -19,7 +19,17 @@ public interface Intersectable {
      * @param ray the ray that intersects the object
      * @return a list of all intersection of GeoPoint
      */
-    List<GeoPoint> findIntersections(Ray ray);
+    default List<GeoPoint> findIntersections(Ray ray) {
+        return findIntersections(ray, Double.POSITIVE_INFINITY);
+    }
+    /**
+     * filter shadow not in the other side
+     *
+     * @param ray ray
+     * @param maxDistance max of the dist
+     * @return the geo point closest
+     */
+    List<GeoPoint> findIntersections(Ray ray, double maxDistance);
 
     /**
      * class include intersection point and its geometry
