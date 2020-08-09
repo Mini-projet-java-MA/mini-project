@@ -175,71 +175,72 @@ public class Render {
      * @return the color intensity
      */
 
-    private Color calcColor(GeoPoint geopoint, Ray inRay, int level, double k ) {
-        Color color = geopoint._geometry.getEmission();
-        Vector v = geopoint.getPoint().subtract(_scene.getCamera().getP0()).normalize();
-        Vector n = geopoint._geometry.getNormal(geopoint.getPoint());
-        Material material = geopoint._geometry.getMaterial();
+    private Color calcColor(GeoPoint gp, Ray ray, int lvl, double k) {
+        Color result = gp._geometry.getEmission(); // we add the emission light
+        List<LightSource> lights = _scene.getLight();// list of the light
+        Vector v = ray.getDirection();//vector formed between the camera and the point of the geometry
+        Vector n = gp._geometry.getNormal(gp._point);
+        Material material = gp._geometry.getMaterial();//material of the geo
         int nShininess = material.getNshininess();
-        double kD = material.getKd();
-        double kS = material.getKs();
-        for (LightSource lightSource : _scene.getLight()) {
-            Vector l = lightSource.getL(geopoint.getPoint());
-            if (sign(n.dotProduct(l)) == sign(n.dotProduct(v))) {
-                double ktr = transparency(lightSource, l, n, geopoint);
-                if (ktr * k > MIN_CALC_COLOR_K) {
-                    Color lightIntensity = lightSource.getIntensity(geopoint.getPoint()).scale(ktr);
-                    color = color.add(calcDiffusive(kD, l, n, lightIntensity),
-                            calcSpecular(kS, l, n, v, nShininess, lightIntensity));
+        double kd = material.getKd();
+        double ks = material.getKs();
+        if (_scene.getLight() != null) {//if there is light in the scene
+            for (LightSource lightSource : lights) {// we go over all the lights
+                Vector l = lightSource.getL(gp._point);//vector that impact the geometry
+                double nl = alignZero(n.dotProduct(l));
+                double nv = alignZero(n.dotProduct(v));
+                if (nl * nv > 0) {
+                    double ktr = transparency(lightSource, l, n, gp);
+                    if (ktr * k > MIN_CALC_COLOR_K) {
+                        Color iL = lightSource.getIntensity(gp._point).scale(ktr);
+                        result = result.add(calcDiffusive(kd, l, n, iL),
+                                calcSpecular(ks, l, n, v, nShininess, iL));
+                    }
                 }
             }
         }
-
-        if (level == 1) return Color.BLACK;
-        double kr = geopoint._geometry.getMaterial().getKr(), kkr = k * kr;
+        if (lvl == 1) return Color.BLACK; //not use recursive
+        double kr = material.getKr(), kkr = k * kr;
         if (kkr > MIN_CALC_COLOR_K) {
-            Ray reflectedRay = constructReflectedRay( geopoint._point, inRay,n);
+            Ray reflectedRay =  constructReflectedRay(gp._point, ray, n);
             GeoPoint reflectedPoint = findClosestIntersection(reflectedRay);
             if (reflectedPoint != null)
-                color = color.add(calcColor(reflectedPoint, reflectedRay, level-1, kkr).scale(kr));
-            double kt = geopoint._geometry.getMaterial().getKt(), kkt = k * kt;
-            if (kkt > MIN_CALC_COLOR_K) {
-                Ray refractedRay = constructRefractedRay(geopoint._point, inRay) ;
-                GeoPoint refractedPoint = findClosestIntersection(refractedRay);
-                if (refractedPoint != null)
-                    color = color.add(calcColor(refractedPoint, refractedRay,level-1, kkt).scale(kt));
-            }
+                result = result.add(calcColor(reflectedPoint, reflectedRay, lvl - 1, kkr).scale(kr));
         }
-        return  color;
+        double kt = material.getKt(), kkt = k * kt;
+        if (kkt > MIN_CALC_COLOR_K) {
+            Ray refractedRay = constructRefractedRay(n, gp, ray);
+            GeoPoint refractedPoint = findClosestIntersection(refractedRay);
+            if (refractedPoint != null)
+                result = result.add(calcColor(refractedPoint, refractedRay, lvl - 1, kkt).scale(kt));
+        }
+        return result;
     }
     /**
      * func calc the level of transparency
      *
-     * @param ls ls
+     * @param light lightsource
      * @param l  l
      * @param n  n
-     * @param gp gp
+     * @param geopoint gp
      * @return the level
      */
-    private double transparency(LightSource ls, Vector l, Vector n, GeoPoint gp) {
+    private double transparency(LightSource light, Vector l, Vector n, GeoPoint geopoint) {
         Vector lightDirection = l.scale(-1); // from point to light source
-        Ray lightRay = new Ray(gp._point, lightDirection, n);
+        Ray lightRay = new Ray(geopoint._point, lightDirection, n);
         List<GeoPoint> intersections = _scene.getGeometries().findIntersections(lightRay);
-        if (intersections == null)
-            return 1d;
-        double lightDistance = ls.getDistance(gp._point);
-        double ktr = 1d;
-        for (GeoPoint geo : intersections) {
-            double temp = geo._point.distance(gp._point) - lightDistance;
-            if (alignZero(temp) <= 0) {
-                ktr *= geo._geometry.getMaterial().getKt();
-                if (ktr < MIN_CALC_COLOR_K) {
-                    return 0.0;
-                }
+        if (intersections == null) return 1.0;
+        double lightDistance = light.getDistance(geopoint._point);
+        double ktr = 1.0;
+        for (GeoPoint gp : intersections) {
+            if (alignZero(gp._point.distance(geopoint._point) - lightDistance) <= 0) {
+                ktr *= gp._geometry.getMaterial().getKt();
+                if (ktr < MIN_CALC_COLOR_K) return 0.0;
             }
         }
         return ktr;
     }
+
 
     /**
      *
@@ -290,11 +291,8 @@ public class Render {
      */
     private Ray constructReflectedRay(Point3D point, Ray ray, Vector n){
         Vector v = ray.getDirection();
-        double vNormal = v.dotProduct(n);
-        if (vNormal == 0)
-            return null;
-        Vector r = v.subtract(n.scale(2 * vNormal));
-        return new Ray(point,  n);
+        Vector reflectedDirection = v.subtract(n.scale(2 * v.dotProduct(n)));
+        return new Ray(point, reflectedDirection, n);
     }
     /**
      * this func calc the refracted ray
@@ -303,8 +301,8 @@ public class Render {
      * @param inRay ray
      * @return the ref ray
      */
-    private Ray constructRefractedRay(Point3D point, Ray inRay) {
-        return new Ray(point, inRay.getDirection());
+    private Ray constructRefractedRay(Vector n, GeoPoint point, Ray inRay) {
+        return new Ray(point._point, inRay.getDirection(), n);
     }
 }
 
