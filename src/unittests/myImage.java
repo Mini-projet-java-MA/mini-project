@@ -16,7 +16,7 @@ public class myImage {
      * Produce a picture of a sphere lighted by a spot light
      */
     @Test
-    public void twoSpheres() {
+    public void thereSpheres() {
         Scene scene = new Scene("Test scene");
         scene.setCamera(new Camera(new Point3D(0, 0, -1000), new Vector(0, 0, 1), new Vector(0, -1, 0)));
         scene.setDistance(1000);
@@ -26,7 +26,7 @@ public class myImage {
         scene.addGeometries(
                 new Sphere(new Color(java.awt.Color.BLUE), new Material(0.4, 0.3, 100, 0.3, 0), 50,
                         new Point3D(0, 0, 50)),
-                new Sphere(new Color(java.awt.Color.RED), new Material(0.5, 0.5, 100), 25, new Point3D(0, 0, 50)));
+                new Sphere(new Color(java.awt.Color.RED), new Material(0.5, 0.5, 100), 1000, new Point3D(0, 100, 50)));
 
         scene.addLights(new SpotLight(new Color(1000, 600, 0), new Point3D(-100, 100, -500), new Vector(-1, 1, 2), 1,
                 0.0004, 0.0000006));
@@ -125,11 +125,11 @@ public class myImage {
         scene.addLights(
                 new SpotLight(new Color(700, 400, 400),
                         new Point3D(50, -50, 0), new Vector(0, 0, 1), 1, 4E-5, 2E-7),
-                new PointLight(new Color(127, 255, 212), new Point3D(-400, 120, 50),0,0,0),
+                new PointLight(new Color(127, 255, 212), new Point3D(-400, 120, 50),1,1,1),
                 new SpotLight(new Color(100, 250, 100),
                         new Point3D(-20, 20, 100), new Vector(-1, 1, 4), 1, 0.00001, 0.000005));
 
-        ImageWriter imageWriter = new ImageWriter("OurImage", 200, 200, 600, 600);
+        ImageWriter imageWriter = new ImageWriter("myTestImage", 200, 200, 600, 600);
         Render render = new Render(imageWriter, scene);
 
         render.renderImage();
