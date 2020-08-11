@@ -123,11 +123,11 @@ public class ReflectionRefractionTests {
 				new Sphere(new Color(java.awt.Color.blue), new Material(0.2, 0.2, 30, 0.6, 0), // )
 						30, new Point3D(60, -50, 50)),
 				new Sphere(new Color(java.awt.Color.black), new Material(0.2, 0.2, 60, 0.5, 0.2), // )
-						28, new Point3D(-20, 30, 50)),
+						28, new Point3D(-50, 30, 50)),
 				new Sphere(new Color(java.awt.Color.green), new Material(0.2, 0.2, 20, 0.1, 0.2), // )
-						10, new Point3D(-20, 30, 20)),
+						10, new Point3D(-50, 30, 20)),
 				new Triangle(new Color(0,128,0), new Material(0.5, 0.5, 60), //
-						new Point3D(-45, 35, 30), new Point3D(-10, 35, 55), new Point3D(35, -75, 25)), //
+						new Point3D(-45, 35, 80), new Point3D(-10, 35, 105), new Point3D(35, -75, 55)), //
 				new Sphere(new Color(java.awt.Color.red), new Material(0.2, 0.2, 90, 0, 0.6), // )
 						33, new Point3D(-50, -50, 50)));
 
