@@ -170,7 +170,7 @@ public class Render {
                 _scene.getAmbientLight().getIntensity());
     }
     /**
-     * Calculate the color intensity in a point approach phong model
+     * Calculate the color intensity in a point with a phong model approach
      *
      * @return the color intensity
      */
@@ -217,7 +217,7 @@ public class Render {
         return result;
     }
     /**
-     * func calc the level of transparency
+     * this function calculate the level of transparency
      *
      * @param light lightsource
      * @param l  l
@@ -284,9 +284,9 @@ public class Render {
     /**
      * Returns reflected Ray
      *
-     * @param point
-     * @param ray
-     * @param n
+     * @param point the point of the ray
+     * @param ray the ray
+     * @param n the vector
      * @return reflected ray
      */
     private Ray constructReflectedRay(Point3D point, Ray ray, Vector n){
@@ -297,6 +297,7 @@ public class Render {
     /**
      * this func calc the refracted ray
      *
+     * @param n the vector
      * @param point point
      * @param inRay ray
      * @return the ref ray
