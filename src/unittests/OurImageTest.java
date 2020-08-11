@@ -37,7 +37,7 @@ public class OurImageTest {
                 new Triangle(new Color(0,128,0), new Material(0.5, 0.5, 60), //
                         new Point3D(-45, 35, 80), new Point3D(-10, 35, 105), new Point3D(35, -75, 55)), //
                 new Sphere(new Color(java.awt.Color.GREEN), new Material(0.2, 0.2, 90, 0, 0.6), // )
-                        33, new Point3D(-50, -50, 50)));
+                        33, new Point3D(50, -50, 150)));
 
         scene.addLights(
 
@@ -54,4 +54,5 @@ public class OurImageTest {
         render.writeToImage();
     }
 }
+
 
