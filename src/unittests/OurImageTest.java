@@ -47,7 +47,7 @@ public class OurImageTest {
                 new SpotLight(new Color(100, 250, 100),
                         new Point3D(-20, 20, 100), new Vector(-1, 1, 4), 1, 0.00001, 0.000005));
 
-        ImageWriter imageWriter = new ImageWriter("OurImage", 200, 200, 600, 600);
+        ImageWriter imageWriter = new ImageWriter("OurImageTest", 200, 200, 600, 600);
         Render render = new Render(imageWriter, scene);
 
         render.renderImage();
