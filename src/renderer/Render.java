@@ -242,6 +242,18 @@ public class Render {
         return new Ray(point, reflectedDirection, n);
     }
     /**
+     * Calculates reflected color on point according to Phong model.
+     * Calls for recursive helping function.
+     *
+     * @param geopoint
+     * @param inRay
+     * @return
+     */
+    private Color calcColorAdvanced(GeoPoint geopoint, Ray inRay) {
+        return calcColor(geopoint, inRay, MAX_CALC_COLOR_LEVEL, 1.0).add(
+                _scene.getAmbientLight().getIntensity());
+    }
+    /**
      * this func calc the refracted ray
      *
      * @param n the vector
@@ -252,7 +264,7 @@ public class Render {
     private Ray constructRefractedRay(Vector n, GeoPoint point, Ray inRay) {
         return new Ray(point._point, inRay.getDirection(), n);
     }
-        }
+        
     /**
      * Calculate the average of a color in a pixel
      *
@@ -263,10 +275,8 @@ public class Render {
         java.awt.Color background = _scene.getBackground().getColor();
         Color color = new Color(0, 0, 0);
         for (Ray ray : rayBeam) {
-            color =findClosestIntersection(ray);
-            if(color ==null )
-                color.add(_scene.getBackground());
-                     color.add(calcColorAdvanced(findClosestIntersection(ray), ray));
+            color = findClosestIntersection(ray) == null ? color.add(_scene.getBackground())
+                    : color.add(calcColorAdvanced(findClosestIntersection(ray), ray));
         }
 
         return color.reduce(rayBeam.size());

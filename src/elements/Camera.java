@@ -4,6 +4,9 @@ import primitives.Point3D;
 import primitives.Ray;
 import primitives.Vector;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import static primitives.Util.isZero;
 
 /**
@@ -16,6 +19,8 @@ public class Camera {
     private Vector _vTo;
     private Vector _vUp;
     private Vector _vRight;
+    // number of rows and columns in one pixel for supersampling
+    private static final int SUPERSAMPLING_NUM = 5;
 
     /**
      * a simple constuctor for camera
@@ -93,6 +98,78 @@ public class Camera {
         //direction vector to pixel center
         Vector direction = pij.subtract(_p0);
         return new Ray(_p0, direction);
+    }
+    /**
+     * super sampling method-- we make a group of rays in the pixel
+     *
+     * @param nX
+     * @param nY
+     * @param j
+     * @param i
+     * @param screenDistance
+     * @param screenWidth
+     * @param screenHeight
+     * @return
+     */
+    public List<Ray> constructBeamThroughPixel(int nX, int nY, int j, int i, double screenDistance, double screenWidth,
+                                               double screenHeight) {
+        List<Ray> beam = new LinkedList<>();
+
+        if (isZero(screenDistance)) throw new IllegalArgumentException("error,the distance is 0");
+
+        // get the image center (Center = P0 + distance*Vto)
+        Point3D Center = _p0.add(_vTo.scale(screenDistance));
+
+        // pixel_center
+        Point3D P_center = getPixelCenter(Center, nX, nY, j, i, screenWidth, screenHeight);
+
+        // pixel height and width
+        double Ry = screenHeight / nY;
+        double Rx = screenWidth / nX;
+
+        // subpixel height and width
+        double Sry = Ry / (SUPERSAMPLING_NUM - 1);
+        double Srx = Rx / (SUPERSAMPLING_NUM - 1);
+
+        // Move P_center to the pixel top left corner
+        double X0 = ((- (SUPERSAMPLING_NUM - 1) / 2d) * Srx);
+        double Y0 = ((- (SUPERSAMPLING_NUM - 1) / 2d) * Sry);
+
+        P_center = P_center.add(_vRight.scale(X0));
+        P_center = P_center.add(_vUp.scale(-Y0));
+
+        // pIJS is moving on grid
+        Point3D pIJS = P_center;
+
+        for (i = 0; i < SUPERSAMPLING_NUM ; ++i) {
+            for (j = 0; j < SUPERSAMPLING_NUM; ++j) {
+
+                // Create an Adding Ray to the beam
+                Vector vIJ = pIJS.subtract(_p0);
+                beam.add(new Ray(_p0, vIJ.normalize()));
+
+                // Next point on i
+                pIJS = pIJS.add(_vRight.scale(Srx));
+            }
+            // Next Point on j
+            pIJS = P_center.add(_vUp.scale(- Sry * (j + 1)));
+        }
+        return beam;
+    }
+
+    public Point3D getPixelCenter(Point3D center ,int nX, int nY, int j, int i, double screenWidth, double screenHeight) {
+        // pixel height and width
+        double Ry = screenHeight / nY;
+        double Rx = screenWidth / nX;
+
+        double Yi = ((i - nY / 2d) * Ry + Ry / 2d);
+        double Xj = ((j - nX / 2d) * Rx + Rx / 2d);
+
+        Point3D pIJ = new Point3D(center);  // pIJ is the point on the middle of the given pixel
+
+        if (!isZero(Xj)) pIJ = pIJ.add(_vRight.scale(Xj));
+        if (!isZero(Yi)) pIJ = pIJ.add(_vUp.scale(-Yi));
+        return pIJ;
     }
 
     @Override
