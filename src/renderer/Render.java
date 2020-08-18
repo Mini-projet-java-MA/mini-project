@@ -87,38 +87,7 @@ public class Render {
         }
         return closestPoint;
     }
-    /**
-     * Finding the closest point to the P0 of the camera.
-     *
-     * @param intersectionPoints list of points, the function should find from
-     *                           this list the closet point to P0 of the camera in the scene.
-     * @return the closest point to the camera
-     */
-    private GeoPoint getClosestPoint(List<GeoPoint> intersectionPoints) {
-        Intersectable.GeoPoint result = null;
-        double minDist = Double.POSITIVE_INFINITY;
 
-        Point3D p0 = this._scene.getCamera().getP0();
-
-        for (Intersectable.GeoPoint pt : intersectionPoints) {
-            double distance = p0.distance(pt._point);
-            if (distance < minDist) {
-                minDist = distance;
-                result = pt;
-            }
-        }
-
-        return result;
-    }
-
-    /**
-     *
-     * @param val
-     * @return boolean value if double and val>0
-     */
-    private boolean sign(double val) {
-        return (val > 0d);
-    }
 
     /**
      * function to draw a grid on our image by pixel
@@ -134,29 +103,7 @@ public class Render {
             }
         }
     }
-    /**
-     * unshaded function check if specific ray from light source to geometry passes through other geometry
-     *
-     * @param l        vector from light source to point on geometry
-     * @param n   a unit vector from, vertical to intersection point.
-     * @param geoPoint current geoPoint (the intersection point)
-     * @return true if there is no hindrance, and false otherwise
-     */
-    private boolean unshaded(LightSource light, Vector l, Vector n, GeoPoint geoPoint) {
-        Vector lightDirection = l.scale(-1); // from point to light source
-        Ray lightRay = new Ray(geoPoint._point, lightDirection, n);
-        Point3D point = geoPoint._point;
-        List<GeoPoint> intersections = _scene.getGeometries().findIntersections(lightRay);
-        if (intersections == null)
-            return true;
-        double lightDistance = light.getDistance(point);
-        for (GeoPoint gp : intersections) {
-            double t = gp._point.distance(point) - lightDistance;
-            if (alignZero(t) <= 0 && gp._geometry.getMaterial().getKt() == 0)
-                return false;
-        }
-        return true;
-    }
+    
 
     /**
      * Calc the color intensity in a intersection point
