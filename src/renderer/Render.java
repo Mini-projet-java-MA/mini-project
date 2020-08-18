@@ -252,5 +252,24 @@ public class Render {
     private Ray constructRefractedRay(Vector n, GeoPoint point, Ray inRay) {
         return new Ray(point._point, inRay.getDirection(), n);
     }
+        }
+    /**
+     * Calculate the average of a color in a pixel
+     *
+     * @param rayBeam
+     * @return
+     */
+    private Color averageColor(List<Ray> rayBeam) {
+        java.awt.Color background = _scene.getBackground().getColor();
+        Color color = new Color(0, 0, 0);
+        for (Ray ray : rayBeam) {
+            color =findClosestIntersection(ray);
+            if(color ==null )
+                color.add(_scene.getBackground());
+                     color.add(calcColorAdvanced(findClosestIntersection(ray), ray));
+        }
+
+        return color.reduce(rayBeam.size());
+    }
 }
 
