@@ -100,18 +100,19 @@ public class Camera {
         return new Ray(_p0, direction);
     }
     /**
-     * function to super simpling
-     * @param nX                number         of pixels in the x axis
-     * @param nY                number         of pixels in the y axis
+     * Function for super sampling:
+     * We create a beam of ray who will got trough all the pixel instead of only in its center like we used to before
+     * To do this we are gonna use a grid and add rays on the edges of the grid along with the center
+     * @param nX                number of pixels in the x axis
+     * @param nY                number of pixels in the y axis
      * @param j                 horizontal index of pixel (from left to right)
-     * @param i                  vertical        index of pixel (from up to down)
+     * @param i                  vertical index of pixel (from up to down)
      * @param screenDistance    the distance between the _p0 and pc where the image are located
      * @param screenWidth       width of the screen
      * @param screenHeight      height of the screen
-     * @return
+     * @return beam of rays trough pixel
      */
-    public List<Ray> constructBeamThroughPixel(int nX, int nY, int j, int i, double screenDistance, double screenWidth,
-                                               double screenHeight) {
+    public List<Ray> constructBeamThroughPixel(int nX, int nY, int j, int i, double screenDistance, double screenWidth, double screenHeight) {
         List<Ray> beam = new LinkedList<>();
 
         if (isZero(screenDistance)) throw new IllegalArgumentException("error,the distance is 0");
@@ -119,7 +120,7 @@ public class Camera {
         // get the image center (center = P0 + distance*Vto)
         Point3D center = _p0.add(_vTo.scale(screenDistance));
 
-        // pixel_center
+        // center of the pixel
         Point3D pCenter = getTheCenterPixel(center, nX, nY, j, i, screenWidth, screenHeight);
 
         // pixel height and width
@@ -137,13 +138,13 @@ public class Camera {
         pCenter = pCenter.add(_vRight.scale(X0));
         pCenter = pCenter.add(_vUp.scale(-Y0));
 
-        // pIJS is moving on grid
+        // pIJS is moving on the grid
         Point3D pIJS = pCenter;
 
         for (i = 0; i < SUPER_SAMPLING_NUM ; ++i) {
             for (j = 0; j < SUPER_SAMPLING_NUM; ++j) {
 
-                // Create an Adding Ray to the beam
+                // Add a Ray to the beam
                 Vector vIJ = pIJS.subtract(_p0);
                 beam.add(new Ray(_p0, vIJ.normalize()));
 
@@ -157,25 +158,24 @@ public class Camera {
     }
 
     /**
-     * the function return the pixel of the center to every pixsel
+     * the function return the pixel of the center to every pixel
      *
-     * @param center the center og the pixel
-     * @param nX    number         of pixels in the x axis
-     * @param nY    number         of pixels in the y axis
+     * @param center the center of the pixel
+     * @param nX    number of pixels in the x axis
+     * @param nY    number  of pixels in the y axis
      * @param j     horizontal index of pixel (from left to right)
-     * @param i     vertical        index of pixel (from up to down)
+     * @param i     vertical index of pixel (from up to down)
      * @param screenWidth  the distance between the _p0 and pc where the image are located
      * @param screenHeight  width of the screen
-     * @return
+     * @return the center of the pixel we are going trough
      */
     public Point3D getTheCenterPixel(Point3D center ,int nX, int nY, int j, int i, double screenWidth, double screenHeight) {
         // pixel height and width
         double rY = screenHeight / nY;
         double rX = screenWidth / nX;
 
-        double Yi = ((i - nY / 3d) * rY + rY / 2d);
-        double Xj = ((j - nX / 3d) * rX + rX / 2d
-        );
+        double Yi = ((i - nY / 2d) * rY + rY / 2d);
+        double Xj = ((j - nX / 2d) * rX + rX / 2d);
 
         Point3D pIJ = new Point3D(center);  // pIJ is the point on the middle of the given pixel
 

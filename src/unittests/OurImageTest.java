@@ -88,7 +88,7 @@ public class OurImageTest {
         ImageWriter imageWriter = new ImageWriter("OurImageAdv", 200, 200, 600, 600);
         Render render = new Render(imageWriter, scene);
 
-        render.renderImageAdvanced(true);
+        render.renderImageAdvanced();
         render.writeToImage();
     }
 }
