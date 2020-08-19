@@ -165,8 +165,8 @@ public class Camera {
      * @param nY    number  of pixels in the y axis
      * @param j     horizontal index of pixel (from left to right)
      * @param i     vertical index of pixel (from up to down)
-     * @param screenWidth  the distance between the _p0 and pc where the image are located
-     * @param screenHeight  width of the screen
+     * @param screenWidth  the width of the screen
+     * @param screenHeight  the height of the screen
      * @return the center of the pixel we are going trough
      */
     public Point3D getTheCenterPixel(Point3D center ,int nX, int nY, int j, int i, double screenWidth, double screenHeight) {

@@ -91,4 +91,41 @@ public class OurImageTest {
         render.renderImageAdvanced();
         render.writeToImage();
     }
-}
+    @Test
+    public void OurImageNewTest() {
+            Scene scene = new Scene("Test scene");
+            scene.setCamera(new Camera(new Point3D(0, 0, -10000), new Vector(0, 0, 1), new Vector(0, -1, 0)));
+            scene.setDistance(10000);
+            scene.setBackground(new Color(0, 0, 204));
+            scene.setAmbientLight(new AmbientLight(new Color(255, 255, 255), 0.1));
+
+            scene.addGeometries(
+                    new Sphere(new Color(0, 100, 0), new Material(0.25, 0.25, 20, 0.5, 0), 400, new Point3D(-950, 900, 1000)),
+                    new Sphere(new Color(0, 20, 80), new Material(0.25, 0.25, 40), 200, new Point3D(-950, 900, 1000)),
+                    new Sphere(new Color(153, 0, 204), new Material(0.25, 0.25, 20, 0.5, 0), 400, new Point3D(-300, -500, 1000)),
+                    new Sphere(new Color(255, 255, 0), new Material(0.25, 0.25, 40), 200, new Point3D(-300, -500, 1000)),
+                    new Sphere(new Color(43, 255, 244), new Material(0.25, 0.25, 20, 0.5, 0), 400, new Point3D(750, 900, 1000)),
+                    new Sphere(new Color(244, 168, 53), new Material(0.25, 0.25, 40), 200, new Point3D(750, 900, 1000)),
+                    new Triangle(new Color(0,0,0), new Material(0, 0, 30, 0, 0.5), new Point3D(1500, 1500, 1500),
+                            new Point3D(0, -1400, 1000), new Point3D(-1500, 1500, 2000)),
+                    new Triangle(new Color(64,0,128), new Material(0, 0, 30, 0, 0.5), new Point3D(5000, 1500, 1500),
+                            new Point3D(0, -1400, 1000), new Point3D(-1500, 1500, 2000)),
+                    new Triangle(new Color(64,0,128), new Material(0, 0, 30, 0, 0.5), new Point3D(-5000, 1500, 1500),
+                             new Point3D(0, -1400, 1000), new Point3D(-1500, 1500, 2000)));
+
+
+
+            scene.addLights(new SpotLight(new Color(1020, 400, 400), new Point3D(-750, 750, 150),
+                    new Vector(-1, 1, 4), 1, 0.00001, 0.000005));
+            scene.addLights(new SpotLight(new Color(1020, 400, 400), new Point3D(-200, -1000, 150),
+                new Vector(1, -1, 4), 1, 0.00001, 0.000005));
+
+            ImageWriter imageWriter = new ImageWriter("OurIMG", 2500, 2500, 500, 500);
+            Render render = new Render(imageWriter, scene);
+
+            render.renderImage();
+            render.writeToImage();
+        }
+    }
+
+
