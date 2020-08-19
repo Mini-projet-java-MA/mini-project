@@ -1,168 +1,319 @@
-package scene;
+package renderer;
 
-import elements.AmbientLight;
 import elements.Camera;
 import elements.LightSource;
-import geometries.Geometries;
 import geometries.Intersectable;
-import primitives.Color;
+import geometries.Intersectable.GeoPoint;
+import primitives.*;
+import scene.Scene;
 
-import java.util.LinkedList;
+import java.util.Arrays;
 import java.util.List;
 
+import static primitives.Util.alignZero;
+
 /**
- * scene class create a scene to work on
- * contain 6 fields:
- * _lights the lights of the scene
- * _name name of scene
- * _background color to paint the background of scene
- * _ambientLight light/color that lights the environment
- * _geometries objects/shapes that exist in scene
- * _camera point of view, that from there we look on the scene, through an imagine view plane
- * _distance distance from camere to the imagine view plane
- *
- * @author moshe
+ * the object of this class is to create pixel matrix of picture basic on scene with 3D model
  */
-public class Scene {
-    private List<LightSource> _lights = new LinkedList<LightSource>();
-    private String _name;
-    private Color _background = Color.BLACK;
-    private AmbientLight _ambientLight = new AmbientLight(Color.BLACK, 0d);
-    private Geometries _geometries = new Geometries();
-    private Camera _camera;
-    private double _distance;
-
+public class Render {
+    private Scene _scene;
+    private ImageWriter _imageWriter;
+    private static final int MAX_CALC_COLOR_LEVEL = 10;
+    private static final double MIN_CALC_COLOR_K = 0.001;
     /**
-     * constructor with only the name as a parameter
-     *
-     * @param name name of the scene
+     * constant for the size of the ray sources moving for shading rays
      */
-    public Scene(String name) {
-        this._name = name;
+    private static final double DELTA = 0.1;
+    /**
+     * Build Render object with a scene and image writer
+     *
+     * @param imgWr Image Writer object
+     * @param sc    scene object
+     */
+    public Render(ImageWriter imgWr, Scene sc) {
+        _scene = sc;
+        _imageWriter = imgWr;
     }
 
     /**
-     * a simple getter of list of light source
-     *
-     * @return list of light
+     * this function crat a image with improvements
      */
-    public List<LightSource> getLight() {
-        return _lights;
+
+    public void renderImageAdvanced( ) {
+        Camera camera = _scene.getCamera();
+        Intersectable geometries = _scene.getGeometries();
+        java.awt.Color background = _scene.getBackground().getColor();
+
+        //Nx and Ny are the number of pixels in the rows and columns of the view plane
+        int nX = _imageWriter.getNx();
+        int nY = _imageWriter.getNy();
+
+        //width and height are the width and height of the image.
+        double width = _imageWriter.getWidth();
+        double height = _imageWriter.getHeight();
+
+        double distance = _scene.getDistance();
+
+
+        for (int row = 0; row < nY; ++row)
+            for (int column = 0; column < nX; ++column) {
+                Ray ray = camera.constructRayThroughPixel(nX, nY, column, row, distance, width, height);
+                GeoPoint closestPoint = findClosestIntersection(ray);
+
+                    List<Ray> rayList = camera.constructBeamThroughPixel(nX, nY, column, row, distance, width, height);
+                    _imageWriter.writePixel(column, row, closestPoint == null ? background : averageColor(rayList).getColor());
+
+                }
+
+            }
+    /**
+     * this func create an image
+     */
+    public void renderImage() {
+        Camera camera = _scene.getCamera();
+        Intersectable geometries = _scene.getGeometries();
+        java.awt.Color background = _scene.getBackground().getColor();
+
+        int nX = _imageWriter.getNx();
+        int nY = _imageWriter.getNy();
+
+        double width = _imageWriter.getWidth();
+        double height = _imageWriter.getHeight();
+        double distance = _scene.getDistance();
+
+        Ray ray;
+        for (int i = 0; i < nY; ++i)
+            for (int j = 0; j < nX; ++j) {
+                //creating a new ray for every pixel
+                ray = camera.constructRayThroughPixel(nX, nY, j, i, distance, width, height);
+                //List<GeoPoint> intersectionPoints = geometries.findIntersections(ray);
+                GeoPoint closestPoint = findClosestIntersection(ray);
+                // if no have intersection on this ray so paint background
+                if (closestPoint == null)
+                    _imageWriter.writePixel(j, i, background);
+                else {
+                    //GeoPoint closestPoint = getClosestPoint(intersectionPoints);
+                    _imageWriter.writePixel(j, i, calcColor(closestPoint, ray).getColor());
+                }
+            }
     }
 
     /**
-     * @param lights function to add in the list point of light
+     * the function should find the intercetion most close
+     *
+     * @param ray ray
+     * @return the closest intersection
      */
-    public void addLights(LightSource... lights) {
-        for (LightSource ls : lights)
-            _lights.add(ls);
+    private GeoPoint findClosestIntersection(Ray ray) {
+        GeoPoint closestPoint = null;
+        double closestDistance = Double.POSITIVE_INFINITY;
+        Point3D ray_p0 = ray.getP0();
+        List<GeoPoint> intersections = _scene.getGeometries().findIntersections(ray);
+        if (intersections == null)
+            return null;
+        for (GeoPoint gp : intersections) {
+            double distance = ray_p0.distance(gp.getPoint());
+            if (distance < closestDistance) {
+                closestPoint = gp;
+                closestDistance = distance;
+            }
+        }
+        return closestPoint;
+    }
+
+
+    /**
+     * function to draw a grid on our image by pixel
+     * @param interval number that the pixels are multiple of this number, are part of the grid.
+     */
+    public void printGrid(int interval, java.awt.Color color) {
+        int nY = _imageWriter.getNy();
+        int nX = _imageWriter.getNx();
+        for (int i = 0; i < nY; i++) {
+            for (int j = 0; j < nX; j++) {
+                if (i % interval == 0 || j % interval == 0)
+                    _imageWriter.writePixel(j, i, color);
+            }
+        }
+    }
+
+
+    /**
+     * Calc the color intensity in a intersection point
+     *
+     * @param geoPoint geo point
+     * @param inRay    ray
+     * @return the color
+     */
+    private Color calcColor(GeoPoint geoPoint, Ray inRay) {
+        return calcColor(geoPoint, inRay, MAX_CALC_COLOR_LEVEL, 1.0).add(
+                _scene.getAmbientLight().getIntensity());
+    }
+    /**
+     * Calculate the color intensity in a point with a phong model approach
+     *
+     * @return the color intensity
+     */
+
+    private Color calcColor(GeoPoint gp, Ray ray, int lvl, double k) {
+        Color result = gp._geometry.getEmission(); // we add the emission light
+        List<LightSource> lights = _scene.getLight();// list of the light
+        Vector v = ray.getDirection();//vector formed between the camera and the point of the geometry
+        Vector n = gp._geometry.getNormal(gp._point);
+        Material material = gp._geometry.getMaterial();//material of the geo
+        int nShininess = material.getNshininess();
+        double kd = material.getKd();
+        double ks = material.getKs();
+        if (_scene.getLight() != null) {//if there is light in the scene
+            for (LightSource lightSource : lights) {// we go over all the lights
+                Vector l = lightSource.getL(gp._point);//vector that impact the geometry
+                double nl = alignZero(n.dotProduct(l));
+                double nv = alignZero(n.dotProduct(v));
+                if (nl * nv > 0) {
+                    double ktr = transparency(lightSource, l, n, gp);
+                    if (ktr * k > MIN_CALC_COLOR_K) {
+                        Color iL = lightSource.getIntensity(gp._point).scale(ktr);
+                        result = result.add(calcDiffusive(kd, l, n, iL),
+                                calcSpecular(ks, l, n, v, nShininess, iL));
+                    }
+                }
+            }
+        }
+        if (lvl == 1) return Color.BLACK; //not use recursive
+        double kr = material.getKr(), kkr = k * kr;
+        if (kkr > MIN_CALC_COLOR_K) {
+            Ray reflectedRay =  constructReflectedRay(gp._point, ray, n);
+            GeoPoint reflectedPoint = findClosestIntersection(reflectedRay);
+            if (reflectedPoint != null)
+                result = result.add(calcColor(reflectedPoint, reflectedRay, lvl - 1, kkr).scale(kr));
+        }
+        double kt = material.getKt(), kkt = k * kt;
+        if (kkt > MIN_CALC_COLOR_K) {
+            Ray refractedRay = constructRefractedRay(n, gp, ray);
+            GeoPoint refractedPoint = findClosestIntersection(refractedRay);
+            if (refractedPoint != null)
+                result = result.add(calcColor(refractedPoint, refractedRay, lvl - 1, kkt).scale(kt));
+        }
+        return result;
+    }
+    /**
+     * this function calculate the level of transparency
+     *
+     * @param light lightsource
+     * @param l  l
+     * @param n  n
+     * @param geopoint gp
+     * @return the level
+     */
+    private double transparency(LightSource light, Vector l, Vector n, GeoPoint geopoint) {
+        Vector lightDirection = l.scale(-1); // from point to light source
+        Ray lightRay = new Ray(geopoint._point, lightDirection, n);
+        List<GeoPoint> intersections = _scene.getGeometries().findIntersections(lightRay);
+        if (intersections == null) return 1.0;
+        double lightDistance = light.getDistance(geopoint._point);
+        double ktr = 1.0;
+        for (GeoPoint gp : intersections) {
+            if (alignZero(gp._point.distance(geopoint._point) - lightDistance) <= 0) {
+                ktr *= gp._geometry.getMaterial().getKt();
+                if (ktr < MIN_CALC_COLOR_K) return 0.0;
+            }
+        }
+        return ktr;
+    }
+
+
+    /**
+     *
+     * @param kS factor reduces the specular light.
+     * @param l direction vector from light source to intersection point on geometry.
+     * @param n normal vector from geometry.
+     * @param v direction vector
+     * @param nShininess level of shininess (for calculate the specular light)
+     * @param lightIntensity color of light from light source
+     * @return specular light (color).
+     */
+
+    private Color calcSpecular(double kS, Vector l, Vector n, Vector v, int nShininess, Color lightIntensity) {
+
+        double p = nShininess;
+
+        Vector r = l.add(n.scale(-2 *l.dotProduct(n))); // nl must not be zero!
+        double minusVr = - alignZero(r.dotProduct(v));
+        if (minusVr <= 0) {
+            return Color.BLACK; // view from direction opposite to r vector
+        }
+        return lightIntensity.scale(kS* Math.pow(minusVr, p));
+    }
+    /**
+     *this function calculate the diffusive ligh
+     * @param kD the factor of the diffusive light
+     * @param l the vector of the light source
+     * @param n the normal vector to the object
+     * @param lightIntensity the intensity of the light
+     * @return the diffusive light
+     */
+    private Color calcDiffusive(double kD, Vector l,Vector n,  Color lightIntensity) {
+        return lightIntensity.scale(kD * Math.abs(l.dotProduct(n)));
+    }
+    /**
+    /**
+     * Create the image file in jpeg format
+     */
+    public void writeToImage() {
+        _imageWriter.writeToImage();
+    }
+    /**
+     * Returns reflected Ray
+     *
+     * @param point the point of the ray
+     * @param ray the ray
+     * @param n the vector
+     * @return reflected ray
+     */
+    private Ray constructReflectedRay(Point3D point, Ray ray, Vector n){
+        Vector v = ray.getDirection();
+        Vector reflectedDirection = v.subtract(n.scale(2 * v.dotProduct(n)));
+        return new Ray(point, reflectedDirection, n);
+    }
+    /**
+     * Calculates reflected color on point according to Phong model.
+     * Calls for recursive helping function.
+     *
+     * @param geopoint
+     * @param inRay
+     * @return
+     */
+    private Color calcColorAdvanced(GeoPoint geopoint, Ray inRay) {
+        return calcColor(geopoint, inRay, MAX_CALC_COLOR_LEVEL, 1.0).add(
+                _scene.getAmbientLight().getIntensity());
+    }
+    /**
+     * this func calc the refracted ray
+     *
+     * @param n the vector
+     * @param point point
+     * @param inRay ray
+     * @return the ref ray
+     */
+    private Ray constructRefractedRay(Vector n, GeoPoint point, Ray inRay) {
+        return new Ray(point._point, inRay.getDirection(), n);
     }
 
     /**
-     * getter for the name of the scene
+     * Calculate the average of a color in a pixel
      *
-     * @return the name of the scene
+     * @param rayBeam
+     * @return
      */
-    public String getName() {
-        return _name;
-    }
+    private Color averageColor(List<Ray> rayBeam) {
+        java.awt.Color background = _scene.getBackground().getColor();
+        Color color = new Color(0, 0, 0);
+        for (Ray ray : rayBeam) {
+            color = findClosestIntersection(ray) == null ? color.add(_scene.getBackground())
+                    : color.add(calcColorAdvanced(findClosestIntersection(ray), ray));
+        }
 
-    /**
-     * getter for the background color of the scene
-     *
-     * @return the background color of the scene
-     */
-    public Color getBackground() {
-        return _background;
-    }
-
-    /**
-     * setter for the background color of the scene
-     *
-     * @param _background
-     */
-    public void setBackground(Color _background) {
-        this._background = _background;
-    }
-
-    /**
-     * getter for the ambient light of the scene
-     *
-     * @return ambient light of the scene
-     */
-    public AmbientLight getAmbientLight() {
-        return _ambientLight;
-    }
-
-    /**
-     * setter for the ambient light of the scene
-     *
-     * @param _ambientLight
-     */
-    public void setAmbientLight(AmbientLight _ambientLight) {
-        this._ambientLight = _ambientLight;
-    }
-
-    /**
-     * getter for the camera of the scene
-     *
-     * @return the camera of the scene
-     */
-    public Camera getCamera() {
-        return _camera;
-    }
-
-    /**
-     * setter for the camera of the scene
-     *
-     * @param _camera
-     */
-    public void setCamera(Camera _camera) {
-        this._camera = _camera;
-    }
-
-    /**
-     * getter for the distance of the scene
-     *
-     * @return the distance of the scene
-     */
-    public double getDistance() {
-        return _distance;
-    }
-
-    /**
-     * setter for the distance of the scene
-     *
-     * @param _distance
-     */
-    public void setDistance(double _distance) {
-        this._distance = _distance;
-    }
-
-    /**
-     * getter for the geometries of the scene
-     *
-     * @return the geometries of the scene
-     */
-    public Geometries getGeometries() {
-        return _geometries;
-    }
-
-    /**
-     * setter for the geometries of the scene
-     *
-     * @param _geometries
-     */
-    public void setGeometries(Geometries _geometries) {
-        this._geometries = _geometries;
-    }
-
-    /**
-     * function to add geometries to scene
-     *
-     * @param geometries one or more geometries, such sphere or triangle
-     */
-    public void addGeometries(Intersectable... geometries) {
-        _geometries.add(geometries);
+        return color.reduce(rayBeam.size());
     }
 }
+
