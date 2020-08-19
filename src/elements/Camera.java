@@ -101,7 +101,7 @@ public class Camera {
     }
     /**
      * Function for super sampling:
-     * We create a beam of ray who will got trough all the pixel instead of only in its center like we used to before
+     * We create a beam of ray who will go trough all the pixel instead of only in its center like we used to before
      * To do this we are gonna use a grid and add rays on the edges of the grid along with the center
      * @param nX                number of pixels in the x axis
      * @param nY                number of pixels in the y axis
