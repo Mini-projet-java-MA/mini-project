@@ -264,7 +264,7 @@ public class Render {
     private Ray constructRefractedRay(Vector n, GeoPoint point, Ray inRay) {
         return new Ray(point._point, inRay.getDirection(), n);
     }
-        
+
     /**
      * Calculate the average of a color in a pixel
      *
