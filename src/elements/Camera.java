@@ -20,7 +20,7 @@ public class Camera {
     private Vector _vUp;
     private Vector _vRight;
     // number of rows and columns in one pixel for supersampling
-    private static final int SUPER_SAMPLING_NUM = 8;
+    private static final int SUPER_SAMPLING_NUM = 10;
 
     /**
      * a simple constuctor for camera

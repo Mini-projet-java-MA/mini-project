@@ -15,7 +15,13 @@ import static primitives.Util.alignZero;
 /**
  * the object of this class is to create pixel matrix of picture basic on scene with 3D model
  */
+
 public class Render {
+
+    private int _threads = 1;
+    private final int SPARE_THREADS = 2; // Spare threads if trying to use all the cores
+    private boolean _print = false; // printing progress percentage
+
     private Scene _scene;
     private ImageWriter _imageWriter;
     private static final int MAX_CALC_COLOR_LEVEL = 10;
@@ -36,7 +42,7 @@ public class Render {
     }
 
     /**
-     * this function crat a image with improvements
+     * this function create a image with improvements
      */
 
     public void renderImageAdvanced( ) {
@@ -66,6 +72,49 @@ public class Render {
                 }
 
             }
+    /**
+     * Throws rays through the all pixels and for each ray - if it's got
+     * intersection points with the shapes of the scene - paints the closest point
+     */
+    public void renderImage(boolean anti_aliasing) {
+        Camera camera = _scene.getCamera();
+        Intersectable geometries = _scene.getGeometries();
+        java.awt.Color background = _scene.getBackground().getColor();
+
+        //Nx and Ny are the number of pixels in the rows and columns of the view plane
+        int nX = _imageWriter.getNx();
+        int nY = _imageWriter.getNy();
+
+        //width and height are the width and height of the image.
+        double width = _imageWriter.getWidth();
+        double height = _imageWriter.getHeight();
+
+        double distance = _scene.getDistance();
+        final Pixel thePixel = new Pixel(nY, nX,_print); // Main pixel management object
+        Thread[] threads = new Thread[_threads];
+
+        for (int i = _threads - 1; i >= 0; --i) { // create all threads
+            threads[i] = new Thread(() -> {
+                Pixel pixel = new Pixel(); // Auxiliary thread’s pixel object
+                while (thePixel.nextPixel(pixel)) {
+                    Ray ray = camera.constructRayThroughPixel(nX, nY, pixel.col, pixel.row, distance, width, height);
+                    GeoPoint closestPoint = findClosestIntersection(ray);
+
+                    if (anti_aliasing) {
+                        List<Ray> rayList = camera.constructBeamThroughPixel(nX, nY, pixel.col, pixel.row, distance, width, height);
+                        _imageWriter.writePixel(pixel.col, pixel.row, closestPoint == null ? background : averageColor(rayList).getColor());
+                    } else {
+                        _imageWriter.writePixel(pixel.col, pixel.row, closestPoint == null ? background : calcColor(closestPoint, ray).getColor());
+                    }
+                }});
+        }
+        Arrays.stream(threads).forEach(Thread::start);// Start all the threads
+        // Wait for all threads to finish
+        Arrays.stream(threads).forEach(thread -> {try { thread.join(); } catch (Exception e) {}});// Start all the threads
+        if (_print) System.out.println("\r100%%\n"); // Print 100%
+
+
+    }
     /**
      * this func create an image
      */

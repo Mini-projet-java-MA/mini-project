@@ -1,4 +1,4 @@
-package unittests;
+package unittests2;
 import elements.AmbientLight;
 import elements.Camera;
 import elements.PointLight;
